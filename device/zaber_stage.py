@@ -7,8 +7,8 @@ class Zaber() :
         self.maxswitch = 1
         self.description = 'Zaber stage'
         self.name = 'Zaber focuser stage'
-        self.minswitchvalue = 0
-        self.maxswitchvalue = 50
+        self.minvalue = 0
+        self.maxvalue = 50
         self.connect()
 
     def connect(self) :
@@ -26,6 +26,12 @@ class Zaber() :
     def disconnect(self) :
         self.connected(False)
 
+    def get_minvalue(self) :
+        return self.minvalue
+
+    def get_maxvalue(self) :
+        return self.maxvalue
+
     def get_description(self) :
         return self.description
 
@@ -36,8 +42,8 @@ class Zaber() :
         print('setting value',val)
         self.zaber_stage.move(float(val))
 
-    def getswitch(self) :
-        return True
+    def is_moving(self) :
+        return False
 
     def get_position(self) :
         return self.zaber_stage.get_position()
