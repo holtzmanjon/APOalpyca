@@ -95,11 +95,12 @@ class configureddevices():
             'DeviceType'    : Switch1Metadata.DeviceType,
             'DeviceNumber'  : 1,
             'UniqueID'      : Switch1Metadata.DeviceID
-            }
+            },
             {
             'DeviceName'    : FocuserMetadata.Name,
             'DeviceType'    : FocuserMetadata.DeviceType,
             'DeviceNumber'  : 0,
             'UniqueID'      : FocuserMetadata.DeviceID
+            }
         ]
         resp.text = PropertyResponse(confarray, req).json
