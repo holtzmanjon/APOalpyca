@@ -39,7 +39,7 @@ class Zaber() :
     def getswitch(self) :
         return True
 
-    def get_value(self) :
+    def get_position(self) :
         return self.zaber_stage.get_position()
 
     def get_step(self) :
