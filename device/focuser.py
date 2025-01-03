@@ -45,6 +45,7 @@ class FocuserMetadata:
     MaxDeviceNumber = maxdev
     InterfaceVersion = 3        # IFocuserVxxx
 
+from zaber_stage import Zaber
 
 focuser_dev = None
 def start_focuser_device(logger: logger):
