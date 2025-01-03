@@ -46,7 +46,7 @@ class Zaber() :
         return False
 
     def get_position(self) :
-        return self.zaber_stage.get_position()*1000.
+        return int(self.zaber_stage.get_position()*1000.)
 
     def get_step(self) :
          return 1
