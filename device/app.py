@@ -76,6 +76,7 @@ from shr import set_shr_logger
 # FOR EACH ASCOM DEVICE #
 #########################
 import switch
+import focuser
 
 #--------------
 API_VERSION = 1
@@ -218,10 +219,12 @@ def main():
     """ Application startup"""
 
     logger = log.init_logging()
+    flogger = log.init_logging()
     # Share this logger throughout
     log.logger = logger
     exceptions.logger = logger
     switch.start_switch_device(logger)
+    focuser.start_focuser_device(logger)
     discovery.logger = logger
     set_shr_logger(logger)
 
@@ -229,6 +232,7 @@ def main():
     # FOR EACH ASCOM DEVICE #
     #########################
     switch.logger = logger
+    focuser.logger = flogger
 
     # -----------------------------
     # Last-Chance Exception Handler
@@ -252,6 +256,7 @@ def main():
     # FOR EACH ASCOM DEVICE #
     #########################
     init_routes(falc_app, 'switch', switch)
+    init_routes(falc_app, 'focuser', focuser)
     #
     # Initialize routes for Alpaca support endpoints
     falc_app.add_route('/management/apiversions', management.apiversions())
