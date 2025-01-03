@@ -28,7 +28,7 @@ logger: Logger = None
 # which instance of the device (0-based) is being called by the client. Leave this
 # set to 0 for the simple case of controlling only one instance of this device type.
 #
-maxdev = 0                      # Single instance
+maxdev = 1                      # Single instance
 
 # -----------
 # DEVICE INFO
