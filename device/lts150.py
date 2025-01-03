@@ -20,34 +20,34 @@ class LTS150() :
         print('connected',state)
         return state
 
-    def canwrite(self,id) :
+    def canwrite(self) :
         return True
 
     def disconnect(self) :
         self.connected(False)
 
-    def get_description(self,id) :
+    def get_description(self) :
         return self.description
 
-    def get_name(self,id) :
+    def get_name(self) :
         return self.name
 
-    def get_minvalue(self,id) :
+    def get_minvalue(self) :
         return self.minswitchvalue
 
-    def get_maxvalue(self,id) :
+    def get_maxvalue(self) :
         return self.maxswitchvalue
 
-    def set_position(self,id,val) :
+    def set_position(self,val) :
         print('setting value',val)
         self.lts_stage.move(float(val))
 
-    def getswitch(self,id) :
+    def getswitch(self) :
         return True
 
-    def get_position(self,id) :
+    def get_position(self) :
         return self.lts_stage.get_position()
 
-    def get_step(self,id) :
+    def get_step(self) :
          return 1
 
