@@ -63,7 +63,7 @@ switch_dev = None
 def start_switch_device(logger: logger):
     logger = logger
     global switch_dev
-    switch_dev = [TC300(logger=logger),LTS150(logger=logger)]
+    switch_dev = [TC300(logger=logger)]
 
 # --------------------
 # RESOURCE CONTROLLERS
