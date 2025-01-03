@@ -3,7 +3,7 @@ from zaber_motion.ascii import Connection
 
 class ZaberStage() :
 
-    def __init__(self,port='COM4') :
+    def __init__(self,port='COM6') :
         self.connection = Connection.open_serial_port(port)
         self.connection.enable_alerts()
 
