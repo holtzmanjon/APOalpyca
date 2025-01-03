@@ -94,7 +94,7 @@ class connected:
     def on_get(self, req: Request, resp: Response, devnum: int):
         try:
             # -------------------------------------
-            is_connecting = focuser_dev.connected
+            is_conn = focuser_dev.connected
             # -------------------------------------
             resp.text = PropertyResponse(is_conn, req).json
         except Exception as ex:
