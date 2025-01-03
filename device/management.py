@@ -47,7 +47,7 @@ from shr import PropertyResponse, DeviceMetadata
 from config import Config
 from logging import Logger
 # For each *type* of device served
-from switch import Switch0Metadata, Switch1Metadata
+from switch import Switch0Metadata
 from focuser import FocuserMetadata, StageMetadata
 
 logger: Logger = None
