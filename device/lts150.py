@@ -38,14 +38,14 @@ class LTS150() :
     def get_maxvalue(self,id) :
         return self.maxswitchvalue
 
-    def set_value(self,id,val) :
+    def set_position(self,id,val) :
         print('setting value',val)
         self.lts_stage.move(float(val))
 
     def getswitch(self,id) :
         return True
 
-    def get_value(self,id) :
+    def get_position(self,id) :
         return self.lts_stage.get_position()
 
     def get_step(self,id) :

@@ -48,7 +48,7 @@ from config import Config
 from logging import Logger
 # For each *type* of device served
 from switch import Switch0Metadata, Switch1Metadata
-from focuser import FocuserMetadata
+from focuser import FocuserMetadata, StageMetadata
 
 logger: Logger = None
 #logger = None                   # Safe on Python 3.7 but no intellisense in VSCode etc.
@@ -91,16 +91,16 @@ class configureddevices():
             'UniqueID'      : Switch0Metadata.DeviceID
             },
             {
-            'DeviceName'    : Switch1Metadata.Name,
-            'DeviceType'    : Switch1Metadata.DeviceType,
-            'DeviceNumber'  : 1,
-            'UniqueID'      : Switch1Metadata.DeviceID
-            },
-            {
             'DeviceName'    : FocuserMetadata.Name,
             'DeviceType'    : FocuserMetadata.DeviceType,
             'DeviceNumber'  : 0,
             'UniqueID'      : FocuserMetadata.DeviceID
+            },
+            {
+            'DeviceName'    : StageMetadata.Name,
+            'DeviceType'    : StageMetadata.DeviceType,
+            'DeviceNumber'  : 1,
+            'UniqueID'      : StageMetadata.DeviceID
             }
         ]
         resp.text = PropertyResponse(confarray, req).json
