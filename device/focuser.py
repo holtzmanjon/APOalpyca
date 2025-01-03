@@ -430,7 +430,7 @@ class move:
             resp.text = MethodResponse(req,
                             InvalidValueException(f'Position {positionstr} not a valid integer.')).json
             return
-        if position < focuser_dev[devnum][devnum].get_minvalue() or position > focuser_dev[devnum][devnum].get_maxvalue() :
+        if position < focuser_dev[devnum].get_minvalue() or position > focuser_dev[devnum].get_maxvalue() :
             resp.text = MethodResponse(req,
                             InvalidValueException(f'Value " + idstr + " not in range.')).json
             return
