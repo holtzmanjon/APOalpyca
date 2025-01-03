@@ -21,7 +21,6 @@ from exceptions import *        # Nothing but exception classes
 logger: Logger = None
 
 from tc300 import TC300
-from lts150 import LTS150
 
 # ----------------------
 # MULTI-INSTANCE SUPPORT
@@ -44,17 +43,6 @@ class Switch0Metadata:
     Description = 'LTS Temperature controller'
     DeviceType = 'Switch'
     DeviceID = 'e32cca17-899f-401a-bb50-596db7f9a3ee'
-    Info = 'Alpaca Sample Device\nImplements ISwitch\nASCOM Initiative'
-    MaxDeviceNumber = maxdev
-    InterfaceVersion = 3
-
-class Switch1Metadata:
-    """ Metadata describing the Switch Device. Edit for your device"""
-    Name = 'Thorlabs LTS Stage'
-    Version = '1.0.0'
-    Description = 'LTS Stage'
-    DeviceType = 'Switch'
-    DeviceID = '75a88d87-15da-4d2f-94ba-612cd5bb0fea'
     Info = 'Alpaca Sample Device\nImplements ISwitch\nASCOM Initiative'
     MaxDeviceNumber = maxdev
     InterfaceVersion = 3
