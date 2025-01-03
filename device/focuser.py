@@ -57,7 +57,7 @@ class StageMetadata:
     InterfaceVersion = 3
 
 from zaber_stage import Zaber
-from lts_150 import LTS150
+from lts150 import LTS150
 
 focuser_dev = None
 def start_focuser_device(logger: logger):
