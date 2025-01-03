@@ -78,6 +78,7 @@ class K8056(object):
        
     def set_switch(self,id) :
         val = 1 << id+4
+        print('sending: ', val)
         self.send_byte(val)
  
     def send_byte(self, num, address=1):
