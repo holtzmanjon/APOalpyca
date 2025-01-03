@@ -12,7 +12,7 @@ class Zaber() :
         self.maxvalue = 50000
         self.connect()
 
-    def connect(self) :
+    def connect(self,port='COM6') :
         print('connect Zaber stage')
         self.connection = Connection.open_serial_port(port)
         self.connection.enable_alerts()

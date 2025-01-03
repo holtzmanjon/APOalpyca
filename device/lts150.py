@@ -66,7 +66,7 @@ class LTS150() :
     def disconnect(self) :
         self.device.StopPolling()
         self.device.Disconnect()
-        self.connected(False)
+        self.connected=False
 
     def get_description(self) :
         return self.description
