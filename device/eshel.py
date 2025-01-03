@@ -76,8 +76,8 @@ class K8056(object):
         '''Set address of card at `address` to `new`.'''
         self._process(65, new&255, address&255)
        
-    def set_switch(self,id) :
-        val = 1 << id+4
+    def set_switch(self,id,state) :
+        val = state << id+4 | state << 7
         print('sending: ', val)
         self.send_byte(val)
  
