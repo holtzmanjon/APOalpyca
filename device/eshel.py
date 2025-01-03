@@ -41,7 +41,7 @@ class K8056(object):
         sleep(0.1)
 
     def connect(self) :
-        self.clear(9))
+        self.clear(9)
         self.connected = True
 
     def disconnect(self):
