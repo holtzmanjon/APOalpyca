@@ -359,9 +359,10 @@ class temperature:
         
         try:
             # ----------------------
-            val = ## GET PROPERTY ##
+            #val = ## GET PROPERTY ##
             # ----------------------
-            resp.text = PropertyResponse(val, req).json
+            #resp.text = PropertyResponse(val, req).json
+            resp.text = MethodResponse(req, NotImplementedException()).json
         except Exception as ex:
             resp.text = PropertyResponse(None, req,
                             DriverException(0x500, 'Focuser.Temperature failed', ex)).json
