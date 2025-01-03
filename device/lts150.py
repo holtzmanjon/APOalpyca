@@ -18,7 +18,7 @@ from Thorlabs.MotionControl.IntegratedStepperMotorsCLI import *
 from System import Decimal  # necessary for real world units
 
 class LTS150() :
-    def __init__(self,logger=None, serial_no="45441684"):
+    def __init__(self,logger=None) :
         """  Initialize dome properties and capabilities
         """
         self.maxswitch = 1
@@ -28,7 +28,7 @@ class LTS150() :
         self.maxswitchvalue = 150
         self.connect()
 
-    def connect(self) :
+    def connect(self,serial_no="45441685") :
         print('connect LTS 150')
         DeviceManagerCLI.BuildDeviceList()
         # create new device
