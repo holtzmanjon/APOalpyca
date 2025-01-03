@@ -45,7 +45,7 @@ class LTS150() :
     def getswitch(self,id) :
         return True
 
-    def get_position(self,id) :
+    def get_value(self,id) :
         return self.lts_stage.get_position()
 
     def get_step(self,id) :
