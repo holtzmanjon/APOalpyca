@@ -8,7 +8,7 @@ class LTS150() :
         self.description = 'Thorlabs LTS 150'
         self.name = 'Iodine stage'
         self.minswitchvalue = 0
-        self.maxswitchvalue = 1500
+        self.maxswitchvalue = 150
         self.connect()
 
     def connect(self) :
