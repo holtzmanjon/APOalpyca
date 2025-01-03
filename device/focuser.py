@@ -50,7 +50,7 @@ from zaber_stage import Zaber
 focuser_dev = None
 def start_focuser_device(logger: logger):
     logger = logger
-    global switch_dev
+    global focuser_dev
     focuser_dev = Zaber(logger=logger)
 
 # --------------------
