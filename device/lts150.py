@@ -28,7 +28,7 @@ class LTS150() :
         self.maxswitchvalue = 150
         self.connect()
 
-    def connect(self,serial_no="45441685") :
+    def connect(self,serial_no="45441684") :
         print('connect LTS 150')
         DeviceManagerCLI.BuildDeviceList()
         # create new device
