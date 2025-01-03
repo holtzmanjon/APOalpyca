@@ -1,4 +1,5 @@
-import zaber
+from zaber_motion import Units
+from zaber_motion.ascii import Connection
   
 class Zaber() :
     def __init__(self, logger=None ) :
@@ -13,18 +14,25 @@ class Zaber() :
 
     def connect(self) :
         print('connect Zaber stage')
-        self.zaber_stage=zaber.ZaberStage()
+        self.connection = Connection.open_serial_port(port)
+        self.connection.enable_alerts()
+
+        device_list = self.connection.detect_devices()
+        print("Found {} devices".format(len(device_list)))
+
+        self.device = device_list[0]
+        self.axis = self.device.get_axis(1)
+        if not self.axis.is_homed():
+            print('homing axis...')
+            self.axis.home()
         self.connected = True
 
-    def connected(self,state) :
-        print('connected',state)
-        return state
-
-    def canwrite(self) :
-        return True
+    def home(self) :
+        self.axis.home()
 
     def disconnect(self) :
-        self.connected(False)
+        self.connection.close()
+        self.connected=False
 
     def get_minvalue(self) :
         return self.minvalue
@@ -40,14 +48,15 @@ class Zaber() :
 
     def set_position(self,val) :
         print('setting value',val)
-        self.zaber_stage.move(float(val)/1000.)
+        pos=float(val)/1000.
+        self.axis.move_absolute(pos, Units.LENGTH_MILLIMETRES)
 
     def is_moving(self) :
         return False
 
     def get_position(self) :
+        return int(self.axis.get_position(Units.LENGTH_MILLIMETRES)*1000.)
         return int(self.zaber_stage.get_position()*1000.)
 
     def get_step(self) :
          return 1
-
