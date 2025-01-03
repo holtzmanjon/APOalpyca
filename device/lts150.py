@@ -1,7 +1,24 @@
-import lts
-  
+"""
+lts_pythonnet
+==================
+
+An example of using the LTS integrated stages with python via pythonnet
+
+Implement ASCOM calls
+"""
+import time
+import clr
+
+clr.AddReference("C:\\Program Files\\Thorlabs\\Kinesis\\Thorlabs.MotionControl.DeviceManagerCLI.dll")
+clr.AddReference("C:\\Program Files\\Thorlabs\\Kinesis\\Thorlabs.MotionControl.GenericMotorCLI.dll")
+clr.AddReference("C:\\Program Files\\Thorlabs\\Kinesis\\ThorLabs.MotionControl.IntegratedStepperMotorsCLI.dll")
+from Thorlabs.MotionControl.DeviceManagerCLI import *
+from Thorlabs.MotionControl.GenericMotorCLI import *
+from Thorlabs.MotionControl.IntegratedStepperMotorsCLI import *
+from System import Decimal  # necessary for real world units
+
 class LTS150() :
-    def __init__(self, logger=None ) :
+    def __init__(self,logger=None, serial_no="45441684"):
         """  Initialize dome properties and capabilities
         """
         self.maxswitch = 1
@@ -13,17 +30,42 @@ class LTS150() :
 
     def connect(self) :
         print('connect LTS 150')
-        self.lts_stage=lts.ThorlabsStage()
+        DeviceManagerCLI.BuildDeviceList()
+        # create new device
+        # Connect, begin polling, and enable
+        self.device = LongTravelStage.CreateLongTravelStage(serial_no)
+        self.device.Connect(serial_no)
+
+        # Ensure that the device settings have been initialized
+        if not self.device.IsSettingsInitialized():
+            self.device.WaitForSettingsInitialized(10000)  # 10 second timeout
+            assert self.device.IsSettingsInitialized() is True
+
+        # Start polling and enable
+        self.device.StartPolling(250)  #250ms polling rate
+        time.sleep(5)
+        self.device.EnableDevice()
+        time.sleep(0.25)  # Wait for device to enable
+
+        # Get Device Information and display description
+        self.device_info = self.device.GetDeviceInfo()
+        print(self.device_info.Description)
+
+        # Load any configuration settings needed by the controller/stage
+        motor_config = self.device.LoadMotorConfiguration(serial_no)
+
+        # Get parameters related to homing/zeroing/other
+        home_params = self.device.GetHomingParams()
+        print(f'Homing velocity: {home_params.Velocity}\n,'
+              f'Homing Direction: {home_params.Direction}')
+        home_params.Velocity = Decimal(10.0)  # real units, mm/s
+        # Set homing params (if changed)
+        self.device.SetHomingParams(home_params)
         self.connected = True
 
-    def connected(self,state) :
-        print('connected',state)
-        return state
-
-    def canwrite(self) :
-        return True
-
     def disconnect(self) :
+        self.device.StopPolling()
+        self.device.Disconnect()
         self.connected(False)
 
     def get_description(self) :
@@ -40,14 +82,33 @@ class LTS150() :
 
     def set_position(self,val) :
         print('setting value',val)
-        self.lts_stage.move(float(val))
+        position=float(val)
+        # Move the device to a new position
+        new_pos = Decimal(position)  # Must be a .NET decimal
+        print(f'Moving to {new_pos}')
+        self.device.MoveTo(new_pos, 60000)  # 60 second timeout
 
     def getswitch(self) :
         return True
 
     def get_position(self) :
-        return self.lts_stage.get_position()
+        return Decimal.ToDouble(self.device.get_Position())
 
     def get_step(self) :
          return 1
+
+    def home(self) :
+        # Home or Zero the device (if a motor/piezo)
+        print("Homing Device")
+        self.device.Home(60000)  # 60 second timeout
+        print("Done")
+
+    def get_velocity(self) :
+        return Decimal.ToDouble(self.device.get_Velocity())
+
+    def set_velocity(self,velocity) :
+        # Get Velocity Params
+        vel_params = self.device.GetVelocityParams()
+        vel_params.MaxVelocity = Decimal(50.0)  # This is a bad idea
+        self.device.SetVelocityParams(vel_params)
 
