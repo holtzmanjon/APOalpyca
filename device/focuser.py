@@ -50,7 +50,7 @@ class StageMetadata:
     Name = 'Thorlabs LTS Stage'
     Version = '1.0.0'
     Description = 'LTS Stage'
-    DeviceType = 'Switch'
+    DeviceType = 'Focuser'
     DeviceID = '75a88d87-15da-4d2f-94ba-612cd5bb0fea'
     Info = 'Alpaca Sample Device\nImplements ISwitch\nASCOM Initiative'
     MaxDeviceNumber = maxdev
