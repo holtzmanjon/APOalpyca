@@ -168,7 +168,7 @@ class devicestate:
             return
         try:
             # ----------------------
-            val = state_dev[devnum].getstate()
+            resp.text = MethodResponse(req, NotImplementedException()).json
             # val.append(StateValue('## NAME ##', ## GET VAL ##))
             # Repeat for each of the operational states per the device spec
             # ----------------------

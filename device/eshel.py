@@ -94,7 +94,7 @@ class K8056(object):
         self.send_byte(val)
         self.state = val
 
-    def getstate(self,id) :
+    def getswitch(self,id) :
         val = self.state & (1 << id+4)
         if val > 0 : return True
         else : return False
