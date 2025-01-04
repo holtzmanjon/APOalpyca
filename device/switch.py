@@ -21,7 +21,7 @@ from exceptions import *        # Nothing but exception classes
 logger: Logger = None
 
 from tc300 import TC300
-from eshell import K8056
+from eshel import K8056
 
 # ----------------------
 # MULTI-INSTANCE SUPPORT
