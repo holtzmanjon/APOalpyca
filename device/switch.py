@@ -48,7 +48,7 @@ class Switch0Metadata:
     MaxDeviceNumber = maxdev
     InterfaceVersion = 3
 
-class Switc10Metadata:
+class Switch1Metadata:
     """ Metadata describing the Switch Device. Edit for your device"""
     Name = 'K8056 relay card'
     Version = '1.0.0'
