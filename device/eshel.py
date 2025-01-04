@@ -38,10 +38,16 @@ class K8056(object):
         self._serial = Serial(port, 2400)
         self.repeat = repeat
         self.wait = wait
+        self.maxswitch = 4
+        self.minswitchvalue = 0
+        self.maxswitchvalue = 1
+        self.description = ['quartz','ThAr','LED','Mirror']
+        self.canasync = False
         sleep(0.1)
 
     def connect(self) :
         self.clear(9)
+        self.state = 0
         self.connected = True
 
     def disconnect(self):
@@ -76,10 +82,20 @@ class K8056(object):
         '''Set address of card at `address` to `new`.'''
         self._process(65, new&255, address&255)
        
-    def set_switch(self,id,state) :
-        val = state << id+4 | state << 7
+    def set_state(self,id,state) :
+        if state :
+            val = self.state | 1 << id+4
+        else :
+            val = self.state & ~(1 << id+4)
+
         print('sending: ', val)
         self.send_byte(val)
+        self.state = val
+
+    def getstate(self,id) :
+        val = self.state & (1 << id+4)
+        if val > 0 : return True
+        else : return False
  
     def send_byte(self, num, address=1):
         '''Set relays to `num` (in binary mode).'''
@@ -97,3 +113,20 @@ class K8056(object):
         '''Display card address on LEDs.'''
         self._process(68, 1, 1)
 
+    def canwrite(self,id) :
+        return True
+
+    def get_description(self,id) :
+        return self.description[id]
+
+    def get_value(self,id) : 
+        return self.getstate(self,id)
+
+    def get_minvalue(self,id) :
+        return self.minswitchvalue
+
+    def get_maxvalue(self,id) :
+        return self.maxswitchvalue
+
+    def get_step(self,id) :
+        return 1

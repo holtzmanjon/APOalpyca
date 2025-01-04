@@ -10,6 +10,7 @@ class TC300() :
         self.name = 'Iodine temperature'
         self.minswitchvalue = 0
         self.maxswitchvalue = 80
+        self.canasync = False
         self.connect(port='COM7')
 
     def connect(self,port='COM7') :
@@ -28,7 +29,7 @@ class TC300() :
         self.connected(False)
 
     def get_description(self,id) :
-        return self.description
+        return '{:s}, channel {:d}'.format(self.description,id)
 
     def get_name(self,id) :
         return self.name

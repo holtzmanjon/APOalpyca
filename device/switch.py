@@ -47,11 +47,22 @@ class Switch0Metadata:
     MaxDeviceNumber = maxdev
     InterfaceVersion = 3
 
+class Switc10Metadata:
+    """ Metadata describing the Switch Device. Edit for your device"""
+    Name = 'K8056 relay card'
+    Version = '1.0.0'
+    Description = 'Relay for eShel calibration'
+    DeviceType = 'Switch'
+    DeviceID = 'ea700a31b-2b41-41be-bcf0-bfda9b0cee87'
+    Info = 'Alpaca Sample Device\nImplements ISwitch\nASCOM Initiative'
+    MaxDeviceNumber = maxdev
+    InterfaceVersion = 3
+
 switch_dev = None
 def start_switch_device(logger: logger):
     logger = logger
     global switch_dev
-    switch_dev = [TC300(logger=logger)]
+    switch_dev = [TC300(logger=logger),K8056(logger=logger)]
 
 # --------------------
 # RESOURCE CONTROLLERS
@@ -156,7 +167,7 @@ class devicestate:
             return
         try:
             # ----------------------
-            val = []
+            val = state_dev[devnum].getstate()
             # val.append(StateValue('## NAME ##', ## GET VAL ##))
             # Repeat for each of the operational states per the device spec
             # ----------------------
@@ -165,12 +176,10 @@ class devicestate:
             resp.text = PropertyResponse(None, req,
                             DriverException(0x500, 'switch.Devicestate failed', ex)).json
 
-
 class disconnect:
     def on_put(self, req: Request, resp: Response, devnum: int):
         try:
             # ---------------------------
-            ### DISCONNECT THE DEVICE ###
             switch_dev[devnum].disconnect()
             # ---------------------------
             resp.text = MethodResponse(req).json
@@ -229,7 +238,7 @@ class maxswitch:
         
         try:
             # ----------------------
-            val = switch_dev[devnum].maxswitch ## GET PROPERTY ##
+            val = switch_dev[devnum].maxswitch
             # ----------------------
             resp.text = PropertyResponse(val, req).json
         except Exception as ex:
@@ -289,7 +298,7 @@ class getswitch:
 
         try:
             # ----------------------
-            val = switch_dev[devnum].getswitch(id) ## GET PROPERTY ##
+            val = switch_dev[devnum].getswitch(id) 
             # ----------------------
             resp.text = PropertyResponse(val, req).json
         except Exception as ex:
@@ -349,7 +358,7 @@ class getswitchname:
 
         try:
             # ----------------------
-            val = switch_dev[devnum].get_name(id)
+            val = switch_dev[devnum].get_description(id)
             # ----------------------
             resp.text = PropertyResponse(val, req).json
         except Exception as ex:
@@ -506,9 +515,11 @@ class setswitch:
             return
 
         try:
-            #resp.text = MethodResponse(req, NotImplementedException()).json
             # -----------------------------
-            #switch_dev[devnum].set_switch(id)
+            if devnum == 0 :
+                resp.text = MethodResponse(req, NotImplementedException()).json
+            else :
+                switch_dev[devnum].set_state(id)
             # -----------------------------
             resp.text = MethodResponse(req).json
         except Exception as ex:
@@ -614,7 +625,7 @@ class canasync:
 
         try:
             # ----------------------
-            val = False ## GET PROPERTY ##
+            val = switch_dev[devnum].canasync
             # ----------------------
             resp.text = PropertyResponse(val, req).json
         except Exception as ex:
