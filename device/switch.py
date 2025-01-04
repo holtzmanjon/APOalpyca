@@ -91,6 +91,10 @@ class action:
                     val = switch_dev[devnum].get_voltage(id)
                 elif req.get_media()['Action'] == 'get_current' :
                     val = switch_dev[devnum].get_current(id)
+                elif req.get_media()['Action'] == 'get_enable' :
+                    val = switch_dev[devnum].get_enable(id)
+                elif req.get_media()['Action'] == 'set_enable' :
+                    val = switch_dev[devnum].set_enable(id,int(idstr[1]))
                 resp.text = PropertyResponse(val, req).json
             except Exception as ex:
                 resp.text = PropertyResponse(None, req,

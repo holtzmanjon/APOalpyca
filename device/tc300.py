@@ -46,6 +46,10 @@ class TC300() :
         self.tc300.write('EN{:d}=1\r'.format(id+1).encode())
         self.tc300.readline()
 
+    def get_enable(self,id,val) :
+        self.tc300.write('EN{:d}?\r'.format(id+1).encode())
+        return int(self.tc300.readline().strip(b'>').split()[0])
+
     def set_enable(self,id,val) :
         self.tc300.write('EN{:d}={:d}\r'.format(id+1,int(val)).encode())
         self.tc300.readline()
