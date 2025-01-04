@@ -520,7 +520,7 @@ class setswitch:
             if devnum == 0 :
                 resp.text = MethodResponse(req, NotImplementedException()).json
             else :
-                switch_dev[devnum].set_state(id)
+                switch_dev[devnum].set_state(id,state)
             # -----------------------------
             resp.text = MethodResponse(req).json
         except Exception as ex:
