@@ -43,9 +43,11 @@ class K8056(object):
         self.maxswitchvalue = 1
         self.description = ['quartz','ThAr','LED','Mirror']
         self.canasync = False
+        self.connect()
         sleep(0.1)
 
     def connect(self) :
+        print('connecting K8056...')
         self.clear(9)
         self.state = 0
         self.connected = True
