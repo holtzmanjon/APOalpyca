@@ -228,7 +228,7 @@ class name():
 class supportedactions:
     def on_get(self, req: Request, resp: Response, devnum: int):
         if devnum == 0 :
-            resp.text = PropertyResponse(['get_tset','get_voltage','get_current'], req).json  # Not PropertyNotImplemented
+            resp.text = PropertyResponse(['get_tset','get_voltage','get_current','get_enable','set_enable'], req).json
         else :
             resp.text = PropertyResponse([], req).json  # Not PropertyNotImplemented
 
