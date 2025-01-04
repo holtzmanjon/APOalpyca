@@ -34,7 +34,7 @@ class K8056(object):
     For better reliability repeat instructions `repeat` times
     and `wait` seconds between execution.
     """
-    def __init__(self, port='COM4', repeat=0, wait=0):
+    def __init__(self, port='COM4', repeat=0, wait=0, logger=None):
         self._serial = Serial(port, 2400)
         self.repeat = repeat
         self.wait = wait
