@@ -26,6 +26,7 @@ class Safety :
         self.override_time = time
 
     def override(self) :
+        print(self.override_timer, self.override_timer.elapsed(),self.override_time)
         if (self.override_timer is not None and 
             self.override_timer.elapsed()<self.override_time ) :
             # if we have a timer set and overrid time hasn't expired 
