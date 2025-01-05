@@ -74,8 +74,6 @@ class action:
     def on_put(self, req: Request, resp: Response, devnum: int):
         if devnum == 0 :
             idstr = get_request_field('Parameters', req)      # Raises 400 bad request if missing
-            import pdb
-            pdb.set_trace()
             try:
                 if isinstance(idstr,list) :
                     id = int(idstr[0])
@@ -100,7 +98,8 @@ class action:
                 elif req.get_media()['Action'] == 'get_enable' :
                     val = switch_dev[devnum].get_enable(id)
                 elif req.get_media()['Action'] == 'set_enable' :
-                    val = switch_dev[devnum].set_enable(id,par) 
+                    switch_dev[devnum].set_enable(id,par) 
+                    val = switch_dev[devnum].get_enable(id)
                 resp.text = PropertyResponse(val, req).json
             except Exception as ex:
                 resp.text = PropertyResponse(None, req,
