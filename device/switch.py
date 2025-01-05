@@ -74,10 +74,12 @@ class action:
     def on_put(self, req: Request, resp: Response, devnum: int):
         if devnum == 0 :
             idstr = get_request_field('Parameters', req)      # Raises 400 bad request if missing
-            import pdb
-            pdb.set_trace()
             try:
-                id = int(idstr)
+                if isinstance(idstr,list) :
+                    id = int(idstr[0])
+                    par = int(idstr[1])
+                else :
+                    id = int(idstr)
             except:
                 resp.text = MethodResponse(req,
                                 InvalidValueException(f'Id {idstr} not a valid integer.')).json
@@ -96,7 +98,7 @@ class action:
                 elif req.get_media()['Action'] == 'get_enable' :
                     val = switch_dev[devnum].get_enable(id)
                 elif req.get_media()['Action'] == 'set_enable' :
-                    val = switch_dev[devnum].set_enable(id,int(idstr[1]))
+                    val = switch_dev[devnum].set_enable(id,par) 
                 resp.text = PropertyResponse(val, req).json
             except Exception as ex:
                 resp.text = PropertyResponse(None, req,
