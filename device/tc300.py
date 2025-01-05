@@ -49,7 +49,8 @@ class TC300() :
     def get_enable(self,id) :
         self.tc300.write('ST?\r'.format(id+1).encode())
         status = int(self.tc300.readline().strip(b'>').split()[0])
-        return (status & (1<<id)) == 1
+        print('status: ', status)
+        return (status & (1<<id)) > 0
 
     def set_enable(self,id,val) :
         self.tc300.write('EN{:d}={:d}\r'.format(id+1,int(val)).encode())
