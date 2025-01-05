@@ -223,16 +223,16 @@ def main():
     # Share this logger throughout
     log.logger = logger
     exceptions.logger = logger
-    switch.start_switch_device(logger)
-    focuser.start_focuser_device(logger)
+    dome.start_dome_device(logger)
+    safetymonitor.start_safety_device(logger)
     discovery.logger = logger
     set_shr_logger(logger)
 
     #########################
     # FOR EACH ASCOM DEVICE #
     #########################
-    switch.logger = logger
-    focuser.logger = flogger
+    dome.logger = logger
+    safetymonitor.logger = flogger
 
     # -----------------------------
     # Last-Chance Exception Handler
