@@ -598,7 +598,7 @@ class setswitchvalue:
             resp.text = MethodResponse(req,
                             InvalidValueException(f'Value {valuestr} not a valid number.')).json
             return
-        if value < switch_dev[devnum].get_minvalue() or value > switch_dev[devnum].get_maxvalue() :
+        if value < switch_dev[devnum].get_minvalue(id) or value > switch_dev[devnum].get_maxvalue(id) :
             resp.text = MethodResponse(req,
                             InvalidValueException(f'Value " + idstr + " not in range.')).json
             return
