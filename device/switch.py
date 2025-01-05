@@ -74,6 +74,7 @@ class action:
     def on_put(self, req: Request, resp: Response, devnum: int):
         if devnum == 0 :
             idstr = get_request_field('Parameters', req)      # Raises 400 bad request if missing
+            pdb.set_trace()
             try:
                 if isinstance(idstr,list) :
                     id = int(idstr[0])

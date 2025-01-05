@@ -47,7 +47,7 @@ class TC300() :
         self.tc300.readline()
 
     def get_enable(self,id) :
-        self.tc300.write('ST{:d}?\r'.format(id+1).encode())
+        self.tc300.write('ST?\r'.format(id+1).encode())
         status = int(self.tc300.readline().strip(b'>').split()[0])
         return (status & (1<<id)) == 1
 
