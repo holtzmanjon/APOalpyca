@@ -259,9 +259,9 @@ def main():
     init_routes(falc_app, 'safetymonitor', safetymonitor)
     #
     # Initialize routes for Alpaca support endpoints
-    falc_app.add_route('/management/apiversions', management.apiversions())
-    falc_app.add_route(f'/management/v{API_VERSION}/description', management.description())
-    falc_app.add_route(f'/management/v{API_VERSION}/configureddevices', management.configureddevices())
+    falc_app.add_route('/management/apiversions', domemanagement.apiversions())
+    falc_app.add_route(f'/management/v{API_VERSION}/description', domemanagement.description())
+    falc_app.add_route(f'/management/v{API_VERSION}/configureddevices', domemanagement.configureddevices())
     falc_app.add_route('/setup', setup.svrsetup())
     falc_app.add_route(f'/setup/v{API_VERSION}/switch/{{devnum}}/setup', setup.devsetup())
 
