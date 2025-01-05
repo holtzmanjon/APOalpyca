@@ -25,6 +25,7 @@ class Safety :
         self.override_timer = timer.Timer()
         self.override_timer.start()
         self.override_time = time
+        print('in setoverride: ',self.override_timer)
 
     def override(self) :
         print(self.override_timer)
