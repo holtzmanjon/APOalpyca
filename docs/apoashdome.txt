@@ -1,5 +1,5 @@
-APOalpyca module
-****************
+APOAshDome module
+*****************
 
 Introduction
 ++++++++++++
@@ -7,7 +7,7 @@ Introduction
 
 Module functions
 ++++++++++++++++
-.. automodule:: APOalpyca
+.. automodule:: APOAshDome
    :members:
    :member-order: bysource
 

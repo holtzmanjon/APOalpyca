@@ -1,4 +1,4 @@
-APOalpyca module
+APOsafety module
 ****************
 
 Introduction
@@ -7,7 +7,7 @@ Introduction
 
 Module functions
 ++++++++++++++++
-.. automodule:: APOalpyca
+.. automodule:: APOsafety
    :members:
    :member-order: bysource
 

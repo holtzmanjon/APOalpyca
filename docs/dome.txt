@@ -1,13 +1,14 @@
-APOalpyca module
-****************
+dome module
+***********
 
-Introduction
-++++++++++++
+The dome module provides the Alpyca driver to the APOAshDome hardware.
+
+It implements the standard ASCOM commands:
 
 
 Module functions
 ++++++++++++++++
-.. automodule:: APOalpyca
+.. automodule:: dome
    :members:
    :member-order: bysource
 

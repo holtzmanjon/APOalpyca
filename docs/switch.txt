@@ -1,13 +1,32 @@
-APOalpyca module
-****************
+switch module
+*************
 
-Introduction
-++++++++++++
+The switch module provides the Alpyca driver to the hardware for controlling
+the iodine cell temperature through the Thorlabs TC300 controller, and for
+controlling the Shelyak eShel calibration module.
+
+The TC300 device can address the two separate channels of the controller.
+
+The Shelyak device can address four channels:
+- Quartz (channel 0)
+- ThAr (channel 1)
+- LED (channel 2)
+- Mirror (channel 3)
+
+switch implements the standard ASCOM commands:
+
+The TC300 device implements some extra SupportedActions:
+- get_voltage()
+- get_current()
+- get_tset()
+- get_tact()
+- get_enable()
+- set_enable()
 
 
 Module functions
 ++++++++++++++++
-.. automodule:: APOalpyca
+.. automodule:: switch
    :members:
    :member-order: bysource
 

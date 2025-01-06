@@ -1,13 +1,16 @@
-APOalpyca module
-****************
+focuser module
+**************
 
-Introduction
-++++++++++++
+The focuser module provides the Alpyca driver to the hardware for moving
+the SONG focal plane camera with the Zaber stage, and for moving the SONG
+iodine cell in and out of the beam with the Thorlabs LTS150 stage.
+
+It implements the standard ASCOM commands:
 
 
 Module functions
 ++++++++++++++++
-.. automodule:: APOalpyca
+.. automodule:: focuser
    :members:
    :member-order: bysource
 

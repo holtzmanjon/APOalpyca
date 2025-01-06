@@ -1,13 +1,21 @@
-APOalpyca module
-****************
+safetymonitor module
+********************
 
-Introduction
-++++++++++++
+The safetymonitor module provides the Alpyca driver to determine whether
+it is safe to open the 1m dome. This is achieved with routines implemented
+in APOSafety that check the status
+
+It implements the standard ASCOM commands:
+- SafetyMonity.IsSafe()
+
+It includes a custom SupportedAction:
+- override, which sets an override to suspend checking status of the other domes for a specified number of seconds
+
 
 
 Module functions
 ++++++++++++++++
-.. automodule:: APOalpyca
+.. automodule:: safetymonitor
    :members:
    :member-order: bysource
 
