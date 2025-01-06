@@ -20,8 +20,7 @@ class Safety :
         self.warnonly = warnonly
         self.override_timer = None
         self.override_time = 0
-        try: os.remove('OVERRIDE')
-        except : pass
+        os.remove('OVERRIDE')
 
     def setoverride(self,time) :
         t=Thread(target=self.runoverride)
