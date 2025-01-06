@@ -5,3 +5,4 @@ falcon
 toml
 clr
 zaber_motion
+sphinx_rtd_theme
