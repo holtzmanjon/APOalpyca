@@ -1,4 +1,7 @@
-from serial import Serial
+try: 
+    from serial import Serial
+except: 
+    print('no serial')
   
 class TC300() :
     def __init__(self, logger=None ) :
@@ -15,7 +18,7 @@ class TC300() :
 
     def connect(self,port='COM7') :
         print('connect TC300')
-        self.tc300=Serial(port,115200,timeout=1)
+        if hardware: self.tc300=Serial(port,115200,timeout=1)
         self.connected = True
 
     def connected(self,state) :
@@ -79,5 +82,5 @@ class TC300() :
         return float(self.tc300.readline().strip(b'>').split()[0])
 
     def get_step(self,id) :
-         return 0.1
+        return 0.1
 

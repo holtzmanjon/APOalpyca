@@ -9,13 +9,16 @@ Implement ASCOM calls
 import time
 import clr
 
-clr.AddReference("C:\\Program Files\\Thorlabs\\Kinesis\\Thorlabs.MotionControl.DeviceManagerCLI.dll")
-clr.AddReference("C:\\Program Files\\Thorlabs\\Kinesis\\Thorlabs.MotionControl.GenericMotorCLI.dll")
-clr.AddReference("C:\\Program Files\\Thorlabs\\Kinesis\\ThorLabs.MotionControl.IntegratedStepperMotorsCLI.dll")
-from Thorlabs.MotionControl.DeviceManagerCLI import *
-from Thorlabs.MotionControl.GenericMotorCLI import *
-from Thorlabs.MotionControl.IntegratedStepperMotorsCLI import *
-from System import Decimal  # necessary for real world units
+try :
+    clr.AddReference("C:\\Program Files\\Thorlabs\\Kinesis\\Thorlabs.MotionControl.DeviceManagerCLI.dll")
+    clr.AddReference("C:\\Program Files\\Thorlabs\\Kinesis\\Thorlabs.MotionControl.GenericMotorCLI.dll")
+    clr.AddReference("C:\\Program Files\\Thorlabs\\Kinesis\\ThorLabs.MotionControl.IntegratedStepperMotorsCLI.dll")
+    from Thorlabs.MotionControl.DeviceManagerCLI import *
+    from Thorlabs.MotionControl.GenericMotorCLI import *
+    from Thorlabs.MotionControl.IntegratedStepperMotorsCLI import *
+    from System import Decimal  # necessary for real world units
+except :
+    print('no Thorlabs')
 
 class LTS150() :
     def __init__(self,logger=None) :

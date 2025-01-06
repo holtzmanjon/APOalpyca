@@ -3,8 +3,9 @@
 import socket
 import sys, getopt
 import time
-from serial import Serial
 from time import sleep
+try: from serial import Serial
+except: print('no serial')
 
 #    Copyright (c) 2007, 2015 by jerch (brejoe@web.de)
 #
