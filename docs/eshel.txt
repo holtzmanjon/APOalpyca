@@ -12,7 +12,7 @@ The corresponding channel are 0: quartz, 1: ThAr, 2: LED, and 3: mirror.
 The K8056 status cannot be read, so it is tracked in software only.
 
 In addition to operational methods, class also provides attributes
-and methods as required by ASCOM Alpaca Switch device.
+and methods as required by the `ASCOM Alpaca Switch device <https://ascom-standards.org/alpyca/alpaca.switch.html>`_.
 
 
 Module functions

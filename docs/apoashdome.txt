@@ -9,7 +9,7 @@ the dome azimuth. It also provides the ability to sense the state
 of a dome home switch.
 
 In addition to operational methods, class also provides attributes
-and methods as required by ASCOM Alpaca SafetyMonitor device.
+and methods as required by the `ASCOM Alpaca Dome device <https://ascom-standards.org/alpyca/alpaca.dome.html>`_.
 
 
 Module functions

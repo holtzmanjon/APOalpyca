@@ -7,7 +7,7 @@ using the id parameter (0 or 1). Communication with the device is through
 Serial interface.
 
 In addition to operational methods, class also provides attributes
-and methods as required by ASCOM Alpaca Switch device.
+and methods as required by the `ASCOM Alpaca Switch device <https://ascom-standards.org/alpyca/alpaca.switch.html>`_.
 
 
 Module functions
