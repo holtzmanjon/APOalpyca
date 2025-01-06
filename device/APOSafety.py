@@ -25,7 +25,7 @@ class Safety :
         except FileNotFoundError : pass
 
     def setoverride(self,time) :
-        t=Thread(target=self.runoverride(time))
+        t=Thread(target=self.runoverride,args=(time,))
         t.start()   
 
     def runoverride(self,dt) :
