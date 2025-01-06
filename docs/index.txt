@@ -27,16 +27,16 @@ modified from the AlpycaDevice templates.
    :maxdepth: 2
    :caption: Contents:
 
-dome
-safetymonitor
-focuser
-switch
-apoashdome
-aposafety
-eshel
-lts150
-tc300
-zaber
+   dome
+   safetymonitor
+   focuser
+   switch
+   apoashdome
+   aposafety
+   eshel
+   lts150
+   tc300
+   zaber
 
 
 Indices and tables
