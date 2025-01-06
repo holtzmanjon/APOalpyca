@@ -5,6 +5,7 @@ import time
 from logging import Logger
 import re
 import timer
+from threading import Timer, Lock, Thread
 
 messout = b"all"
 
@@ -23,20 +24,19 @@ class Safety :
         except : pass
 
     def setoverride(self,time) :
-        self.override_timer = timer.Timer()
-        self.override_timer.start()
-        self.override_time = time
+        t=Thread(target=self.runoverride)
+        t.start()   
+
+    def runoverride(self,dt) :
         fp=open('OVERRIDE','w')
         fp.close()
+        time.sleep(dt)
+        try: os.remove('OVERRIDE')
+        except : pass
 
     def override(self) :
         # override is implemented through existence of local file to allow
         #  multiple instances of Safety to set it
-        if (self.override_timer is not None and 
-            self.override_timer.elapsed()>self.override_time ) :
-            # if we have a timer set and overrid time has expired 
-            try: os.remove('OVERRIDE')
-            except : pass
         try:
             fp=open('OVERRIDE','r')
             fp.close()
