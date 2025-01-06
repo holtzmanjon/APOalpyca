@@ -1,17 +1,10 @@
 APOsafety module
 ****************
 
-Introduction
-++++++++++++
-
 
 Module functions
 ++++++++++++++++
 .. automodule:: APOsafety
-   :members:
-   :member-order: bysource
-
-.. autoclass:: Dome
    :members:
    :member-order: bysource
 
