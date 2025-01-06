@@ -23,23 +23,21 @@ The interface betyween the Alpyca server and the lower level routine are achieve
 the AlpycaDevice drivers dome.py, safetymonitor.py, focuser.py, and switch.py, which were
 modified from the AlpycaDevice templates.
 
-dome.txt
-safetymonitor.txt
-focuser.txt
-switch.txt
-apoashdome.txt
-aposafety.txt
-eshel.txt
-lts150.txt
-tc300.txt
-zaber.txt
-
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+dome
+safetymonitor
+focuser
+switch
+apoashdome
+aposafety
+eshel
+lts150
+tc300
+zaber
 
-   apoalpyca
 
 Indices and tables
 ==================
