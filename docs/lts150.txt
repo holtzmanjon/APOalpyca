@@ -11,7 +11,7 @@ Module functions
    :members:
    :member-order: bysource
 
-.. autoclass:: LTS150
+.. autoclass:: lts150::LTS150
    :members:
    :member-order: bysource
 

@@ -11,7 +11,7 @@ Module functions
    :members:
    :member-order: bysource
 
-.. autoclass:: ZaberStage
+.. autoclass:: zaber::ZaberStage
    :members:
    :member-order: bysource
 

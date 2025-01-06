@@ -11,7 +11,7 @@ Module functions
    :members:
    :member-order: bysource
 
-.. autoclass:: TC300
+.. autoclass:: tc300::TC300
    :members:
    :member-order: bysource
 

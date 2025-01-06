@@ -4,7 +4,7 @@ APOsafety module
 
 Module functions
 ++++++++++++++++
-.. automodule:: APOsafety
+.. automodule:: APOSafety
    :members:
    :member-order: bysource
 
