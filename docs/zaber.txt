@@ -1,9 +1,10 @@
 zaber module
 ****************
 
-Introduction
-++++++++++++
+Low level module to interface with Zaber stage controller.
 
+In addition to operational methods, class also provides attributes
+and methods as required by ASCOM Alpaca Focuser device.
 
 Module functions
 ++++++++++++++++

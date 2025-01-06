@@ -1,8 +1,18 @@
 eshel module
 ************
 
-Introduction
-++++++++++++
+
+Low level module to interface with Shelyak eShel calibration unit. This
+unit is controlled by a Velleman K8056 8-channel relay. While commands
+are sent to set all relays with one command, the module provides an
+interface for each relay to be commanded separetely, so it can be implemented
+as an ASCOM Alpaca Switch device with 4 channels, specified by id parameter.
+The corresponding channel are 0: quartz, 1: ThAr, 2: LED, and 3: mirror.
+
+The K8056 status cannot be read, so it is tracked in software only.
+
+In addition to operational methods, class also provides attributes
+and methods as required by ASCOM Alpaca Switch device.
 
 
 Module functions

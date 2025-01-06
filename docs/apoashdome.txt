@@ -1,8 +1,15 @@
 APOAshDome module
 *****************
 
-Introduction
-++++++++++++
+This provides a low level interface to control the APO 1m Ash Dome.
+The software controls relays on a Raspberry Pi that trigger the dome
+control box to open/close upper shutter and to power dome rotation.
+It provides an interface to an encoder on the dome motor to determine
+the dome azimuth. It also provides the ability to sense the state
+of a dome home switch.
+
+In addition to operational methods, class also provides attributes
+and methods as required by ASCOM Alpaca SafetyMonitor device.
 
 
 Module functions

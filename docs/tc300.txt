@@ -1,8 +1,13 @@
 tc300 module
 ************
 
-Introduction
-++++++++++++
+Low level module to interface with Thorlabs TC300 temperature controller. 
+The controller has two channels that are controlled separately, addressed
+using the id parameter (0 or 1). Communication with the device is through
+Serial interface.
+
+In addition to operational methods, class also provides attributes
+and methods as required by ASCOM Alpaca Switch device.
 
 
 Module functions

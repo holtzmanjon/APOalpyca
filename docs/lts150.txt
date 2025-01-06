@@ -1,8 +1,11 @@
 lts150 module
 *************
 
-Introduction
-++++++++++++
+Low level module to interface with Thorlabs stage controller. 
+
+In addition to operational methods, class also provides attributes
+and methods as required by ASCOM Alpaca Focuser device.
+
 
 
 Module functions

@@ -1,6 +1,21 @@
 APOsafety module
 ****************
 
+The APOsafety module provides functionality to determine whether
+it is safe to open 1m dome based on the shutter/enclosure status of the APO
+3.5m and/or 2.5m telescopes. It determines these via network calls.
+Default is that it is deemed safe to open if either of the other telescopes
+is open.
+
+There is an option to override the safety check, which is implemented by
+looking for a local OVERRIDE file.
+
+In addition to operational methods, class also provides attributes
+and methods as required by ASCOM Alpaca SafetyMonitor device. This implements
+a special SupportedAction command, override, which takes as an argument the
+number of seconds for which an override should be allowed: this starts a timed thread
+to write the local OVERRIDE file, and to remove it when thread terminates.
+
 
 Module functions
 ++++++++++++++++
