@@ -1,0 +1,39 @@
+Welcome to APOalpyca's documentation!
+======================================
+
+The APOalpyca package contains Alpyca drivers for several devices in
+use at Apache Point Observatory:
+
+- the 1m AshDome, implemented as an Alpaca Dome device
+- a SafetyMonitor device that operates by getting shutter status of 2.5m and 3.5m
+- a Zaber stage, for moving the SONG focal plane camera, implemented as an Alpaca Focuser device
+- a Thorlabs 150 stage, for moving the SONG iodine cell, implemented as an Alpaca Focuser device
+- a Thorlabs TC300 temperature controller, for controlling the temperature of the SONG iodine cell, implemented as an Alpaca Switch device
+- the Shelyak eShel calibration module, implemented as an Alpaca Switch device
+
+The first two run on the dome1m computer, while the others run on the pwi1m computer. These
+are implemented in two separate Alpyca servers: domeapp.py runs on dome1m and runs the APOAshDome
+and the APOSafetyMonitor, while app.py runs on pwi1 and runs the other devices.
+
+The package includes the low level APOAshDome, APOSafety, lts150, zaber, tc300, and eshel
+routines that provide the control of the devices. These can also be imported on their host machines
+for interactive control of the devices.
+
+The interface betyween the Alpyca server and the lower level routine are achieved through
+the AlpycaDevice drivers dome.py, safetymonitor.py, focuser.py, and switch.py, which were
+modified from the AlpycaDevice templates.
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+
+   apoalpyca
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
