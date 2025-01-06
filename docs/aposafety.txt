@@ -8,3 +8,7 @@ Module functions
    :members:
    :member-order: bysource
 
+.. autoclass:: Safety
+   :members:
+   :member-order: bysource
+
