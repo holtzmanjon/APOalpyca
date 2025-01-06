@@ -11,6 +11,8 @@ Module functions
    :members:
    :member-order: bysource
 
+Module class
+++++++++++++
 .. autoclass:: eshel::K8056
    :members:
    :member-order: bysource
