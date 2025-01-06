@@ -20,7 +20,7 @@ try :
 except :
     print('no Thorlabs')
 
-class LTS150() :
+class LTS150 :
     def __init__(self,logger=None) :
         """  Initialize dome properties and capabilities
         """

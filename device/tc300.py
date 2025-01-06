@@ -3,7 +3,7 @@ try:
 except: 
     print('no serial')
   
-class TC300() :
+class TC300 :
     def __init__(self, logger=None ) :
         """  Initialize dome properties and capabilities
         """

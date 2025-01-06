@@ -1,7 +1,7 @@
 from zaber_motion import Units
 from zaber_motion.ascii import Connection
 
-class ZaberStage() :
+class ZaberStage :
 
     def __init__(self,port='COM6',logger=None) :
         self.connection = Connection.open_serial_port(port)
