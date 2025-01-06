@@ -3,3 +3,5 @@ pigpio
 serial
 falcon
 toml
+clr
+zaber_motion
