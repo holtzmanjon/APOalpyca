@@ -1,0 +1,5 @@
+numpy
+pigpio
+serial
+falcon
+toml
