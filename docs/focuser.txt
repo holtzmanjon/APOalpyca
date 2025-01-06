@@ -7,14 +7,3 @@ iodine cell in and out of the beam with the Thorlabs LTS150 stage.
 
 It implements the standard ASCOM commands:
 
-
-Module functions
-++++++++++++++++
-.. automodule:: focuser
-   :members:
-   :member-order: bysource
-
-.. autoclass:: Dome
-   :members:
-   :member-order: bysource
-

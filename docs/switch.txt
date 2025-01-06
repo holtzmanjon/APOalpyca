@@ -16,21 +16,8 @@ The Shelyak device can address four channels:
 switch implements the standard ASCOM commands:
 
 The TC300 device implements some extra SupportedActions:
-- get_voltage()
-- get_current()
-- get_tset()
-- get_tact()
-- get_enable()
-- set_enable()
-
-
-Module functions
-++++++++++++++++
-.. automodule:: switch
-   :members:
-   :member-order: bysource
-
-.. autoclass:: Dome
-   :members:
-   :member-order: bysource
-
+- get_tset() : get current temperature set point of specified channel
+- get_voltage() : get voltage applied to specified channel
+- get_current() : get current applied to specified channel
+- get_enable() : get enabled status of specified channel
+- set_enable() : set enabled status of specified channel (to 0/1 for off/on)

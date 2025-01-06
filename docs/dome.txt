@@ -3,16 +3,8 @@ dome module
 
 The dome module provides the Alpyca driver to the APOAshDome hardware.
 
-It implements the standard ASCOM commands:
+It implements the command set of the [ASCOM Alpaca Dome class](https://ascom-standards.org/alpyca/alpaca.dome.html)
 
+In particular implements the standard ASCOM commands:
 
-Module functions
-++++++++++++++++
-.. automodule:: dome
-   :members:
-   :member-order: bysource
-
-.. autoclass:: Dome
-   :members:
-   :member-order: bysource
 
