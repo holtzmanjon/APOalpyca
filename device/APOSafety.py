@@ -21,7 +21,8 @@ class Safety :
         self.warnonly = warnonly
         self.override_timer = None
         self.override_time = 0
-        os.remove('OVERRIDE')
+        try: os.remove('OVERRIDE')
+        except FileNotFoundError : pass
 
     def setoverride(self,time) :
         t=Thread(target=self.runoverride)
@@ -32,7 +33,7 @@ class Safety :
         fp.close()
         time.sleep(dt)
         try: os.remove('OVERRIDE')
-        except : pass
+        except FileNotFoundError : pass
 
     def override(self) :
         # override is implemented through existence of local file to allow
