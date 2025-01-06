@@ -19,26 +19,30 @@ class Safety :
         self.warnonly = warnonly
         self.override_timer = None
         self.override_time = 0
+        try: os.remove('OVERRIDE')
+        except : pass
 
     def setoverride(self,time) :
-        print('setoverride: ', time)
         self.override_timer = timer.Timer()
         self.override_timer.start()
         self.override_time = time
-        print('in setoverride: ',self.override_timer)
+        fp=open('OVERRIDE','w')
+        fp.close()
 
     def override(self) :
-        print(self.override_timer)
-        if (self.override_timer is not None) : print(self.override_timer, self.override_timer.elapsed(),self.override_time)
+        # override is implemented through existence of local file to allow
+        #  multiple instances of Safety to set it
         if (self.override_timer is not None and 
-            self.override_timer.elapsed()<self.override_time ) :
-            # if we have a timer set and overrid time hasn't expired 
+            self.override_timer.elapsed()>self.override_time ) :
+            # if we have a timer set and overrid time has expired 
+            try: os.remove('OVERRIDE')
+            except : pass
+        try:
+            fp=open('OVERRIDE','r')
+            fp.close()
             return True
-        elif self.override_timer is not None :
-            # if we've passed override time, dispose of timer 
-            self.override_timer = None
-        return False
-
+        except :
+            return False
 
     def old_override(self,verbose=False) :
         """ Get override from 10.75.0.19
