@@ -8,7 +8,20 @@ It provides an interface to an encoder on the dome motor to determine
 the dome azimuth. It also provides the ability to sense the state
 of a dome home switch.
 
-In addition to operational methods, class also provides attributes
+This is achieved through instantiation of a Dome device. Upon
+instantiation, two important threads are started: 
+
+start_watchdog() toggles a relay on the dome control board every two minutes; the
+control box has an internal timer that will close the dome if this
+watchdog relay isn't reset.
+
+start_weather() instantiates an Safety object from APOSafety and checks
+for issafe() status every 90 seconds (which is determined from state of 3.5m
+and/or 2.5m domes). If this returns False, then the dome is closed. There
+is no provision for automatically reopening the dome; this needs to be tracked
+by some client process.
+
+In addition to operational methods, the class also provides attributes
 and methods as required by the `ASCOM Alpaca Dome device <https://ascom-standards.org/alpyca/alpaca.dome.html>`_.
 
 
