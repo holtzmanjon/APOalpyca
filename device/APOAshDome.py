@@ -53,7 +53,7 @@ class ShutterState(Enum) :
     shutterClosing = 3  # Dome shutter status closing
     shutterError = 4     # Dome shutter status error
 
-class Dome() :
+class APOAshDome() :
     def __init__(self, logger=None ) :
         """  Initialize dome properties and capabilities
         """

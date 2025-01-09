@@ -10,7 +10,7 @@ from threading import Timer, Lock, Thread
 
 messout = b"all"
 
-class Safety :
+class APOSafety :
 
     def __init__(self, logger=None, use35m=True, use25m=True, warnonly=False) :
         """  Initialize safety properties and capabilities

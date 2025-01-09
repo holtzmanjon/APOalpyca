@@ -14,7 +14,7 @@
 
 from falcon import Request, Response, HTTPBadRequest, before
 from logging import Logger
-from APOSafety import Safety
+from APOSafety import APOSafety
 from shr import PropertyResponse, MethodResponse, PreProcessRequest, \
                 get_request_field, to_bool
 from exceptions import *        # Nothing but exception classes
@@ -54,7 +54,7 @@ safety_dev = None
 def start_safety_device(logger: logger):
     logger = logger
     global safety_dev
-    safety_dev = Safety(logger=logger)
+    safety_dev = APOSafety(logger=logger)
 
 # --------------------
 # RESOURCE CONTROLLERS

@@ -12,8 +12,7 @@ looking for a local OVERRIDE file.
 
 In addition to operational methods, class also provides attributes
 and methods as required by the `ASCOM Alpaca SafetyMonitor device <https://ascom-standards.org/alpyca/alpaca.safetymonitor.html>`_.
-This implements
-a special SupportedAction command, override, which takes as an argument the
+This implements a special SupportedAction command, override, which takes as an argument the
 number of seconds for which an override should be allowed: this starts a timed thread
 to write the local OVERRIDE file, and to remove it when thread terminates.
 

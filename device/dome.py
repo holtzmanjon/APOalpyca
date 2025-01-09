@@ -18,7 +18,7 @@ from shr import PropertyResponse, MethodResponse, PreProcessRequest, \
                 get_request_field, to_bool
 from exceptions import *        # Nothing but exception classes
 
-from APOAshDome import Dome
+from APOAshDome import APOAshDome
 logger: Logger = None
 
 
@@ -55,7 +55,7 @@ dome_dev = None
 def start_dome_device(logger: logger):
     logger = logger
     global dome_dev
-    dome_dev = Dome(logger=logger)
+    dome_dev = APOAshDome(logger=logger)
 
 # --------------------
 # RESOURCE CONTROLLERS

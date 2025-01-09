@@ -8,7 +8,7 @@ It provides an interface to an encoder on the dome motor to determine
 the dome azimuth. It also provides the ability to sense the state
 of a dome home switch.
 
-This is achieved through instantiation of a Dome device. Upon
+This is achieved through instantiation of an APOAshDome device. Upon
 instantiation, two important threads are started: 
 
 start_watchdog() toggles a relay on the dome control board every two minutes; the
