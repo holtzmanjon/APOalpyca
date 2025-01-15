@@ -31,10 +31,11 @@ class LTS150 :
         self.name = 'Iodine stage'
         self.minswitchvalue = 0*1000
         self.maxswitchvalue = 150*1000
-        self.connect()
+        t=Thread(target=self.connect)
+        t.start()
 
     def connect(self,serial_no="45441684") :
-        print('connect LTS 150')
+        self.logger.info('connect LTS 150')
         DeviceManagerCLI.BuildDeviceList()
         # create new device
         # Connect, begin polling, and enable
@@ -66,6 +67,7 @@ class LTS150 :
         home_params.Velocity = Decimal(10.0)  # real units, mm/s
         # Set homing params (if changed)
         self.device.SetHomingParams(home_params)
+        self.logger.info('connected LTS 150')
         self.connected = True
 
     def disconnect(self) :
@@ -92,7 +94,11 @@ class LTS150 :
         # Move the device to a new position
         new_pos = Decimal(position)  # Must be a .NET decimal
         self.logger.info(f'Moving to {new_pos}')
-        self.device.MoveTo(new_pos, 60000)  # 60 second timeout
+        t=Thread(target=lambda : self.move(new_pos))
+        t.start()
+
+    def move(self,new_pos,timeout=60000) :
+        self.device.MoveTo(new_pos, timeout)  # 60 second timeout
 
     def getswitch(self) :
         return True
