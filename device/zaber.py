@@ -1,5 +1,6 @@
 from zaber_motion import Units
 from zaber_motion.ascii import Connection
+import time
 
 class ZaberStage :
 
@@ -30,3 +31,10 @@ class ZaberStage :
 
     def close(self) :
         self.connection.close()
+
+    def ismoving(self) :
+        p1 = get_position()
+        time.sleep(0.5)
+        p2 = get_position()
+        if abs(p2-p1)>0.001 : return True
+        else : return False

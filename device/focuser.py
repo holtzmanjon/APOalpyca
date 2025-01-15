@@ -230,10 +230,9 @@ class ismoving:
 
         try:
             # ----------------------
-            #val = ## GET PROPERTY ##
+            val = focuser_dev[devnum].is_moving()
             # ----------------------
-            #resp.text = PropertyResponse(val, req).json
-            resp.text = MethodResponse(req, NotImplementedException()).json
+            resp.text = PropertyResponse(val, req).json
             return
         except Exception as ex:
             resp.text = PropertyResponse(None, req,
