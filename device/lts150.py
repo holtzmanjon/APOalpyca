@@ -52,15 +52,15 @@ class LTS150 :
 
         # Get Device Information and display description
         self.device_info = self.device.GetDeviceInfo()
-        print(self.device_info.Description)
+        logger.info(self.device_info.Description)
 
         # Load any configuration settings needed by the controller/stage
         motor_config = self.device.LoadMotorConfiguration(serial_no)
 
         # Get parameters related to homing/zeroing/other
         home_params = self.device.GetHomingParams()
-        print(f'Homing velocity: {home_params.Velocity}\n,'
-              f'Homing Direction: {home_params.Direction}')
+        logger.info(f'Homing velocity: {home_params.Velocity}')
+        logger.infof'Homing Direction: {home_params.Direction}')
         home_params.Velocity = Decimal(10.0)  # real units, mm/s
         # Set homing params (if changed)
         self.device.SetHomingParams(home_params)
@@ -89,7 +89,7 @@ class LTS150 :
         position=float(val/1000.)
         # Move the device to a new position
         new_pos = Decimal(position)  # Must be a .NET decimal
-        print(f'Moving to {new_pos}')
+        logger.info(f'Moving to {new_pos}')
         self.device.MoveTo(new_pos, 60000)  # 60 second timeout
 
     def getswitch(self) :
@@ -98,16 +98,16 @@ class LTS150 :
     def get_position(self) :
         """ Return position in microns
         """
-        return Decimal.ToInt32(self.device.get_Position()*1000.)
+        return Decimal.ToInt32(self.device.get_Position()*Decimal(1000))
 
     def get_step(self) :
          return 1
 
     def home(self) :
         # Home or Zero the device (if a motor/piezo)
-        print("Homing Device")
+        logger.info("Homing Device")
         self.device.Home(60000)  # 60 second timeout
-        print("Done")
+        logger.info("Done")
 
     def get_velocity(self) :
         return Decimal.ToDouble(self.device.get_Velocity())
