@@ -98,7 +98,7 @@ class LTS150 :
     def get_position(self) :
         """ Return position in microns
         """
-        return Decimal.ToInt(self.device.get_Position()*1000.)
+        return Decimal.ToInt32(self.device.get_Position()*1000.)
 
     def get_step(self) :
          return 1
