@@ -18,7 +18,7 @@ class TC300 :
 
     def connect(self,port='COM7') :
         print('connect TC300')
-        if hardware: self.tc300=Serial(port,115200,timeout=1)
+        self.tc300=Serial(port,115200,timeout=1)
         self.connected = True
 
     def connected(self,state) :
