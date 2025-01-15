@@ -61,6 +61,8 @@ from lts150 import LTS150
 
 focuser_dev = None
 def start_focuser_device(logger: logger):
+    import pdb
+    pdb.set_trace()
     logger = logger
     global focuser_dev
     focuser_dev = [Zaber(logger=logger),LTS150(logger=logger)]
