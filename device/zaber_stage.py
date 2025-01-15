@@ -12,6 +12,7 @@ class Zaber() :
         self.name = 'Zaber focuser stage'
         self.minvalue = 0
         self.maxvalue = 50000
+        self.connected = False
         self.connect()
 
     def connect(self,port='COM6') :

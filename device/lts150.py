@@ -31,6 +31,7 @@ class LTS150 :
         self.name = 'Iodine stage'
         self.minswitchvalue = 0*1000
         self.maxswitchvalue = 150*1000
+        self.connected = False
         t=Thread(target=self.connect)
         t.start()
 
