@@ -116,8 +116,8 @@ class LTS150 :
         self.device.SetVelocityParams(vel_params)
 
     def is_moving(self) :
-        p1 = get_position()
+        p1 = self.get_position()
         time.sleep(0.5)
-        p2 = get_position()
+        p2 = self.get_position()
         if abs(p2-p1)>0.001 : return True
         else : return False
