@@ -93,7 +93,7 @@ class LTS150 :
         position=float(val/1000.)
         # Move the device to a new position
         new_pos = Decimal(position)  # Must be a .NET decimal
-        self.logger.info(f'Moving to {new_pos}')
+        self.logger.info(f'Moving to {position}')
         t=Thread(target=lambda : self.move(new_pos))
         t.start()
 

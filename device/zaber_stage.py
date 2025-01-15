@@ -61,7 +61,7 @@ class Zaber() :
         """
         self.logger.info('setting value',val)
         pos=float(val)/1000.
-        self.logger.info(f'Moving to {new_pos}')
+        self.logger.info(f'Moving to {val}')
         t=Thread(target=lambda : self.move(new_pos))
         t.start()
         
