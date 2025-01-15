@@ -60,10 +60,10 @@ class Zaber() :
     def set_position(self,val) :
         """ Move to new position (input in microns) asynchronously
         """
-        self.logger.info('setting value',val)
+        self.logger.info('setting to value',val)
         pos=float(val)/1000.
         self.logger.info(f'Moving to {val}')
-        t=Thread(target=lambda : self.move(new_pos))
+        t=Thread(target=lambda : self.move(pos))
         t.start()
         
     def move(self,new_pos,timeout=60000) :
