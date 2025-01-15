@@ -24,13 +24,13 @@ class LTS150 :
     def __init__(self,logger=None) :
         """  Initialize dome properties and capabilities
         """
+        self.logger = logger
         self.maxswitch = 1
         self.description = 'Thorlabs LTS 150'
         self.name = 'Iodine stage'
         self.minswitchvalue = 0*1000
         self.maxswitchvalue = 150*1000
         self.connect()
-        self.logger = logger
 
     def connect(self,serial_no="45441684") :
         print('connect LTS 150')
