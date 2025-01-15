@@ -5,19 +5,20 @@ import time
 class ZaberStage :
 
     def __init__(self,port='COM6',logger=None) :
+        self.logger=logger
         self.connection = Connection.open_serial_port(port)
         self.connection.enable_alerts()
 
         device_list = self.connection.detect_devices()
-        print("Found {} devices".format(len(device_list)))
+        logger.info("Found {} devices".format(len(device_list)))
 
         self.device = device_list[0]
         self.axis = self.device.get_axis(1)
         if not self.axis.is_homed():
-            print('homing axis...')
             self.axis.home()
 
     def home(self) :
+        logger.info('homing axis...')
         self.axis.home()
 
     def move(self,pos,units=Units.LENGTH_MILLIMETRES,absolute=True) :
