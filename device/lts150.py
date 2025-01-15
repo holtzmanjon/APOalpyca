@@ -27,8 +27,8 @@ class LTS150 :
         self.maxswitch = 1
         self.description = 'Thorlabs LTS 150'
         self.name = 'Iodine stage'
-        self.minswitchvalue = 0
-        self.maxswitchvalue = 150
+        self.minswitchvalue = 0*1000
+        self.maxswitchvalue = 150*1000
         self.connect()
 
     def connect(self,serial_no="45441684") :
@@ -84,8 +84,9 @@ class LTS150 :
         return self.maxswitchvalue
 
     def set_position(self,val) :
-        print('setting value',val)
-        position=float(val)
+        """ Set position to val in microns
+        """
+        position=float(val/1000.)
         # Move the device to a new position
         new_pos = Decimal(position)  # Must be a .NET decimal
         print(f'Moving to {new_pos}')
@@ -95,7 +96,9 @@ class LTS150 :
         return True
 
     def get_position(self) :
-        return Decimal.ToDouble(self.device.get_Position())
+        """ Return position in microns
+        """
+        return Decimal.ToInt(self.device.get_Position()*1000.)
 
     def get_step(self) :
          return 1
