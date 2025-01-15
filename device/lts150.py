@@ -115,7 +115,7 @@ class LTS150 :
         vel_params.MaxVelocity = Decimal(50.0)  # This is a bad idea
         self.device.SetVelocityParams(vel_params)
 
-    def ismoving(self) :
+    def is_moving(self) :
         p1 = get_position()
         time.sleep(0.5)
         p2 = get_position()

@@ -32,7 +32,7 @@ class ZaberStage :
     def close(self) :
         self.connection.close()
 
-    def ismoving(self) :
+    def is_moving(self) :
         p1 = get_position()
         time.sleep(0.5)
         p2 = get_position()
