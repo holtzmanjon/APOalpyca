@@ -60,7 +60,7 @@ class LTS150 :
         # Get parameters related to homing/zeroing/other
         home_params = self.device.GetHomingParams()
         logger.info(f'Homing velocity: {home_params.Velocity}')
-        logger.infof'Homing Direction: {home_params.Direction}')
+        logger.info(f'Homing Direction: {home_params.Direction}')
         home_params.Velocity = Decimal(10.0)  # real units, mm/s
         # Set homing params (if changed)
         self.device.SetHomingParams(home_params)
