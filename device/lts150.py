@@ -8,6 +8,7 @@ Implement ASCOM calls
 """
 import time
 import clr
+from threading import Timer, Lock, Thread
 
 try :
     clr.AddReference("C:\\Program Files\\Thorlabs\\Kinesis\\Thorlabs.MotionControl.DeviceManagerCLI.dll")
@@ -105,6 +106,10 @@ class LTS150 :
          return 1
 
     def home(self) :
+        t=Thread(target=self.sendhome)
+        t.start()
+
+    def sendhome(self) :
         # Home or Zero the device (if a motor/piezo)
         self.logger.info("Homing Device")
         self.device.Home(60000)  # 60 second timeout
