@@ -73,6 +73,9 @@ def start_focuser_device(logger: logger):
 class action:
     def on_put(self, req: Request, resp: Response, devnum: int):
         resp.text = MethodResponse(req, NotImplementedException()).json
+        if req.get_media()['Action'] == 'home' :
+            focuser_dev[devnum].home()
+            resp.text = MethodResponse(req).json
 
 @before(PreProcessRequest(maxdev))
 class commandblind:
@@ -198,7 +201,7 @@ class name():
 @before(PreProcessRequest(maxdev))
 class supportedactions:
     def on_get(self, req: Request, resp: Response, devnum: int):
-        resp.text = PropertyResponse([], req).json  # Not PropertyNotImplemented
+        resp.text = PropertyResponse(['home'], req).json
 
 @before(PreProcessRequest(maxdev))
 class absolute:
