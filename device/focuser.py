@@ -74,7 +74,8 @@ class action:
     def on_put(self, req: Request, resp: Response, devnum: int):
         if req.get_media()['Action'] == 'home' :
             focuser_dev[devnum].home()
-            resp.text = PropertyResponse(None,req).json
+            resp.text = MethodResponse(req).json
+            #resp.text = PropertyResponse(None,req).json
 
 @before(PreProcessRequest(maxdev))
 class commandblind:
