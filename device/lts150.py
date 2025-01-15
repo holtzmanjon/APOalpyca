@@ -30,6 +30,7 @@ class LTS150 :
         self.minswitchvalue = 0*1000
         self.maxswitchvalue = 150*1000
         self.connect()
+        self.logger = logger
 
     def connect(self,serial_no="45441684") :
         print('connect LTS 150')
@@ -52,15 +53,15 @@ class LTS150 :
 
         # Get Device Information and display description
         self.device_info = self.device.GetDeviceInfo()
-        logger.info(self.device_info.Description)
+        self.logger.info(self.device_info.Description)
 
         # Load any configuration settings needed by the controller/stage
         motor_config = self.device.LoadMotorConfiguration(serial_no)
 
         # Get parameters related to homing/zeroing/other
         home_params = self.device.GetHomingParams()
-        logger.info(f'Homing velocity: {home_params.Velocity}')
-        logger.info(f'Homing Direction: {home_params.Direction}')
+        self.logger.info(f'Homing velocity: {home_params.Velocity}')
+        self.logger.info(f'Homing Direction: {home_params.Direction}')
         home_params.Velocity = Decimal(10.0)  # real units, mm/s
         # Set homing params (if changed)
         self.device.SetHomingParams(home_params)
@@ -89,7 +90,7 @@ class LTS150 :
         position=float(val/1000.)
         # Move the device to a new position
         new_pos = Decimal(position)  # Must be a .NET decimal
-        logger.info(f'Moving to {new_pos}')
+        self.logger.info(f'Moving to {new_pos}')
         self.device.MoveTo(new_pos, 60000)  # 60 second timeout
 
     def getswitch(self) :
@@ -105,9 +106,9 @@ class LTS150 :
 
     def home(self) :
         # Home or Zero the device (if a motor/piezo)
-        logger.info("Homing Device")
+        self.logger.info("Homing Device")
         self.device.Home(60000)  # 60 second timeout
-        logger.info("Done")
+        self.logger.info("Done")
 
     def get_velocity(self) :
         return Decimal.ToDouble(self.device.get_Velocity())
