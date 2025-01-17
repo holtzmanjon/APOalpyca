@@ -1,6 +1,7 @@
 from zaber_motion import Units
 from zaber_motion.ascii import Connection
 from threading import Timer, Lock, Thread
+import time
   
 class Zaber() :
     def __init__(self, logger=None ) :
