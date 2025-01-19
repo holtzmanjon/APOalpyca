@@ -13,8 +13,8 @@ class Yocto :
 
     def connect(self) :
         print('connect Yoct')
-        YAPI.RegisterHub("usb",errmsg)
         errmsg=YRefParam()
+        YAPI.RegisterHub("usb",errmsg)
         self.temp=[YTemperature.FindTemperature(f"THRMCPL1-286EEC.temperature1"),
                    YTemperature.FindTemperature(f"THRMCPL1-286EEC.temperature2")]
         self.connected = True
