@@ -15,6 +15,8 @@ class Yocto :
         print('connect Yoct')
         YAPI.RegisterHub("usb",errmsg)
         errmsg=YRefParam()
+        self.temp=[YTemperature.FindTemperature(f"THRMCPL1-286EEC.temperature1"),
+                   YTemperature.FindTemperature(f"THRMCPL1-286EEC.temperature2")]
         self.connected = True
 
     def connected(self,state) :
@@ -37,8 +39,7 @@ class Yocto :
         return True
 
     def get_value(self,id) :
-        temp=YTemperature.FindTemperature(f"THRMCPL1-286EEC.temperature{id}")
-        return temp
+        return self.temp[id].get_currentValue()
 
     def get_step(self,id) :
         return 0.1
