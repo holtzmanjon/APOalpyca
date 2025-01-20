@@ -6,7 +6,7 @@ class Yocto :
         """  Initialize dome properties and capabilities
         """
         self.logger=logger
-        logger.info('init Yocto')
+        self.logger.info('init Yocto')
         self.maxswitch = 2
         self.description = 'Yocto thermocouple'
         self.name = 'Yocto thermocouple'
@@ -15,7 +15,7 @@ class Yocto :
         self.connect()
 
     def connect(self) :
-        logger.info('connect Yocto')
+        self.logger.info('connect Yocto')
         errmsg=YRefParam()
         YAPI.RegisterHub("usb",errmsg)
         self.temp=[YTemperature.FindTemperature(f"THRMCPL1-286EEC.temperature1"),
