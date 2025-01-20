@@ -20,8 +20,7 @@ from exceptions import *        # Nothing but exception classes
 
 logger: Logger = None
 
-from tc300 import TC300
-from eshel import K8056
+from yocto import Yocto
 
 # ----------------------
 # MULTI-INSTANCE SUPPORT
@@ -31,7 +30,7 @@ from eshel import K8056
 # which instance of the device (0-based) is being called by the client. Leave this
 # set to 0 for the simple case of controlling only one instance of this device type.
 #
-maxdev = 1                      # Single instance
+maxdev = 0                      # Single instance
 
 # -----------
 # DEVICE INFO
