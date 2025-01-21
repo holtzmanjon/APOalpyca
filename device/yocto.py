@@ -64,9 +64,12 @@ class Yocto :
 
         while True :
             #tccd = C.CCDTemperature
+            tccd=-999
+            tset=-999
+            power=-999
             t1 = self.get_value(0)
             t2 = self.get_value(1)
-            self.logger.info('tccd: {:f} {:f} {:f} thermocouple: {:f} {:f}'.format(tccd,C.SetCCDTemperature,C.CoolerPower,t1,t2))
+            self.logger.info('tccd: {:f} {:f} {:f} thermocouple: {:f} {:f}'.format(tccd,tset,power,t1,t2))
             if t1 < 30 and t2 < 30 :
                 # reset watchdog
                 self.logger.info('resetting watchdog...')
