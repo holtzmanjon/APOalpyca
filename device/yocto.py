@@ -1,6 +1,6 @@
 from yoctopuce.yocto_api import *
 from yoctopuce.yocto_temperature import *
-from alpyca.camera import *
+from alpaca.camera import *
 
 class Yocto :
     def __init__(self, logger=None ) :
