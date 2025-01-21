@@ -66,10 +66,10 @@ class Yocto :
             #tccd = C.CCDTemperature
             t1 = self.get_value(0)
             t2 = self.get_value(1)
-            logger.info('tccd: {:f} {:f} {:f} thermocouple: {:f} {:f}'.format(tccd,C.SetCCDTemperature,C.CoolerPower,t1,t2))
+            self.logger.info('tccd: {:f} {:f} {:f} thermocouple: {:f} {:f}'.format(tccd,C.SetCCDTemperature,C.CoolerPower,t1,t2))
             if t1 < 30 and t2 < 30 :
                 # reset watchdog
-                logger.info('resetting watchdog...')
+                self.logger.info('resetting watchdog...')
                 relay.on_relay(1)
                 time.sleep(1)
                 relay.off_relay(1)
