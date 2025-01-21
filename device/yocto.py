@@ -76,6 +76,9 @@ class Yocto :
                 relay.on_relay(1)
                 time.sleep(1)
                 relay.off_relay(1)
+            else :
+                self.logger.info('temp out of range, break...')
+                break
 
             time.sleep(timeout)
 
