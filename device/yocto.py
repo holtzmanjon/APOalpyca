@@ -56,7 +56,7 @@ class Yocto :
         t=Thread(target=self.reset_watchdog)
         t.start()
     
-    def reset_watchdog(self,timeout=110) :
+    def reset_watchdog(self,timeout=10,tcrit=10) :
         """ Reset watchdog periodically
         """
         #C = Camera("localhost:11111",0)
@@ -70,13 +70,13 @@ class Yocto :
             t1 = self.get_value(0)
             t2 = self.get_value(1)
             self.logger.info('tccd: {:f} {:f} {:f} thermocouple: {:f} {:f}'.format(tccd,tset,power,t1,t2))
-            if t1 < 30 and t2 < 30 :
+            if t1 < tcrit and t2 < tcrit :
                 # reset watchdog
                 self.logger.info('resetting watchdog...')
                 relay.on_relay(1)
                 time.sleep(1)
                 relay.off_relay(1)
 
-            time.sleep(10)
+            time.sleep(timeout)
 
 
