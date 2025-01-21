@@ -2,6 +2,7 @@ from yoctopuce.yocto_api import *
 from yoctopuce.yocto_temperature import *
 from alpaca.camera import *
 from threading import Thread
+import usbrelay
 
 class Yocto :
     def __init__(self, logger=None ) :
