@@ -1,5 +1,6 @@
 from yoctopuce.yocto_api import *
 from yoctopuce.yocto_temperature import *
+from alpyca.camera import *
 
 class Yocto :
     def __init__(self, logger=None ) :
@@ -12,6 +13,7 @@ class Yocto :
         self.name = 'Yocto thermocouple'
         self.canasync = False
         self.connected = False
+        self.start_watchdog()
         self.connect()
 
     def connect(self) :
@@ -45,4 +47,31 @@ class Yocto :
 
     def get_step(self,id) :
         return 0.1
+
+    def start_watchdog(self) :
+        """ Start thread to periodically reset watchdog
+        """
+        t=Thread(target=self.reset_watchdog)
+        t.start()
+    
+    def reset_watchdog(self,timeout=110) :
+        """ Reset watchdog periodically
+        """
+        #C = Camera("localhost:11111",0)
+        relay=usbrelay.USBRelay()
+
+        while True :
+            #tccd = C.CCDTemperature
+            t1 = self.get_value(0)
+            t2 = self.get_value(1)
+            logger.info('tccd: {:f} {:f} {:f} thermocouple: {:f} {:f}'.format(tccd,C.SetCCDTemperature,C.CoolerPower,t1,t2))
+            if t1 < 30 and t2 < 30 :
+                # reset watchdog
+                logger.info('resetting watchdog...')
+                relay.on_relay(1)
+                time.sleep(1)
+                relay.off_relay(1)
+
+            time.sleep(10)
+
 
