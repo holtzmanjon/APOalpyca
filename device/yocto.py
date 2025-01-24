@@ -19,7 +19,7 @@ class Yocto :
         self.connect()
 
     def connect(self) :
-        if logger is not None : self.logger.info('connect Yocto')
+        if self.logger is not None : self.logger.info('connect Yocto')
         errmsg=YRefParam()
         YAPI.RegisterHub("usb",errmsg)
         self.temp=[YTemperature.FindTemperature(f"THRMCPL1-286EEC.temperature1"),
@@ -72,16 +72,16 @@ class Yocto :
 
             t1 = self.get_value(0)
             t2 = self.get_value(1)
-            if logger is not None :self.logger.info('tccd: {:f} {:f} {:f} thermocouple: {:f} {:f}'.format(tccd,tset,power,t1,t2))
+            if self.logger is not None :self.logger.info('tccd: {:f} {:f} {:f} thermocouple: {:f} {:f}'.format(tccd,tset,power,t1,t2))
             print('tccd: {:f} {:f} {:f} thermocouple: {:f} {:f}'.format(tccd,tset,power,t1,t2))
             if t1 < tcrit and t2 < tcrit :
                 # reset watchdog
-                if logger is not None : self.logger.info('resetting watchdog...')
+                if self.logger is not None : self.logger.info('resetting watchdog...')
                 relay.on_relay(1)
                 time.sleep(1)
                 relay.off_relay(1)
             else :
-                if logger is not None : self.logger.info('temp out of range, break...')
+                if self.logger is not None : self.logger.info('temp out of range, break...')
                 break
 
             time.sleep(timeout)
