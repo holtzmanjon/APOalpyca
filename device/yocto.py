@@ -9,7 +9,7 @@ class Yocto :
         """  Initialize dome properties and capabilities
         """
         self.logger=logger
-        self.logger.info('init Yocto')
+        if self.logger is not None : self.logger.info('init Yocto')
         self.maxswitch = 2
         self.description = 'Yocto thermocouple'
         self.name = 'Yocto thermocouple'
