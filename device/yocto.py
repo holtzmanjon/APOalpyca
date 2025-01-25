@@ -68,7 +68,7 @@ class Yocto :
             power=-999
             tccd = C.CCDTemperature
             tset = C.SetCCDTemperature
-            tccd = C.CoolerPower
+            power = C.CoolerPower
 
             t1 = self.get_value(0)
             t2 = self.get_value(1)
