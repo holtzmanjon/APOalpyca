@@ -56,7 +56,7 @@ class Yocto :
         t=Thread(target=self.reset_watchdog)
         t.start()
     
-    def reset_watchdog(self,timeout=10,twarn=30,tcrit=35) :
+    def reset_watchdog(self,timeout=10,twarn=32,tcrit=35) :
         """ Reset watchdog periodically
         """
         C = Camera("172.24.4.202:11111",0)
@@ -74,16 +74,18 @@ class Yocto :
             t2 = self.get_value(1)
             if self.logger is not None :self.logger.info('tccd: {:f} {:f} {:f} thermocouple: {:f} {:f}'.format(tccd,tset,power,t1,t2))
             print('tccd: {:f} {:f} {:f} thermocouple: {:f} {:f}'.format(tccd,tset,power,t1,t2))
+            if t1 > twarn or t2 > twarn :
+                #if temp > twarn, turn off cooler power, but not camera, and stay in loop
+                if self.logger is not None : self.logger.info('turning off cooler...')
+                C.CoolerOn = False
             if t1 < tcrit and t2 < tcrit :
-                # reset watchdog
+                # if temp<tcrit, reset watchdog to keep camera on
                 if self.logger is not None : self.logger.info('resetting watchdog...')
                 relay.on_relay(1)
                 time.sleep(1)
                 relay.off_relay(1)
-            elif t1 > twarn or t2 > twarn :
-                if self.logger is not None : self.logger.info('turning off cooler...')
-                C.CoolerOn = False
             else :
+                # let camera go off and exit loop
                 if self.logger is not None : self.logger.info('temp out of range, break...')
                 break
 
