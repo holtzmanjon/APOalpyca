@@ -56,7 +56,7 @@ class Yocto :
         t=Thread(target=self.reset_watchdog)
         t.start()
     
-    def reset_watchdog(self,timeout=10,twarn=33,tcrit=35) :
+    def reset_watchdog(self,timeout=10,twarn=34,tcrit=37) :
         """ Reset watchdog periodically
         """
         C = Camera("172.24.4.202:11111",0)
