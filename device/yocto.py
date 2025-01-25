@@ -5,7 +5,7 @@ from threading import Thread
 import usbrelay
 
 class Yocto :
-    def __init__(self, logger=None,timeout=10,twarn=34,tcrit=37) :
+    def __init__(self, logger=None,timeout=10,twarn=34,tcrit=37,watchdog=True) :
         """  Initialize dome properties and capabilities
         """
         self.logger=logger
@@ -18,7 +18,7 @@ class Yocto :
         self.timeout = timeout
         self.twarn = twarn
         self.tcrit = tcrit
-        self.start_watchdog()
+        if watchdog : self.start_watchdog()
         self.connect()
 
     def connect(self) :
