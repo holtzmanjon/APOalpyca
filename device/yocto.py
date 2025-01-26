@@ -76,7 +76,7 @@ class Yocto :
         """ Reset watchdog periodically
         """
         ccd_power()
-        print('connect camera in ASCOM Remote now (10s)!)
+        print('connect camera in ASCOM Remote now (10s)!')
         time.sleep(10)
         C = Camera("172.24.4.202:11111",0)
         relay=usbrelay.USBRelay()
