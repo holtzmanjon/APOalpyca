@@ -85,9 +85,14 @@ class Yocto :
             tccd=-999
             tset=-999
             power=-999
-            tccd = C.CCDTemperature
-            tset = C.SetCCDTemperature
-            power = C.CoolerPower
+            try : 
+                tccd = C.CCDTemperature
+                tset = C.SetCCDTemperature
+                power = C.CoolerPower
+            except :
+                self.logger.info("error reading CCD values")
+                print("error reading CCD values")
+                pass
 
             t1 = self.get_value(0)
             t2 = self.get_value(1)
