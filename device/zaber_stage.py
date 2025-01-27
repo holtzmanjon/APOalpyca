@@ -37,7 +37,7 @@ class Zaber() :
         t=Thread(target=self.sendhome)
         t.start()
 
-    def sendhome() :
+    def sendhome(self) :
         logger.info('homing axis...')
         self.axis.home()
         logger.info('homed axis...')
