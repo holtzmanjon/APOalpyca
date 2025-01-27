@@ -38,9 +38,9 @@ class Zaber() :
         t.start()
 
     def sendhome(self) :
-        logger.info('homing axis...')
+        self.logger.info('homing axis...')
         self.axis.home()
-        logger.info('homed axis...')
+        self.logger.info('homed axis...')
 
     def disconnect(self) :
         self.connection.close()
