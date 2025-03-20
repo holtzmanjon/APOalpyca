@@ -47,7 +47,7 @@ from shr import PropertyResponse, DeviceMetadata
 from config import Config
 from logging import Logger
 # For each *type* of device served
-from switch2 import Switch0Metadata, Switch1Metadata
+from switch2 import Switch0Metadata
 
 logger: Logger = None
 #logger = None                   # Safe on Python 3.7 but no intellisense in VSCode etc.
