@@ -31,11 +31,13 @@ modified from the AlpycaDevice templates.
    safetymonitor
    focuser
    switch
+   switch2
    apoashdome
    aposafety
    eshel
    lts150
    tc300
+   yocto
    zaber
 
 

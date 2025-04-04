@@ -8,17 +8,26 @@ controlling the Shelyak eShel calibration module.
 The TC300 device can address the two separate channels of the controller.
 
 The Shelyak device can address four channels:
+
 - Quartz (channel 0)
+
 - ThAr (channel 1)
+
 - LED (channel 2)
+
 - Mirror (channel 3)
 
 It implements the command set of the `ASCOM Alpaca Switch class <https://ascom-standards.org/alpyca/alpaca.switch.html>`_
 
 
 The TC300 device implements some extra SupportedActions:
+
 - get_tset() : get current temperature set point of specified channel
+
 - get_voltage() : get voltage applied to specified channel
+
 - get_current() : get current applied to specified channel
+
 - get_enable() : get enabled status of specified channel
+
 - set_enable() : set enabled status of specified channel (to 0/1 for off/on)
