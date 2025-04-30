@@ -52,8 +52,9 @@ class StageMetadata:
     Description = 'LTS Stage'
     DeviceType = 'Focuser'
     DeviceID = '75a88d87-15da-4d2f-94ba-612cd5bb0fea'
+    DeviceID2 = 'b93157f1-c8dc-4f9d-8214-ff6c5fdb21ac'
     Info = 'Alpaca Sample Device\nImplements ISwitch\nASCOM Initiative'
-    MaxDeviceNumber = maxdev
+    MaxDeviceNumber = 2
     InterfaceVersion = 3
 
 from zaber_stage import Zaber
