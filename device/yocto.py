@@ -78,7 +78,7 @@ class Yocto :
         self.ccd_power()
         print('connect camera in ASCOM Remote now (10s)!')
         time.sleep(10)
-        C = Camera("172.24.4.202:11111",0)
+        C = Camera("10.75.0.251:11111",0)
         relay=usbrelay.USBRelay()
 
         while True :
