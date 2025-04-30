@@ -42,7 +42,7 @@ class LTS150 :
         # create new device
         # Connect, begin polling, and enable
         self.device = LongTravelStage.CreateLongTravelStage(self.serial_no)
-        self.device.Connect(serial_no)
+        self.device.Connect(self.serial_no)
 
         # Ensure that the device settings have been initialized
         if not self.device.IsSettingsInitialized():
@@ -60,7 +60,7 @@ class LTS150 :
         self.logger.info(self.device_info.Description)
 
         # Load any configuration settings needed by the controller/stage
-        motor_config = self.device.LoadMotorConfiguration(serial_no)
+        motor_config = self.device.LoadMotorConfiguration(self.serial_no)
 
         # Get parameters related to homing/zeroing/other
         home_params = self.device.GetHomingParams()
