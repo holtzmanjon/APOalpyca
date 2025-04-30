@@ -64,7 +64,9 @@ focuser_dev = None
 def start_focuser_device(logger: logger):
     logger = logger
     global focuser_dev
-    focuser_dev = [Zaber(logger=logger),LTS150(logger=logger,serial_no="45441684"),LTS150(logger=logger,serial_no="45494294")]
+    focuser_dev = [Zaber(logger=logger),
+                   LTS150(logger=logger,serial_no="45441684",name='Iodine stage'),
+                   LTS150(logger=logger,serial_no="45494294",name='Calibration stage')]
 
 # --------------------
 # RESOURCE CONTROLLERS

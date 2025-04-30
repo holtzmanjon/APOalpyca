@@ -22,14 +22,14 @@ except :
     print('no Thorlabs')
 
 class LTS150 :
-    def __init__(self,logger=None,serial_no="45441684") :
+    def __init__(self,logger=None,serial_no="45441684",name='iodine stage') :
         """  Initialize dome properties and capabilities
         """
         self.logger = logger
         self.maxswitch = 1
         self.description = 'Thorlabs LTS 150'
         self.serial_no = serial_no
-        self.name = 'Iodine stage'
+        self.name = name
         self.minswitchvalue = 0*1000
         self.maxswitchvalue = 150*1000
         self.connected = False
