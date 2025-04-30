@@ -63,7 +63,7 @@ focuser_dev = None
 def start_focuser_device(logger: logger):
     logger = logger
     global focuser_dev
-    focuser_dev = [Zaber(logger=logger),LTS150(logger=logger)]
+    focuser_dev = [Zaber(logger=logger),LTS150(logger=logger,serial_no="45441684"),LTS150(logger=logger,serial_no="45494294")]
 
 # --------------------
 # RESOURCE CONTROLLERS

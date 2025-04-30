@@ -22,12 +22,13 @@ except :
     print('no Thorlabs')
 
 class LTS150 :
-    def __init__(self,logger=None) :
+    def __init__(self,logger=None,serial_no="45441684") :
         """  Initialize dome properties and capabilities
         """
         self.logger = logger
         self.maxswitch = 1
         self.description = 'Thorlabs LTS 150'
+        self.serial_no = serial_no
         self.name = 'Iodine stage'
         self.minswitchvalue = 0*1000
         self.maxswitchvalue = 150*1000
@@ -35,12 +36,12 @@ class LTS150 :
         t=Thread(target=self.connect)
         t.start()
 
-    def connect(self,serial_no="45441684") :
+    def connect(self) :
         self.logger.info('connect LTS 150')
         DeviceManagerCLI.BuildDeviceList()
         # create new device
         # Connect, begin polling, and enable
-        self.device = LongTravelStage.CreateLongTravelStage(serial_no)
+        self.device = LongTravelStage.CreateLongTravelStage(self.serial_no)
         self.device.Connect(serial_no)
 
         # Ensure that the device settings have been initialized
