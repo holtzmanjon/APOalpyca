@@ -1,0 +1,8 @@
+switch2 module
+**************
+
+The switch2 module provides the Alpyca driver to the hardware for monitoring
+the QHY600 body temperature.
+
+The thermocouples are read by a Yoctopuce device.
+

@@ -1,0 +1,30 @@
+yocto module
+************
+
+Low level module to interface with Yoctopuce thermocouple to monitor
+QHY600 body temperatures.
+
+When this is instantiated, a thread is started that monitors the
+thermocouples. If the temperatures are below a threshold (tcrit), a USB
+relay is triggered that resets an external watchdog that passes
+power to the camera.
+
+If the body temperature exceeds some threshold (twarn), the camera cooler
+power is turned off.
+
+In addition to operational methods, class also provides attributes
+and methods as required by the `ASCOM Alpaca Switch device <https://ascom-standards.org/alpyca/alpaca.switch.html>`_.
+
+
+Module functions
+++++++++++++++++
+.. automodule:: yocto
+   :members:
+   :member-order: bysource
+
+Module class
+++++++++++++
+.. autoclass:: yocto::Yocto
+   :members:
+   :member-order: bysource
+
