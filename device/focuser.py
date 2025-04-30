@@ -64,10 +64,9 @@ focuser_dev = None
 def start_focuser_device(logger: logger):
     logger = logger
     global focuser_dev
-    print("starting 1")
-    focuser_dev = LTS150(logger=logger,serial_no="45494294")
     print("starting 3")
-    focuser_dev = [Zaber(logger=logger),LTS150(logger=logger,serial_no="45441684"),LTS150(logger=logger,serial_no="45494294")]
+    #focuser_dev = [Zaber(logger=logger),LTS150(logger=logger,serial_no="45441684"),LTS150(logger=logger,serial_no="45494294")]
+    focuser_dev = [Zaber(logger=logger),LTS150(logger=logger,serial_no="45494294")]
 
 # --------------------
 # RESOURCE CONTROLLERS
