@@ -198,8 +198,10 @@ class name():
     def on_get(self, req: Request, resp: Response, devnum: int):
         if devnum == 0 :
             resp.text = PropertyResponse(FocuserMetadata.Name, req).json
-        else :
-            resp.text = PropertyResponse(StageMetadata.Name, req).json
+        elif devnum == 1 :
+            resp.text = PropertyResponse('Iodine stage', req).json
+        elif devnum == 2 :
+            resp.text = PropertyResponse('Calibration stage', req).json
 
 @before(PreProcessRequest(maxdev))
 class supportedactions:
