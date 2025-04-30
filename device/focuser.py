@@ -28,7 +28,7 @@ logger: Logger = None
 # which instance of the device (0-based) is being called by the client. Leave this
 # set to 0 for the simple case of controlling only one instance of this device type.
 #
-maxdev = 1                      # Single instance
+maxdev = 2                      # Single instance
 
 # -----------
 # DEVICE INFO
@@ -64,7 +64,6 @@ focuser_dev = None
 def start_focuser_device(logger: logger):
     logger = logger
     global focuser_dev
-    print("starting 3")
     focuser_dev = [Zaber(logger=logger),LTS150(logger=logger,serial_no="45441684"),LTS150(logger=logger,serial_no="45494294")]
 
 # --------------------
