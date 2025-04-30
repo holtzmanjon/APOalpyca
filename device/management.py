@@ -107,6 +107,12 @@ class configureddevices():
             'DeviceType'    : StageMetadata.DeviceType,
             'DeviceNumber'  : 1,
             'UniqueID'      : StageMetadata.DeviceID
+            },
+            {
+            'DeviceName'    : StageMetadata.Name,
+            'DeviceType'    : StageMetadata.DeviceType,
+            'DeviceNumber'  : 2,
+            'UniqueID'      : StageMetadata.DeviceID
             }
         ]
         resp.text = PropertyResponse(confarray, req).json
