@@ -19,9 +19,9 @@ except :
     print('no APOSafety or RPi.GPIO')
 
 # RELAYPlates relay numbers for different operations
-DOME_POWER = 1      #relay 207  pin 47
-UPPER_POWER = 2     #relay 205  pin 48
-DOME_DIRECTION = 3  #relay 208  pin 5
+DOME_POWER = 1      #relay 207  pin 47 on old Autoscope box
+DOME_DIRECTION = 2  #relay 208  pin 5
+UPPER_POWER = 3     #relay 205  pin 48
 UPPER_DIRECTION = 4 #relay 206  pin 4
 WATCHDOG_RESET = 5  #relay 201  pin 50
 LOWER_DIRECTION = 6
