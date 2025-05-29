@@ -87,7 +87,7 @@ class APOAshDome() :
         except: 
             self.azimuth = HOME_POSITION
         self.logger = logger
-        if logger is not None : self.logger.info('Instantiating dome device')
+        if self.logger is not None : self.logger.info('Instantiating dome device')
         self.start_watchdog()
         self.start_weather()
 
@@ -119,7 +119,7 @@ class APOAshDome() :
         """ Reset watchdog periodically
         """
         while True :
-            if logger is not None : self.logger.info('resetting watchdog')
+            if self.logger is not None : self.logger.info('resetting watchdog')
             set_relay(WATCHDOG_RESET,1)
             time.sleep(5)
             set_relay(WATCHDOG_RESET,0)
@@ -141,7 +141,7 @@ class APOAshDome() :
     def sendhome(self,timeout=180) :
         """ Go to home
         """
-        if logger is not None : self.logger.info('sending home')
+        if self.logger is not None : self.logger.info('sending home')
         self.rotate(1)
         t=timer.Timer()
         t.start()
@@ -149,15 +149,15 @@ class APOAshDome() :
             time.sleep(0.1)
             continue
         if t.elapsed() < timeout :
-            if logger is not None : self.logger.info('Encoder position at home: {:d}'.format(self.enc.pos))
+            if self.logger is not None : self.logger.info('Encoder position at home: {:d}'.format(self.enc.pos))
             self.enc.pos = 0
-            if logger is not None : self.logger.info('Setting to zero{:d}'.format(self.enc.pos))
+            if self.logger is not None : self.logger.info('Setting to zero{:d}'.format(self.enc.pos))
             self.azimuth = HOME_POSITION
             set_relay(DOME_POWER,0)
             self.slewing = False
-            if logger is not None : self.logger.info('hit home')
+            if self.logger is not None : self.logger.info('hit home')
         else :
-            if logger is not None : self.logger.info('Home timer expired before finding home !')
+            if self.logger is not None : self.logger.info('Home timer expired before finding home !')
         t.stop()
         self.save_position()
 
@@ -173,7 +173,7 @@ class APOAshDome() :
     def set_upper_open(self) :
         """ Set upper shutter status to open and turn off shutter power 
         """
-        if logger is not None : self.logger.info('setting upper shutter open')
+        if self.logger is not None : self.logger.info('setting upper shutter open')
         self.is_upper_open = True
         self.shutterstatus = ShutterState.shutterOpen.value
         set_relay(UPPER_POWER,0)
@@ -182,7 +182,7 @@ class APOAshDome() :
     def set_upper_closed(self) :
         """ Set upper shutter status to closed and turn off shutter power 
         """
-        if logger is not None : self.logger.info('setting upper shutter closed')
+        if self.logger is not None : self.logger.info('setting upper shutter closed')
         self.is_upper_open = False
         self.shutterstatus = ShutterState.shutterClosed.value
         set_relay(UPPER_POWER,0)
@@ -191,7 +191,7 @@ class APOAshDome() :
         """ Open upper shutter asynchronously
         """
         set_relay(UPPER_POWER,0)
-        if logger is not None : self.logger.info('starting shutter open')
+        if self.logger is not None : self.logger.info('starting shutter open')
         set_relay(UPPER_DIRECTION,0)
         set_relay(UPPER_POWER,1)
         self.shutterstatus = ShutterState.shutterOpening.value
@@ -202,7 +202,7 @@ class APOAshDome() :
         """ Close upper shutter
         """
         set_relay(UPPER_POWER,0)
-        if logger is not None : self.logger.info('starting shutter close')
+        if self.logger is not None : self.logger.info('starting shutter close')
         set_relay(UPPER_DIRECTION,1)
         set_relay(UPPER_POWER,1)
         self.shutterstatus = ShutterState.shutterClosing.value
@@ -250,7 +250,7 @@ class APOAshDome() :
         """ Open the dome shutter(s). If lower, wait 10s after starting upper to start lower
         """
         if not self.safety.issafe() :
-            if logger is not None : self.logger.info('cannot open shutter due to weather condition!')
+            if self.logger is not None : self.logger.info('cannot open shutter due to weather condition!')
             return
 
         self.open_upper() 
@@ -290,19 +290,19 @@ class APOAshDome() :
     def sendpark(self) :
         """ Go to park
         """
-        if logger is not None : self.logger.info('sending to park')
+        if self.logger is not None : self.logger.info('sending to park')
         self.slewtoazimuth(self.park_position)
         
     def abort_slew(self) :
         """ Turn off dome rotation power
         """
-        if logger is not None : self.logger.info('abort: turning dome rotation power off')
+        if self.logger is not None : self.logger.info('abort: turning dome rotation power off')
         self.stop()
 
     def stop(self) :
         """ Stop dome rotation
         """
-        if logger is not None : self.logger.info('stopping dome rotation ')
+        if self.logger is not None : self.logger.info('stopping dome rotation ')
         set_relay(DOME_POWER,0)
         self.slewing = False
         self.enc.delta=np.array([0,1,-1,2,-1,0,-2,1,1,-2,0,-1,2,-1,1,0])
