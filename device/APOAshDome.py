@@ -101,7 +101,7 @@ class APOAshDome() :
     def start_weather(self) :
         """ Start weather monitoring thread
         """
-        self.safety=APOSafety.Safety(warnonly=False,use25m=True)
+        self.safety=APOSafety.APOSafety(warnonly=False,use25m=True)
         t=Thread(target=self.monitor_weather)
         t.start()
 
