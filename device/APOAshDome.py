@@ -227,7 +227,7 @@ class APOAshDome() :
     def open_lower(self) :
         """ Open lower shutter asynchronously
         """
-        if is_upper_open == True :
+        if self.is_upper_open == True :
             set_relay(LOWER_POWER,0)
             set_relay(LOWER_DIRECTION,1)
             set_relay(LOWER_POWER,1)
@@ -239,7 +239,7 @@ class APOAshDome() :
     def close_lower(self) :
         """ Close lower shutter
         """
-        if is_upper_open == True :
+        if self.is_upper_open == True :
             set_relay(LOWER_POWER,0)
             set_relay(LOWER_DIRECTION,0)
             set_relay(LOWER_POWER,1)
