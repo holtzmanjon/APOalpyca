@@ -31,8 +31,9 @@ LOWER_POWER = 7
 HOME = 16
 
 # time before shutters are reigster open or closed
-UPPER_TIME = 86
-LOWER_TIME = 5
+#UPPER_TIME = 86
+UPPER_TIME = 15
+LOWER_TIME = 15
 
 # Park and home positions
 PARK_POSITION = 60
@@ -214,6 +215,7 @@ class APOAshDome() :
         """
         self.is_lower_open = True
         set_relay(LOWER_POWER,0)
+        set_relay(LOWER_DIRECTION,0)
 
     def set_lower_closed(self) :
         """ Set lower shutter status to closed and turn off shutter power 
@@ -229,7 +231,7 @@ class APOAshDome() :
             set_relay(LOWER_POWER,0)
             set_relay(LOWER_DIRECTION,1)
             set_relay(LOWER_POWER,1)
-            t=Timer(LOWER_TIME,self.set_upper_open)
+            t=Timer(LOWER_TIME,self.set_lower_open)
             t.start()
         else :
             raise RuntimeError('cannot open lower shutter when upper shutter is not open')
@@ -239,9 +241,9 @@ class APOAshDome() :
         """
         if is_upper_open == True :
             set_relay(LOWER_POWER,0)
-            set_relay(LOWER_DIRECTION,1)
+            set_relay(LOWER_DIRECTION,0)
             set_relay(LOWER_POWER,1)
-            t=Timer(LOWER_TIME,self.set_upper_open)
+            t=Timer(LOWER_TIME,self.set_lower_open)
             t.start()
         else :
             raise RuntimeError('cannot close lower shutter when upper shutter is not open')
