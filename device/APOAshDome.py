@@ -256,16 +256,16 @@ class APOAshDome() :
             return
 
         self.open_upper() 
-        #if lower :
-        #    time.sleep(10)
-        #    self.open_lower() 
+        if lower :
+            time.sleep(20)
+            self.open_lower() 
 
     def close_shutter(self,lower=False) :
         """ Close the dome shutter(s). If lower, wait 30s after starting lower to start upper
         """
         if lower :
             self.close_lower() 
-            time.sleep(30)
+            time.sleep(20)
         self.close_upper() 
 
     def atpark(self) :
