@@ -31,9 +31,8 @@ LOWER_POWER = 7
 HOME = 16
 
 # time before shutters are reigster open or closed
-#UPPER_TIME = 86
-UPPER_TIME = 15
-LOWER_TIME = 15
+UPPER_TIME = 86
+LOWER_TIME = 60
 
 # Park and home positions
 PARK_POSITION = 60
