@@ -82,22 +82,10 @@ class Yocto :
         relay=usbrelay.USBRelay()
 
         while True :
-            tccd=-999
-            tset=-999
-            power=-999
-            try : 
-                tccd = C.CCDTemperature
-                tset = C.SetCCDTemperature
-                power = C.CoolerPower
-            except :
-                self.logger.info("error reading CCD values")
-                print("error reading CCD values")
-                pass
-
             t1 = self.get_value(0)
             t2 = self.get_value(1)
-            if self.logger is not None :self.logger.info('tccd: {:f} {:f} {:f} thermocouple: {:f} {:f}'.format(tccd,tset,power,t1,t2))
-            print('tccd: {:f} {:f} {:f} thermocouple: {:f} {:f}'.format(tccd,tset,power,t1,t2))
+            if self.logger is not None :self.logger.info('thermocouple: {:f} {:f}'.format(t1,t2))
+            print('thermocouple: {:f} {:f}'.format(t1,t2))
             if t1 > self.twarn or t2 > self.twarn :
                 #if temp > twarn, turn off cooler power, but not camera, and stay in loop
                 if self.logger is not None : self.logger.info('turning off cooler...')
