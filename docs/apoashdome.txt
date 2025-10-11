@@ -13,7 +13,8 @@ instantiation, two important threads are started:
 
 start_watchdog() toggles a relay on the dome control board every two minutes; the
 control box has an internal timer that will close the dome if this
-watchdog relay isn't reset.
+watchdog relay isn't reset. The timeout on the timer can be adjusted,
+and is set to close after 3-4 minutes (should be occasionally tested!).
 
 start_weather() instantiates an Safety object from APOSafety and checks
 for issafe() status every 90 seconds (which is determined from state of 3.5m
