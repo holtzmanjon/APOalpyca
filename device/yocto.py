@@ -82,6 +82,7 @@ class Yocto :
         relay=usbrelay.USBRelay()
 
         while True :
+          try :
             t1 = self.get_value(0)
             t2 = self.get_value(1)
             if self.logger is not None :self.logger.info('thermocouple: {:f} {:f}'.format(t1,t2))
@@ -102,5 +103,8 @@ class Yocto :
                 break
 
             time.sleep(self.timeout)
+          except Exception as e :
+            print('exception: ',e)
+            if self.logger is not None : self.logg.error('exception '+e)
 
 
