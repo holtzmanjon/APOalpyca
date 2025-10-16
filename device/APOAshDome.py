@@ -109,11 +109,15 @@ class APOAshDome() :
         """ Check weather periodically
         """
         while True :
+          try :
             if not self.safety.issafe() and \
                not (self.shutterstatus == ShutterState.shutterClosed.value) and\
                not (self.shutterstatus == ShutterState.shutterClosing.value) : 
                 self.close_shutter()
             time.sleep(timeout)
+          except Exception as e :
+            print('Error: ', e)
+            if self.logger is not None : self.logger.error('Error: '+ e)
 
     def reset_watchdog(self,timeout=110) :
         """ Reset watchdog periodically
