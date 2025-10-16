@@ -105,6 +105,6 @@ class Yocto :
             time.sleep(self.timeout)
           except Exception as e :
             print('exception: ',e)
-            if self.logger is not None : self.logger.exception()
+            if self.logger is not None : self.logger.exception(e)
 
 
