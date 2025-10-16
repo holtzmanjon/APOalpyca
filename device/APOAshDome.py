@@ -117,7 +117,7 @@ class APOAshDome() :
             time.sleep(timeout)
           except Exception as e :
             print('Error: ', e)
-            if self.logger is not None : self.logger.error('Error: '+ e)
+            if self.logger is not None : self.logger.exception()
 
     def reset_watchdog(self,timeout=110) :
         """ Reset watchdog periodically
