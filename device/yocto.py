@@ -106,5 +106,7 @@ class Yocto :
           except Exception as e :
             print('exception: ',e)
             if self.logger is not None : self.logger.exception(e)
+            time.sleep(15)
+            relay=usbrelay.USBRelay()
 
 
