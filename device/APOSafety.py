@@ -137,14 +137,22 @@ class APOSafety :
         conn = create_connection(("10.25.1.139", 19991))
         buffer = b""
 
-        while True:
-            data = conn.recv(1024)
+        iter=0
+        while iter<10:
+            data = conn.recv(15024)
             buffer += data
+            iter+=1
 
             if b"\n" in data:
                 response = eval(buffer[0 : buffer.index(b"\n")].decode())
                 buffer = buffer[buffer.index(b"\n") + 1 :]
                 break
+
+        conn.close()
+
+        if iter>=10 : 
+            print('encl25Open iter>=10')
+            return "unknown"
         
         bldg_clear_az = (response["plc_words_158"] & 0x10) != 0
         bldg_clear_alt = (response["plc_words_157"] & 0x02) != 0
