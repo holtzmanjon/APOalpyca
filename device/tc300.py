@@ -94,7 +94,7 @@ class TC300 :
         return float(self.tc300.readline().strip(b'>').split()[0])
 
     def get_bright(self,id) :
-        self.tc300.write('BRIGHT?\r.encode()')
+        self.tc300.write('BRIGHT?\r'.encode())
         return float(self.tc300.readline().strip(b'>').split()[0])
 
 
