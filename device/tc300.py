@@ -59,6 +59,14 @@ class TC300 :
         self.tc300.write('EN{:d}={:d}\r'.format(id+1,int(val)).encode())
         self.tc300.readline()
 
+    def set_dark(self,id,val) :
+        self.tc300.write('DARK={:d}\r'.format(int(val)).encode())
+        self.tc300.readline()
+
+    def set_bright(self,id,val) :
+        self.tc300.write('BRIGHT={:d}\r'.format(int(val)).encode())
+        self.tc300.readline()
+
     def getswitch(self,id) :
         return True
 
@@ -80,6 +88,15 @@ class TC300 :
     def get_current(self,id) :
         self.tc300.write('CURR{:d}?\r'.format(id+1).encode())
         return float(self.tc300.readline().strip(b'>').split()[0])
+
+    def get_dark(self,id) :
+        self.tc300.write('DARK?\r')
+        return float(self.tc300.readline().strip(b'>').split()[0])
+
+    def get_bright(self,id) :
+        self.tc300.write('BRIGHT?\r')
+        return float(self.tc300.readline().strip(b'>').split()[0])
+
 
     def get_step(self,id) :
         return 0.1

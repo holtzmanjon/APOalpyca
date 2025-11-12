@@ -97,9 +97,19 @@ class action:
                     val = switch_dev[devnum].get_current(id)
                 elif req.get_media()['Action'] == 'get_enable' :
                     val = switch_dev[devnum].get_enable(id)
+                elif req.get_media()['Action'] == 'get_bright' :
+                    val = switch_dev[devnum].get_bright(id)
+                elif req.get_media()['Action'] == 'get_dark' :
+                    val = switch_dev[devnum].get_dark(id)
                 elif req.get_media()['Action'] == 'set_enable' :
                     switch_dev[devnum].set_enable(id,par) 
                     val = switch_dev[devnum].get_enable(id)
+                elif req.get_media()['Action'] == 'set_bright' :
+                    switch_dev[devnum].set_bright(id,par) 
+                    val = switch_dev[devnum].get_bright(id)
+                elif req.get_media()['Action'] == 'set_dark' :
+                    switch_dev[devnum].set_dark(id,par) 
+                    val = switch_dev[devnum].get_dark(id)
                 resp.text = PropertyResponse(val, req).json
             except Exception as ex:
                 resp.text = PropertyResponse(None, req,
@@ -233,7 +243,8 @@ class name():
 class supportedactions:
     def on_get(self, req: Request, resp: Response, devnum: int):
         if devnum == 0 :
-            resp.text = PropertyResponse(['get_tset','get_voltage','get_current','get_enable','set_enable'], req).json
+            resp.text = PropertyResponse(['get_tset','get_voltage','get_current','get_enable','set_enable',
+                                          'get_bright','get_dark','set_bright','set_dark'], req).json
         else :
             resp.text = PropertyResponse([], req).json  # Not PropertyNotImplemented
 
