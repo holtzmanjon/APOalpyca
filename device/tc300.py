@@ -90,11 +90,11 @@ class TC300 :
         return float(self.tc300.readline().strip(b'>').split()[0])
 
     def get_dark(self,id) :
-        self.tc300.write('DARK?\r')
+        self.tc300.write('DARK?\r'.encode())
         return float(self.tc300.readline().strip(b'>').split()[0])
 
     def get_bright(self,id) :
-        self.tc300.write('BRIGHT?\r')
+        self.tc300.write('BRIGHT?\r.encode()')
         return float(self.tc300.readline().strip(b'>').split()[0])
 
 
