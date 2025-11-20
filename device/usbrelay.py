@@ -105,7 +105,7 @@ class USBRelay() :
         """ Get relay status for specific relaty
         """
         buffer = self.read_status_row()
-        print('in read_relay_status')
+        print('in read_relay_status',buffer)
         return relay_number & buffer[8]
 
     def is_relay_on(self,relay_number):
