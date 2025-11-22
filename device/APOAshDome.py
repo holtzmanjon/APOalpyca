@@ -114,6 +114,7 @@ class APOAshDome() :
                not (self.shutterstatus == ShutterState.shutterClosed.value) and\
                not (self.shutterstatus == ShutterState.shutterClosing.value) : 
                 self.close_shutter()
+            if self.logger is not None : self.logger.info('closing dome from monitor_weather')
             time.sleep(timeout)
           except Exception as e :
             print('Error: ', e)
@@ -127,6 +128,11 @@ class APOAshDome() :
             set_relay(WATCHDOG_RESET,1)
             time.sleep(5)
             set_relay(WATCHDOG_RESET,0)
+            if not self.safety.issafe() and \
+               not (self.shutterstatus == ShutterState.shutterClosed.value) and\
+               not (self.shutterstatus == ShutterState.shutterClosing.value) : 
+                self.close_shutter()
+            if self.logger is not None : self.logger.info('closing dome from reset_watchdog')
             time.sleep(timeout)
 
     def start_watchdog(self) :
@@ -345,8 +351,14 @@ class APOAshDome() :
     def slewtoazimuth(self,azimuth) :
         """ Start slew to requested azimuth
         """
-        t=Thread(target=lambda : self.gotoazimuth(azimuth))
-        t.start()
+        if not self.safety.issafe() and \
+           not (self.shutterstatus == ShutterState.shutterClosed.value) and\
+           not (self.shutterstatus == ShutterState.shutterClosing.value) : 
+            self.close_shutter()
+            if self.logger is not None : self.logger.info('closing dome from slewtoazimuth')
+        else :
+           t=Thread(target=lambda : self.gotoazimuth(azimuth))
+           t.start()
 
     def gotoazimuth(self,azimuth,timeout=180) :
         """ slew to requested azimuth
