@@ -565,7 +565,11 @@ class setswitchvalue:
             return
 
         try:
-            resp.text = MethodResponse(req, NotImplementedException()).json
+            if devnum == 0 :
+                resp.text = MethodResponse(req, NotImplementedException()).json
+            else :
+                switch_dev[devnum].set_value(id,value)
+ 
         except Exception as ex:
             resp.text = MethodResponse(req,
                             DriverException(0x500, 'Switch.Setswitchvalue failed', ex)).json
