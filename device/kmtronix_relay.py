@@ -49,3 +49,9 @@ class USBRelay :
     def getswitch(self,id) :
         return True
 
+    def on_relay(self,id) :
+        self.set_value(1,1) 
+
+    def off_relay(self,id) :
+        self.set_value(1,0) 
+
