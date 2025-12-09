@@ -30,6 +30,9 @@ class Relay(object):
         if relay_type == 'KMTronic_8':
             usb_conn = 'ttyACM'
             ch = range(1,9)
+        elif relay_type == 'KMTronic_2':
+            usb_conn = 'ttyACM'
+            ch = range(1,3)
         else:
             msg = 'This relay_type is not available.'
             raise NotImplementedError(msg, relay_type)
