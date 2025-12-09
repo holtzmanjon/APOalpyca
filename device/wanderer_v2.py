@@ -50,6 +50,7 @@ class Wanderer :
         return self.maxswitchvalue
 
     def set_value(self,id,val) :
+        print('sending: ','3{:d}{:d}'.format(id+1,int(val)))
         self.wanderer.write('3{:d}{:d}'.format(id+1,int(val)).encode())
         self.values[id] = val
 
