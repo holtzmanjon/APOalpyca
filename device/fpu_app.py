@@ -65,7 +65,7 @@ from enum import IntEnum
 import discovery
 import exceptions
 from falcon import Request, Response, App, HTTPInternalServerError
-import management
+import fpu_management
 import setup
 import log
 from config import Config
