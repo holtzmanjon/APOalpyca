@@ -21,7 +21,7 @@ class Wanderer :
 
     def connect(self,port='COM6') :
         print('connect Wanderer')
-        self.wanderer=Serial(port,115200,timeout=1)
+        self.wanderer=Serial(port,19200,timeout=1)
         self.connected = True
         # start with all ports on
         for id in range(self.maxswitch) :
