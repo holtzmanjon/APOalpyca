@@ -21,6 +21,7 @@ from exceptions import *        # Nothing but exception classes
 logger: Logger = None
 
 from yocto import Yocto
+from wanderer_v2 import Wanderer
 
 # ----------------------
 # MULTI-INSTANCE SUPPORT
@@ -30,7 +31,7 @@ from yocto import Yocto
 # which instance of the device (0-based) is being called by the client. Leave this
 # set to 0 for the simple case of controlling only one instance of this device type.
 #
-maxdev = 0                      # Single instance
+maxdev = 1                      # Single instance
 
 # -----------
 # DEVICE INFO
@@ -47,11 +48,22 @@ class Switch0Metadata:
     MaxDeviceNumber = maxdev
     InterfaceVersion = 3
 
+class Switch1Metadata:
+    """ Metadata describing the Switch Device. Edit for your device"""
+    Name = 'Wanderer PowerBox'
+    Version = '1.0.0'
+    Description = 'Wanderer Ultimate PowerBox V2'
+    DeviceType = 'Switch'
+    DeviceID = '6d95d038-c074-4ec2-87b1-e884d8374df9'
+    Info = 'Alpaca Sample Device\nImplements ISwitch\nASCOM Initiative'
+    MaxDeviceNumber = maxdev
+    InterfaceVersion = 3
+
 switch_dev = None
 def start_switch_device(logger: logger):
     logger = logger
     global switch_dev
-    switch_dev = [Yocto(logger=logger)]
+    switch_dev = [Yocto(logger=logger),Wanderer(logger=logger)]
 
 # --------------------
 # RESOURCE CONTROLLERS

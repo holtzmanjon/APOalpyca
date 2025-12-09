@@ -76,7 +76,7 @@ from shr import set_shr_logger
 # FOR EACH ASCOM DEVICE #
 #########################
 print('importing switch')
-import switch
+import switch_fpu
 print('importing focuser')
 import focuser
 

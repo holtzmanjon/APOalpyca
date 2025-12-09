@@ -75,7 +75,7 @@ from shr import set_shr_logger
 #########################
 # FOR EACH ASCOM DEVICE #
 #########################
-import switch2
+import switch_spectro
 
 #--------------
 API_VERSION = 1
