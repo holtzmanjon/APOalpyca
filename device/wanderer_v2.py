@@ -50,14 +50,11 @@ class Wanderer :
         self.wanderer.write('3{:d}{:d}'.format(id,val).encode())
         self.values[id-1] = val
 
-    def get_value(self,id,val) :
+    def get_value(self,id) :
         return self.values[id-1]
 
     def getswitch(self,id) :
         return True
-
-    def get_value(self,id) :
-        return self.get_value(id)
 
     def get_step(self,id) :
         return 1
