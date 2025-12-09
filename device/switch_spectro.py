@@ -565,6 +565,8 @@ class setswitchvalue:
             return
 
         try:
+            import pdb
+            pdb.set_trace()
             if devnum == 0 :
                 resp.text = MethodResponse(req, NotImplementedException()).json
             else :
