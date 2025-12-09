@@ -23,6 +23,9 @@ class Wanderer :
         print('connect Wanderer')
         self.wanderer=Serial(port,115200,timeout=1)
         self.connected = True
+        # start with all ports on
+        for id in range(self.maxswitch) :
+            self.set_value(id,1)
 
     def connected(self,state) :
         print('connected',state)
