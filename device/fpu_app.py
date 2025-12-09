@@ -225,7 +225,9 @@ def main():
     # Share this logger throughout
     log.logger = logger
     exceptions.logger = logger
+    print('start switch...')
     switch.start_switch_device(logger)
+    print('start focuser...')
     focuser.start_focuser_device(logger)
     discovery.logger = logger
     set_shr_logger(logger)
