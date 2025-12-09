@@ -1,9 +1,11 @@
+import numpy as np
+
 try: 
     from serial import Serial
 except: 
     print('no serial')
   
-class TC300 :
+class Wanderer :
     def __init__(self, logger=None ) :
         """  Initialize dome properties and capabilities
         """
