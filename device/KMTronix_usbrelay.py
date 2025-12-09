@@ -82,7 +82,7 @@ class Relay(object):
         """Outputs the parameters used to control the USB relay bank.
         """
         so = self._make_serial_object(self.tty_port)
-        print(so.getPort() + ' : ' + `so.getSettingsDict()`)
+        #print(so.getPort() + ' : ' + `so.getSettingsDict()`)
         
     def set(self, channel=None, state=None, verbose=False):
         """Sets the state of a given channel.
