@@ -2,7 +2,7 @@ from yoctopuce.yocto_api import *
 from yoctopuce.yocto_temperature import *
 from alpaca.camera import *
 from threading import Thread
-import usbrelay
+import kmtronix_relay as usbrelay
 
 class Yocto :
     def __init__(self, logger=None,timeout=10,twarn=36,tcrit=38,watchdog=True) :
