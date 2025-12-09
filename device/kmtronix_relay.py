@@ -17,7 +17,7 @@ class USBRelay :
         self.connect(port='COM7')
 
     def connect(self,port='COM7') :
-        print('connect TC300')
+        print('connect kmtronix relay')
         self.kmtronix=Serial(port,9600,timeout=1)
         self.connected = True
 
@@ -50,8 +50,8 @@ class USBRelay :
         return True
 
     def on_relay(self,id) :
-        self.set_value(1,1) 
+        self.set_value(id,1) 
 
     def off_relay(self,id) :
-        self.set_value(1,0) 
+        self.set_value(id,0) 
 
