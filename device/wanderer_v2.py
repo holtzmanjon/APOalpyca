@@ -21,7 +21,7 @@ class Wanderer :
 
     def connect(self,port='COM6') :
         print('connect Wanderer')
-        self.tc300=Serial(port,115200,timeout=1)
+        self.wanderer=Serial(port,115200,timeout=1)
         self.connected = True
 
     def connected(self,state) :
