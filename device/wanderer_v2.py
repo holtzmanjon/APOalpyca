@@ -1,4 +1,5 @@
 import numpy as np
+import time
 
 try: 
     from serial import Serial
@@ -22,6 +23,7 @@ class Wanderer :
     def connect(self,port='COM6') :
         print('connect Wanderer')
         self.wanderer=Serial(port,19200,timeout=1)
+        time.sleep(2)
         self.connected = True
         # start with all ports on
         for id in range(self.maxswitch) :
