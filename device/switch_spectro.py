@@ -359,7 +359,7 @@ class getswitchvalue:
 
         try:
             # ----------------------
-            val = switch_dev[devnum].get_value(id) 
+            val = float(switch_dev[devnum].get_value(id))
             # ----------------------
             resp.text = PropertyResponse(val, req).json
         except Exception as ex:
