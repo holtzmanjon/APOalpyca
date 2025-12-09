@@ -63,8 +63,6 @@ switch_dev = None
 def start_switch_device(logger: logger):
     logger = logger
     global switch_dev
-    import pdb
-    pdb.set_trace()
     switch_dev = [Yocto(logger=logger),Wanderer(logger=logger)]
 
 # --------------------

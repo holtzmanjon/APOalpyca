@@ -93,7 +93,7 @@ class configureddevices():
             {
             'DeviceName'    : Switch1Metadata.Name,
             'DeviceType'    : Switch1Metadata.DeviceType,
-            'DeviceNumber'  : 0,
+            'DeviceNumber'  : 1,
             'UniqueID'      : Switch1Metadata.DeviceID
             },
         ]
