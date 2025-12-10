@@ -279,6 +279,7 @@ class APOAshDome() :
         if self.lower :
             self.close_lower() 
             t=Timer(70,self.close_upper)
+            t.start()
         else :
             self.close_upper() 
 
