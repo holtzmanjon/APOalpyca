@@ -229,6 +229,7 @@ def main():
     switch_fpu.start_switch_device(logger)
     print('start focuser...')
     focuser.start_focuser_device(logger)
+    print('done start focuser...')
     discovery.logger = logger
     set_shr_logger(logger)
 
@@ -259,8 +260,10 @@ def main():
     #########################
     # FOR EACH ASCOM DEVICE #
     #########################
+    print('init routes')
     init_routes(falc_app, 'switch', switch_fpu)
     init_routes(falc_app, 'focuser', focuser)
+    print('done init routes')
     #
     # Initialize routes for Alpaca support endpoints
     falc_app.add_route('/management/apiversions', management.apiversions())
@@ -268,6 +271,7 @@ def main():
     falc_app.add_route(f'/management/v{API_VERSION}/configureddevices', management.configureddevices())
     falc_app.add_route('/setup', setup.svrsetup())
     falc_app.add_route(f'/setup/v{API_VERSION}/switch/{{devnum}}/setup', setup.devsetup())
+    print('done add routes')
 
     #
     # Install the unhandled exception processor. See above,
