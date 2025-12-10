@@ -268,9 +268,8 @@ class APOAshDome() :
             return
 
         self.open_upper() 
-        print('lower: ', self.lower)
         if self.lower :
-            t=Timer(20,self.open_lower)
+            t=Timer(UPPER_TIME+10,self.open_lower)
             t.start()
 
     def close_shutter(self) :
@@ -278,7 +277,7 @@ class APOAshDome() :
         """
         if self.lower :
             self.close_lower() 
-            t=Timer(70,self.close_upper)
+            t=Timer(LOWER_TIME+10,self.close_upper)
             t.start()
         else :
             self.close_upper() 
