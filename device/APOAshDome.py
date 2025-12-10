@@ -32,7 +32,7 @@ HOME = 16
 
 # time before shutters are reigster open or closed
 UPPER_TIME = 86
-LOWER_TIME = 60
+LOWER_TIME = 120
 
 # Park and home positions
 PARK_POSITION = 60
@@ -275,7 +275,7 @@ class APOAshDome() :
         """
         if self.lower :
             self.close_lower() 
-            time.sleep(20)
+            time.sleep(70)
         self.close_upper() 
 
     def atpark(self) :
