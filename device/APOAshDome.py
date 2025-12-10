@@ -54,12 +54,13 @@ class ShutterState(Enum) :
     shutterError = 4     # Dome shutter status error
 
 class APOAshDome() :
-    def __init__(self, logger=None ) :
+    def __init__(self, logger=None, lower=True ) :
         """  Initialize dome properties and capabilities
         """
         self.connected = True
         self.altitude = None
         #try:
+        self.lower = lower
         self.is_upper_open = Tristate()
         self.is_upper_closed = Tristate()
         self.is_lower_open = Tristate()
@@ -255,9 +256,9 @@ class APOAshDome() :
             t=Timer(LOWER_TIME,self.set_lower_open)
             t.start()
         else :
-            raise RuntimeError('cannot close lower shutter when upper shutter is not open')
+            print('cannot close lower shutter when upper shutter is not open')
 
-    def open_shutter(self,lower=False) :
+    def open_shutter(self) :
         """ Open the dome shutter(s). If lower, wait 10s after starting upper to start lower
         """
         if not self.safety.issafe() :
@@ -265,14 +266,14 @@ class APOAshDome() :
             return
 
         self.open_upper() 
-        if lower :
+        if self.lower :
             time.sleep(20)
             self.open_lower() 
 
-    def close_shutter(self,lower=False) :
+    def close_shutter(self) :
         """ Close the dome shutter(s). If lower, wait 30s after starting lower to start upper
         """
-        if lower :
+        if self.lower :
             self.close_lower() 
             time.sleep(20)
         self.close_upper() 
