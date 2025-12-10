@@ -266,9 +266,9 @@ def main():
     print('done init routes')
     #
     # Initialize routes for Alpaca support endpoints
-    falc_app.add_route('/management/apiversions', management.apiversions())
-    falc_app.add_route(f'/management/v{API_VERSION}/description', management.description())
-    falc_app.add_route(f'/management/v{API_VERSION}/configureddevices', management.configureddevices())
+    falc_app.add_route('/management/apiversions', fpu_management.apiversions())
+    falc_app.add_route(f'/management/v{API_VERSION}/description', fpu_management.description())
+    falc_app.add_route(f'/management/v{API_VERSION}/configureddevices', fpu_management.configureddevices())
     falc_app.add_route('/setup', setup.svrsetup())
     falc_app.add_route(f'/setup/v{API_VERSION}/switch/{{devnum}}/setup', setup.devsetup())
     print('done add routes')
