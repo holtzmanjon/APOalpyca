@@ -65,7 +65,7 @@ from enum import IntEnum
 import discovery
 import exceptions
 from falcon import Request, Response, App, HTTPInternalServerError
-import management
+import fpu_management
 import setup
 import log
 from config import Config
@@ -75,7 +75,9 @@ from shr import set_shr_logger
 #########################
 # FOR EACH ASCOM DEVICE #
 #########################
-import switch
+print('importing switch')
+import switch_fpu
+print('importing focuser')
 import focuser
 
 #--------------
@@ -223,15 +225,18 @@ def main():
     # Share this logger throughout
     log.logger = logger
     exceptions.logger = logger
-    switch.start_switch_device(logger)
+    print('start switch...')
+    switch_fpu.start_switch_device(logger)
+    print('start focuser...')
     focuser.start_focuser_device(logger)
+    print('done start focuser...')
     discovery.logger = logger
     set_shr_logger(logger)
 
     #########################
     # FOR EACH ASCOM DEVICE #
     #########################
-    switch.logger = logger
+    switch_fpu.logger = logger
     focuser.logger = flogger
 
     # -----------------------------
@@ -255,15 +260,18 @@ def main():
     #########################
     # FOR EACH ASCOM DEVICE #
     #########################
-    init_routes(falc_app, 'switch', switch)
+    print('init routes')
+    init_routes(falc_app, 'switch', switch_fpu)
     init_routes(falc_app, 'focuser', focuser)
+    print('done init routes')
     #
     # Initialize routes for Alpaca support endpoints
-    falc_app.add_route('/management/apiversions', management.apiversions())
-    falc_app.add_route(f'/management/v{API_VERSION}/description', management.description())
-    falc_app.add_route(f'/management/v{API_VERSION}/configureddevices', management.configureddevices())
+    falc_app.add_route('/management/apiversions', fpu_management.apiversions())
+    falc_app.add_route(f'/management/v{API_VERSION}/description', fpu_management.description())
+    falc_app.add_route(f'/management/v{API_VERSION}/configureddevices', fpu_management.configureddevices())
     falc_app.add_route('/setup', setup.svrsetup())
     falc_app.add_route(f'/setup/v{API_VERSION}/switch/{{devnum}}/setup', setup.devsetup())
+    print('done add routes')
 
     #
     # Install the unhandled exception processor. See above,

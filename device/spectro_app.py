@@ -75,7 +75,7 @@ from shr import set_shr_logger
 #########################
 # FOR EACH ASCOM DEVICE #
 #########################
-import switch2
+import switch_spectro
 
 #--------------
 API_VERSION = 1
@@ -222,14 +222,14 @@ def main():
     # Share this logger throughout
     log.logger = logger
     exceptions.logger = logger
-    switch2.start_switch_device(logger)
+    switch_spectro.start_switch_device(logger)
     discovery.logger = logger
     set_shr_logger(logger)
 
     #########################
     # FOR EACH ASCOM DEVICE #
     #########################
-    switch2.logger = logger
+    switch_spectro.logger = logger
 
     # -----------------------------
     # Last-Chance Exception Handler
@@ -252,7 +252,7 @@ def main():
     #########################
     # FOR EACH ASCOM DEVICE #
     #########################
-    init_routes(falc_app, 'switch', switch2)
+    init_routes(falc_app, 'switch', switch_spectro)
     #
     # Initialize routes for Alpaca support endpoints
     falc_app.add_route('/management/apiversions', spectro_management.apiversions())

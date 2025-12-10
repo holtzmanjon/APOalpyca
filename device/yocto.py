@@ -2,10 +2,10 @@ from yoctopuce.yocto_api import *
 from yoctopuce.yocto_temperature import *
 from alpaca.camera import *
 from threading import Thread
-import usbrelay
+import kmtronix_relay as usbrelay
 
 class Yocto :
-    def __init__(self, logger=None,timeout=10,twarn=36,tcrit=38,watchdog=True) :
+    def __init__(self, logger=None,timeout=60,twarn=36,tcrit=38,watchdog=True) :
         """  Initialize dome properties and capabilities
         """
         self.logger=logger
@@ -94,10 +94,14 @@ class Yocto :
             if t1 < self.tcrit and t2 < self.tcrit :
                 # if temp<tcrit, reset watchdog to keep camera on
                 if self.logger is not None : self.logger.info('resetting watchdog...')
+                # always start with relayoff in case that generates an exception
+                print('relay_off 1')
+                relay.off_relay(1)
+                time.sleep(1)
                 print('relay_on')
                 relay.on_relay(1)
                 time.sleep(1)
-                print('relay_off')
+                print('relay_off 2')
                 relay.off_relay(1)
             else :
                 # let camera go off and exit loop
@@ -110,7 +114,5 @@ class Yocto :
             if self.logger is not None : self.logger.exception(e)
             time.sleep(15)
             relay=usbrelay.USBRelay()
-
-          time.sleep(10)
 
 
