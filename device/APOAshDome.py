@@ -238,6 +238,7 @@ class APOAshDome() :
         """ Open lower shutter asynchronously
         """
         if self.is_upper_open == True :
+            print('opening lower')
             set_relay(LOWER_POWER,0)
             set_relay(LOWER_DIRECTION,1)
             set_relay(LOWER_POWER,1)
@@ -250,6 +251,7 @@ class APOAshDome() :
         """ Close lower shutter
         """
         if self.is_upper_open == True :
+            print('closing lower')
             set_relay(LOWER_POWER,0)
             set_relay(LOWER_DIRECTION,0)
             set_relay(LOWER_POWER,1)
@@ -266,17 +268,20 @@ class APOAshDome() :
             return
 
         self.open_upper() 
+        print('lower: ', lower)
         if self.lower :
-            time.sleep(20)
-            self.open_lower() 
+            t=Timer(20,self.open_louver)
+            t.start()
 
     def close_shutter(self) :
         """ Close the dome shutter(s). If lower, wait 30s after starting lower to start upper
         """
         if self.lower :
             self.close_lower() 
+            t=Timer(70,self.close_upper)
             time.sleep(70)
-        self.close_upper() 
+        else :
+            self.close_upper() 
 
     def atpark(self) :
         """ Is telescope at park position?
