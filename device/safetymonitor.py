@@ -63,7 +63,6 @@ import pdb
 @before(PreProcessRequest(maxdev))
 class action:
     def on_put(self, req: Request, resp: Response, devnum: int):
-        resp.text = MethodResponse(req, NotImplementedException()).json
         if not safety_dev.connected : ##IS DEV CONNECTED##:
             resp.text = PropertyResponse(None, req,
                             NotConnectedException()).json
