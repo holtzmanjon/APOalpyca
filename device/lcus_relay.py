@@ -1,11 +1,13 @@
+import time
+
 try: 
     from serial import Serial
 except: 
     print('no serial')
   
 class USBRelay :
-    def __init__(self, logger=None ) :
-        """  Initialize dome properties and capabilities
+    def __init__(self, logger=None, port='/dev/ttyUSB1' ) :
+        """  Initialize relay
         """
         print('init LCUS relay')
         self.maxswitch = 1
@@ -14,7 +16,7 @@ class USBRelay :
         self.minswitchvalue = 0
         self.maxswitchvalue = 1
         self.canasync = False
-        self.connect(port='COM7')
+        self.connect(port=port)
 
     def connect(self,port='COM7') :
         print('connect LCUS relay')
@@ -44,15 +46,21 @@ class USBRelay :
         return self.maxswitchvalue
 
     def set_value(self,id,val) :
-        self.relay.write(bytes([0xA0, 0x01, val, 0xA2]))
+        start = 0xA0
+        address = id+1
+        cmd = val
+        checksum = start+address+cmd
+        self.relay.write(bytes([start,address,cmd,checksum])
         time.sleep(1)
 
     def getswitch(self,id) :
         return True
 
     def on_relay(self,id) :
+        #self.relay.write(bytes([0xA0, 0x01, 1, 0xA2]))
         self.set_value(id,1) 
 
     def off_relay(self,id) :
+        #self.relay.write(bytes([0xA0, 0x01, 0, 0xA1]))
         self.set_value(id,0) 
 
