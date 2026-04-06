@@ -4,17 +4,17 @@ except:
     print('no serial')
   
 class TCube :
-    def __init__(self, logger=None ) :
+    def __init__(self, logger=None, port='/dev/ttyUSB0' ) :
         """  Initialize dome properties and capabilities
         """
         print('init TCube')
         self.maxswitch = 2
-        self.description = 'TCube
+        self.description = 'TCube'
         self.name = 'CCD cooler'
         self.minswitchvalue = 0
         self.maxswitchvalue = 80
         self.canasync = False
-        self.connect(port='COM7')
+        self.connect(port=port)
 
     def connect(self,port='COM7') :
         print('connect TCube')
