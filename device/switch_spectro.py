@@ -31,7 +31,7 @@ from wanderer_v2 import Wanderer
 # which instance of the device (0-based) is being called by the client. Leave this
 # set to 0 for the simple case of controlling only one instance of this device type.
 #
-maxdev = 1                      # Single instance
+maxdev = 2
 
 # -----------
 # DEVICE INFO
@@ -59,11 +59,22 @@ class Switch1Metadata:
     MaxDeviceNumber = maxdev
     InterfaceVersion = 3
 
+class Switch2Metadata:
+    """ Metadata describing the Switch Device. Edit for your device"""
+    Name = 'TCube 300
+    Version = '1.0.0'
+    Description = 'Wanderer Ultimate PowerBox V2'
+    DeviceType = 'Switch'
+    DeviceID = 'ebe37518-d822-46d9-b824-83a17cee188d'
+    Info = 'Alpaca Sample Device\nImplements ISwitch\nASCOM Initiative'
+    MaxDeviceNumber = maxdev
+    InterfaceVersion = 3
+
 switch_dev = None
 def start_switch_device(logger: logger):
     logger = logger
     global switch_dev
-    switch_dev = [Yocto(logger=logger),Wanderer(logger=logger)]
+    switch_dev = [Yocto(logger=logger),Wanderer(logger=logger),TCube(logger=logger)]
 
 # --------------------
 # RESOURCE CONTROLLERS

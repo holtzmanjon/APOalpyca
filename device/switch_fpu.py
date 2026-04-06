@@ -22,6 +22,7 @@ logger: Logger = None
 
 from tc300 import TC300
 from eshel import K8056
+from lcus_relay import USBRelay
 
 # ----------------------
 # MULTI-INSTANCE SUPPORT
@@ -31,7 +32,7 @@ from eshel import K8056
 # which instance of the device (0-based) is being called by the client. Leave this
 # set to 0 for the simple case of controlling only one instance of this device type.
 #
-maxdev = 1                      # Single instance
+maxdev = 2    
 
 # -----------
 # DEVICE INFO
@@ -59,11 +60,22 @@ class Switch1Metadata:
     MaxDeviceNumber = maxdev
     InterfaceVersion = 3
 
+class Switch2Metadata:
+    """ Metadata describing the Switch Device. Edit for your device"""
+    Name = 'LCUS relay card'
+    Version = '1.0.0'
+    Description = 'Relay for calibration shutter'
+    DeviceType = 'Switch'
+    DeviceID = 'bc812dc2-d8ce-481c-a1f6-db2b0277fe97'
+    Info = 'Alpaca Sample Device\nImplements ISwitch\nASCOM Initiative'
+    MaxDeviceNumber = maxdev
+    InterfaceVersion = 3
+
 switch_dev = None
 def start_switch_device(logger: logger):
     logger = logger
     global switch_dev
-    switch_dev = [TC300(logger=logger),K8056(logger=logger)]
+    switch_dev = [TC300(logger=logger),K8056(logger=logger),USBRelay(logger=logger)]
 
 # --------------------
 # RESOURCE CONTROLLERS
@@ -174,8 +186,10 @@ class description:
     def on_get(self, req: Request, resp: Response, devnum: int):
         if devnum == 0 :
             resp.text = PropertyResponse(Switch0Metadata.Description, req).json
-        else :
+        elif devnum == 1 :
             resp.text = PropertyResponse(Switch1Metadata.Description, req).json
+        else :
+            resp.text = PropertyResponse(Switch2Metadata.Description, req).json
 
 @before(PreProcessRequest(maxdev))
 class devicestate:
@@ -212,32 +226,40 @@ class driverinfo:
     def on_get(self, req: Request, resp: Response, devnum: int):
         if devnum == 0 :
             resp.text = PropertyResponse(Switch0Metadata.Info, req).json
-        else :
+        elif devnum == 1 :
             resp.text = PropertyResponse(Switch1Metadata.Info, req).json
+        else :
+            resp.text = PropertyResponse(Switch2Metadata.Info, req).json
 
 @before(PreProcessRequest(maxdev))
 class interfaceversion:
     def on_get(self, req: Request, resp: Response, devnum: int):
         if devnum == 0 :
             resp.text = PropertyResponse(Switch0Metadata.InterfaceVersion, req).json
-        else :
+        elif devnum == 1 :
             resp.text = PropertyResponse(Switch1Metadata.InterfaceVersion, req).json
+        else :
+            resp.text = PropertyResponse(Switch2Metadata.InterfaceVersion, req).json
 
 @before(PreProcessRequest(maxdev))
 class driverversion():
     def on_get(self, req: Request, resp: Response, devnum: int):
         if devnum == 0 :
             resp.text = PropertyResponse(Switch0Metadata.Version, req).json
-        else :
+        elif devnum == 1 :
             resp.text = PropertyResponse(Switch1Metadata.Version, req).json
+        else :
+            resp.text = PropertyResponse(Switch2Metadata.Version, req).json
 
 @before(PreProcessRequest(maxdev))
 class name():
     def on_get(self, req: Request, resp: Response, devnum: int):
         if devnum == 0 :
             resp.text = PropertyResponse(Switch0Metadata.Name, req).json
-        else :
+        elif devnum == 1 :
             resp.text = PropertyResponse(Switch1Metadata.Name, req).json
+        else :
+            resp.text = PropertyResponse(Switch2Metadata.Name, req).json
 
 @before(PreProcessRequest(maxdev))
 class supportedactions:
