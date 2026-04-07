@@ -45,6 +45,14 @@ class USBRelay :
     def get_maxvalue(self,id) :
         return self.maxswitchvalue
 
+    def set_state(self,id,val) :
+        start = 0xA0
+        address = id+1
+        cmd = val
+        checksum = start+address+cmd
+        self.relay.write(bytes([start,address,cmd,checksum]))
+        time.sleep(1)
+
     def set_value(self,id,val) :
         start = 0xA0
         address = id+1
