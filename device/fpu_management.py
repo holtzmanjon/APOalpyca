@@ -97,6 +97,12 @@ class configureddevices():
             'UniqueID'      : Switch1Metadata.DeviceID
             },
             {
+            'DeviceName'    : Switch2Metadata.Name,
+            'DeviceType'    : Switch2Metadata.DeviceType,
+            'DeviceNumber'  : 2,
+            'UniqueID'      : Switch2Metadata.DeviceID
+            },
+            {
             'DeviceName'    : FocuserMetadata.Name,
             'DeviceType'    : FocuserMetadata.DeviceType,
             'DeviceNumber'  : 0,
