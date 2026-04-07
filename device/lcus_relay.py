@@ -6,7 +6,7 @@ except:
     print('no serial')
   
 class USBRelay :
-    def __init__(self, logger=None, port='/dev/ttyUSB1' ) :
+    def __init__(self, logger=None, port='COM8' ) :
         """  Initialize relay
         """
         print('init LCUS relay')
