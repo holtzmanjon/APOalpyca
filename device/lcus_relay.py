@@ -50,7 +50,7 @@ class USBRelay :
         address = id+1
         cmd = val
         checksum = start+address+cmd
-        self.relay.write(bytes([start,address,cmd,checksum])
+        self.relay.write(bytes([start,address,cmd,checksum]))
         time.sleep(1)
 
     def getswitch(self,id) :
