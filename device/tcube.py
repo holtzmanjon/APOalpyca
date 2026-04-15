@@ -4,7 +4,7 @@ except:
     print('no serial')
   
 class TCube :
-    def __init__(self, logger=None, port='/dev/ttyUSB0' ) :
+    def __init__(self, logger=None, port='/dev/ttyUSB0',baudrate=57600 ) :
         """  Initialize dome properties and capabilities
         """
         print('init TCube')
@@ -14,11 +14,11 @@ class TCube :
         self.minswitchvalue = 0
         self.maxswitchvalue = 80
         self.canasync = False
-        self.connect(port=port)
+        self.connect(port=port,baudrate=baudrate)
 
-    def connect(self,port='COM7') :
+    def connect(self,port='COM7',baudrate=9600) :
         print('connect TCube')
-        self.tcube=Serial(port,9600,timeout=1)
+        self.tcube=Serial(port,baudrate,timeout=1)
         self.connected = True
 
     def connected(self,state) :
@@ -49,19 +49,31 @@ class TCube :
         else :
             self.tcube.write('STOP\r'.encode())
 
+    def read_status(self,status) :
+        out=status.decode().split('\r')
+        self.temp=float(out[0])
+        self.settemp=float(out[1])
+        self.pumptemp=float(out[2])
+        self.pwm=float(out[3])
+        self.fanpwm=float(out[4])
+        self.tll=out[5]
+        self.stat1a=int(out[6])
+        self.flts1a=int(out[7])
+
+
     def get_status(self,id) :
         self.tcube.write('GETSET2\r'.format(id+1).encode())
         status = self.tcube.readline()
+        self.read_status(status)
         print('status: ', status)
-
-    def set_enable(self,id,val) :
-        self.tcube.write('EN{:d}={:d}\r'.format(id+1,int(val)).encode())
-
-    def set_dark(self,id,val) :
-        self.tcube.write('DARK={:d}\r'.format(int(val)).encode())
-
-    def set_bright(self,id,val) :
-        self.tcube.write('BRIGHT={:d}\r'.format(int(val)).encode())
+        print('temp: ', self.temp)
+        print('settemp: ', self.settemp)
+        print('pumptemp: ', self.pumptemp)
+        print('pwm: ', self.pwm)
+        print('fanpwm: ', self.fanpwm)
+        print('tll: ', self.tll)
+        print('stat1a: ', bin(self.stat1a))
+        print('flt1a: ', bin(self.flt1a))
 
     def getswitch(self,id) :
         return True
@@ -70,11 +82,11 @@ class TCube :
         return self.get_tact(id)
 
     def get_tset(self,id) :
-        self.tcube.write('TEMP?\r'.encode())
+        self.tcube.write('SETTEMP?\r'.encode())
         print(self.tcube.readline())
 
     def get_tact(self,id) :
-        self.tcube.write('RTD?\r'.encode())
+        self.tcube.write('TEMP?\r'.encode())
         print(self.tcube.readline())
 
     def get_step(self,id) :
