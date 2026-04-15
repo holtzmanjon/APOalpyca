@@ -47,7 +47,7 @@ from shr import PropertyResponse, DeviceMetadata
 from config import Config
 from logging import Logger
 # For each *type* of device served
-from switch_fpu import Switch0Metadata, Switch1Metadata
+from switch_fpu import Switch0Metadata, Switch1Metadata, Switch2Metadata
 from focuser import FocuserMetadata, StageMetadata
 
 logger: Logger = None
@@ -95,6 +95,12 @@ class configureddevices():
             'DeviceType'    : Switch1Metadata.DeviceType,
             'DeviceNumber'  : 1,
             'UniqueID'      : Switch1Metadata.DeviceID
+            },
+            {
+            'DeviceName'    : Switch2Metadata.Name,
+            'DeviceType'    : Switch2Metadata.DeviceType,
+            'DeviceNumber'  : 2,
+            'UniqueID'      : Switch2Metadata.DeviceID
             },
             {
             'DeviceName'    : FocuserMetadata.Name,
