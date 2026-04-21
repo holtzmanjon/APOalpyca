@@ -60,7 +60,6 @@ class TCube :
         self.stat1a=int(out[6])
         self.flts1a=int(out[7])
 
-
     def get_status(self,id) :
         self.tcube.write('GETSET2\r'.format(id+1).encode())
         status = self.tcube.readline()

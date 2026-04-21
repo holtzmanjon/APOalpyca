@@ -22,6 +22,7 @@ logger: Logger = None
 
 from yocto import Yocto
 from wanderer_v2 import Wanderer
+from tcube import TCube
 
 # ----------------------
 # MULTI-INSTANCE SUPPORT
@@ -61,9 +62,9 @@ class Switch1Metadata:
 
 class Switch2Metadata:
     """ Metadata describing the Switch Device. Edit for your device"""
-    Name = 'TCube 300
+    Name = 'TCube 300'
     Version = '1.0.0'
-    Description = 'Wanderer Ultimate PowerBox V2'
+    Description = 'TCube chiller'
     DeviceType = 'Switch'
     DeviceID = 'ebe37518-d822-46d9-b824-83a17cee188d'
     Info = 'Alpaca Sample Device\nImplements ISwitch\nASCOM Initiative'
