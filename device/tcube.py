@@ -91,3 +91,9 @@ class TCube :
     def get_step(self,id) :
         return 0.1
 
+    def write(self,command) :
+        self.tcube.write((command+'\r').encode())
+
+    def read(self) :
+        self.tcube.readline())
+
