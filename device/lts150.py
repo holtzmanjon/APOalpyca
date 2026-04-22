@@ -70,7 +70,8 @@ class LTS150 :
         # Set homing params (if changed)
         self.device.SetHomingParams(home_params)
         self.logger.info('Velocity: {:f}'.format(self.get_velocity()))
-        print('Velocity: {:f}'.format(self.get_velocity()))
+        vel_params = self.device.GetVelocityParams()
+        print(vel_params)
         self.logger.info('connected LTS 150')
         self.connected = True
 
