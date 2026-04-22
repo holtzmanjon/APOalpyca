@@ -4,7 +4,7 @@ except:
     print('no serial')
   
 class TCube :
-    def __init__(self, logger=None, port='/dev/ttyUSB0',baudrate=9600 ) :
+    def __init__(self, logger=None, port='COM8',baudrate=9600 ) :
         """  Initialize dome properties and capabilities
         """
         print('init TCube')
