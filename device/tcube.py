@@ -89,7 +89,7 @@ class TCube :
         return self.tcube.readline().decode()
   
     def tset(self,id,val) :
-        self.tcube.write(('SETTEMP {:f}\r'.format(val)).encode())
+        self.write('SETTEMP {:f}'.format(val))
         return self.get_tset(id)
 
     def get_step(self,id) :
