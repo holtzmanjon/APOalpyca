@@ -96,9 +96,10 @@ class TCube :
         return 0.1
 
     def write(self,command) :
+        print('write command: ', command)
         self.tcube.write((command+'\r').encode())
 
     def read(self) :
         out=self.tcube.readline()
-        print(out)
+        return out.decode()
 
