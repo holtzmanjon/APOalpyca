@@ -84,7 +84,36 @@ def start_switch_device(logger: logger):
 @before(PreProcessRequest(maxdev))
 class action:
     def on_put(self, req: Request, resp: Response, devnum: int):
-        resp.text = MethodResponse(req, NotImplementedException()).json
+        if devnum == 2 :
+            idstr = get_request_field('Parameters', req)      # Raises 400 bad request if missing
+            try:
+                if isinstance(idstr,list) :
+                    id = int(idstr[0])
+                    par = int(idstr[1])
+                else :
+                    id = int(idstr)
+            except:
+                resp.text = MethodResponse(req,
+                                InvalidValueException(f'Id {idstr} not a valid integer.')).json
+                return
+            if id < 0 or id > switch_dev[devnum].maxswitch -1 :
+                resp.text = MethodResponse(req,
+                                InvalidValueException(f'Id " + idstr + " not in range.')).json
+                return
+            try:
+                if req.get_media()['Action'] == 'get_tset' :
+                    val = switch_dev[devnum].get_tset(id)
+                elif req.get_media()['Action'] == 'get_tact' :
+                    val = switch_dev[devnum].get_tact(id)
+                elif req.get_media()['Action'] == 'tset' :
+                    val = switch_dev[devnum].tset(id,par)
+                resp.text = PropertyResponse(val, req).json
+            except Exception as ex:
+                resp.text = PropertyResponse(None, req,
+                    DriverException(0x500, 'Switch.Action failed', ex)).json
+        else :
+            resp.text = MethodResponse(req, NotImplementedException()).json
+
 
 
 @before(PreProcessRequest(maxdev))
@@ -221,7 +250,10 @@ class name():
 @before(PreProcessRequest(maxdev))
 class supportedactions:
     def on_get(self, req: Request, resp: Response, devnum: int):
-        resp.text = PropertyResponse([], req).json  # Not PropertyNotImplemented
+        if devnum == 2 :
+            resp.text = PropertyResponse(['get_tset','get_tact','tset'], req).json
+        else :
+            resp.text = PropertyResponse([], req).json  # Not PropertyNotImplemented
 
 @before(PreProcessRequest(maxdev))
 class maxswitch:
