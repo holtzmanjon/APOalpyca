@@ -71,12 +71,11 @@ class LTS150 :
         self.device.SetHomingParams(home_params)
         # set velocity
         self.set_velocity()
-
         vel_params = self.device.GetVelocityParams()
         print(vel_params)
-        print(dir(vel_params))
         print(vel_params.MaxVelocity)
         print(vel_params.Acceleration)
+
         self.logger.info('connected LTS 150')
         self.connected = True
 
@@ -134,11 +133,12 @@ class LTS150 :
     def get_velocity(self) :
         return Decimal.ToDouble(self.device.get_Velocity())
 
-    def set_velocity(self,velocity=10.0,acceleration=2.0) :
+    def set_velocity(self,velocity=10,acceleration=2) :
         # Get Velocity Params
         vel_params = self.device.GetVelocityParams()
         vel_params.MaxVelocity = Decimal(velocity)
         vel_params.Acceleration = Decimal(acceleration)
+        print(velocity,acceleration)
         self.device.SetVelocityParams(vel_params)
 
     def is_moving(self) :
