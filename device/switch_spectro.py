@@ -106,7 +106,7 @@ class action:
                 elif req.get_media()['Action'] == 'get_tact' :
                     val = switch_dev[devnum].get_tact(id)
                 elif req.get_media()['Action'] == 'tset' :
-                    val = switch_dev[devnum].tset(id,par)
+                    val = switch_dev[devnum].tset(id,float(par))
                 resp.text = PropertyResponse(val, req).json
             except Exception as ex:
                 resp.text = PropertyResponse(None, req,
