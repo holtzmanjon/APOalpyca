@@ -82,11 +82,11 @@ class TCube :
 
     def get_tset(self,id) :
         self.tcube.write('SETTEMP?\r'.encode())
-        return self.tcube.readline()
+        return self.tcube.readline().decode()
 
     def get_tact(self,id) :
         self.tcube.write('TEMP?\r'.encode())
-        return self.tcube.readline()
+        return self.tcube.readline().decode()
   
     def tset(self,id,val) :
         self.tcube.write('TEMP {:f}\r'.format(val).encode())
