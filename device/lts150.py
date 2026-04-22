@@ -69,8 +69,8 @@ class LTS150 :
         home_params.Velocity = Decimal(10.0)  # real units, mm/s
         # Set homing params (if changed)
         self.device.SetHomingParams(home_params)
-        self.logger.info('Velocity: {:f}'.format(get_velocity()))
-        print('Velocity: {:f}'.format(get_velocity()))
+        self.logger.info('Velocity: {:f}'.format(self.get_velocity()))
+        print('Velocity: {:f}'.format(self.get_velocity()))
         self.logger.info('connected LTS 150')
         self.connected = True
 
