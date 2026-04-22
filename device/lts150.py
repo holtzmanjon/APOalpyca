@@ -71,6 +71,7 @@ class LTS150 :
         self.device.SetHomingParams(home_params)
         vel_params = self.device.GetVelocityParams()
         print(vel_params)
+        print(dir(vel_params))
         print(vel_params.Velocity)
         print(vel_params.Acceleration)
         self.logger.info('connected LTS 150')
