@@ -95,5 +95,5 @@ class TCube :
         self.tcube.write((command+'\r').encode())
 
     def read(self) :
-        self.tcube.readline())
+        self.tcube.readline()
 
