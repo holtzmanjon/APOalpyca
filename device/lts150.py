@@ -134,10 +134,11 @@ class LTS150 :
     def get_velocity(self) :
         return Decimal.ToDouble(self.device.get_Velocity())
 
-    def set_velocity(self,velocity=10.0) :
+    def set_velocity(self,velocity=10.0,acceleration=2.0) :
         # Get Velocity Params
         vel_params = self.device.GetVelocityParams()
         vel_params.MaxVelocity = Decimal(velocity)
+        vel_params.Acceleration = Decimal(acceleration)
         self.device.SetVelocityParams(vel_params)
 
     def is_moving(self) :
