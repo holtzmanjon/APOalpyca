@@ -90,7 +90,7 @@ class TCube :
   
     def tset(self,id,val) :
         self.write('SETTEMP {:f}'.format(val))
-        return self.get_tset(id)
+#        return self.get_tset(id)
 
     def get_step(self,id) :
         return 0.1
