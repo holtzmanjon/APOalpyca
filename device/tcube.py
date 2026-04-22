@@ -58,7 +58,7 @@ class TCube :
         self.fanpwm=float(out[4])
         self.tll=out[5]
         self.stat1a=int(out[6])
-        self.flts1a=int(out[7])
+        self.flt1a=int(out[7])
 
     def status(self,id) :
         self.tcube.write('GETSET2\r'.format(id+1).encode())
