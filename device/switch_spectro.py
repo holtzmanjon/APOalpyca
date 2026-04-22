@@ -143,8 +143,10 @@ class description:
     def on_get(self, req: Request, resp: Response, devnum: int):
         if devnum == 0 :
             resp.text = PropertyResponse(Switch0Metadata.Description, req).json
-        else :
+        elif devnum == 1 :
             resp.text = PropertyResponse(Switch1Metadata.Description, req).json
+        else :
+            resp.text = PropertyResponse(Switch2Metadata.Description, req).json
 
 @before(PreProcessRequest(maxdev))
 class devicestate:
@@ -181,32 +183,40 @@ class driverinfo:
     def on_get(self, req: Request, resp: Response, devnum: int):
         if devnum == 0 :
             resp.text = PropertyResponse(Switch0Metadata.Info, req).json
-        else :
+        elif devnum == 1 :
             resp.text = PropertyResponse(Switch1Metadata.Info, req).json
+        else :
+            resp.text = PropertyResponse(Switch2Metadata.Info, req).json
 
 @before(PreProcessRequest(maxdev))
 class interfaceversion:
     def on_get(self, req: Request, resp: Response, devnum: int):
         if devnum == 0 :
             resp.text = PropertyResponse(Switch0Metadata.InterfaceVersion, req).json
-        else :
+        elif devnum == 1 :
             resp.text = PropertyResponse(Switch1Metadata.InterfaceVersion, req).json
+        else :
+            resp.text = PropertyResponse(Switch2Metadata.InterfaceVersion, req).json
 
 @before(PreProcessRequest(maxdev))
 class driverversion():
     def on_get(self, req: Request, resp: Response, devnum: int):
         if devnum == 0 :
             resp.text = PropertyResponse(Switch0Metadata.Version, req).json
-        else :
+        elif devnum == 1 :
             resp.text = PropertyResponse(Switch1Metadata.Version, req).json
+        else :
+            resp.text = PropertyResponse(Switch2Metadata.Version, req).json
 
 @before(PreProcessRequest(maxdev))
 class name():
     def on_get(self, req: Request, resp: Response, devnum: int):
         if devnum == 0 :
             resp.text = PropertyResponse(Switch0Metadata.Name, req).json
-        else :
+        elif devnum == 1 :
             resp.text = PropertyResponse(Switch1Metadata.Name, req).json
+        else :
+            resp.text = PropertyResponse(Switch2Metadata.Name, req).json
 
 @before(PreProcessRequest(maxdev))
 class supportedactions:
