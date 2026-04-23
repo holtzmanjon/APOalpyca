@@ -105,6 +105,8 @@ class action:
                     val = switch_dev[devnum].get_tset(id)
                 elif req.get_media()['Action'] == 'get_tact' :
                     val = switch_dev[devnum].get_tact(id)
+                elif req.get_media()['Action'] == 'get_fault' :
+                    val = switch_dev[devnum].get_fault(id)
                 elif req.get_media()['Action'] == 'tset' :
                     val = switch_dev[devnum].tset(id,float(par))
                 resp.text = PropertyResponse(val, req).json
@@ -251,7 +253,7 @@ class name():
 class supportedactions:
     def on_get(self, req: Request, resp: Response, devnum: int):
         if devnum == 2 :
-            resp.text = PropertyResponse(['get_tset','get_tact','tset'], req).json
+            resp.text = PropertyResponse(['get_tset','get_tact','get_fault','tset'], req).json
         else :
             resp.text = PropertyResponse([], req).json  # Not PropertyNotImplemented
 

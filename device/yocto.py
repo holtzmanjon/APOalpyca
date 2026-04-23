@@ -3,6 +3,7 @@ from yoctopuce.yocto_temperature import *
 from alpaca.camera import *
 from threading import Thread
 import kmtronix_relay as usbrelay
+from tcube import TCube
 
 class Yocto :
     def __init__(self, logger=None,timeout=60,twarn=36,tcrit=38,watchdog=True) :
@@ -80,18 +81,20 @@ class Yocto :
         time.sleep(10)
         C = Camera("10.75.0.251:11111",0)
         relay=usbrelay.USBRelay()
+        chiller = TCube()
 
         while True :
           try :
             t1 = self.get_value(0)
             t2 = self.get_value(1)
-            if self.logger is not None :self.logger.info('thermocouple: {:f} {:f}'.format(t1,t2))
+            fault = chiller.get_fault(0)
+            if self.logger is not None :self.logger.info('thermocouple: {:f} {:f} chiller fault: {:d}'.format(t1,t2,fault))
             print('thermocouple: {:f} {:f}'.format(t1,t2))
-            if t1 > self.twarn or t2 > self.twarn :
+            if t1 > self.twarn or t2 > self.twarn or fault != 0 :
                 #if temp > twarn, turn off cooler power, but not camera, and stay in loop
                 if self.logger is not None : self.logger.info('turning off cooler...')
                 C.CoolerOn = False
-            if t1 < self.tcrit and t2 < self.tcrit :
+            if t1 < self.tcrit and t2 < self.tcrit and fault == 0 :
                 # if temp<tcrit, reset watchdog to keep camera on
                 if self.logger is not None : self.logger.info('resetting watchdog...')
                 # always start with relayoff in case that generates an exception

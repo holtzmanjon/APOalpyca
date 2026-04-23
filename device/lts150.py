@@ -72,9 +72,8 @@ class LTS150 :
         # set velocity
         self.set_velocity()
         vel_params = self.device.GetVelocityParams()
-        print(vel_params)
-        print(vel_params.MaxVelocity)
-        print(vel_params.Acceleration)
+        print('MaxVelcity: ', vel_params.MaxVelocity)
+        print('Acceleration: ', vel_params.Acceleration)
 
         self.logger.info('connected LTS 150')
         self.connected = True

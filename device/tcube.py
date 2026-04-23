@@ -87,7 +87,11 @@ class TCube :
     def get_tact(self,id) :
         self.write('TEMP?')
         return self.read()
-  
+
+    def get_fault(self,id) :
+        self.write('FLTS1A?')
+        return bin(self.read())
+
     def tset(self,id,val) :
         self.write('SETTEMP {:f}'.format(val))
         return self.read()
