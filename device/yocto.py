@@ -7,7 +7,7 @@ import kmtronix_relay as usbrelay
 from tcube import TCube
 
 class Yocto :
-    def __init__(self, logger=None,timeout=60,twarn=36,tcrit=38,watchdog=True) :
+    def __init__(self, logger=None,timeout=60,twarn=30,tcrit=32,watchdog=True) :
         """  Initialize dome properties and capabilities
         """
         self.logger=logger
