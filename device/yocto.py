@@ -1,6 +1,7 @@
 from yoctopuce.yocto_api import *
 from yoctopuce.yocto_temperature import *
 from alpaca.camera import *
+from alpaca.switch import *
 from threading import Thread
 import kmtronix_relay as usbrelay
 from tcube import TCube
@@ -80,14 +81,14 @@ class Yocto :
         print('connect camera in ASCOM Remote now (10s)!')
         time.sleep(10)
         C = Camera("10.75.0.251:11111",0)
+        chiller = Switch("10.75.0.251:11111",2)
         relay=usbrelay.USBRelay()
-        chiller = TCube()
 
         while True :
           try :
             t1 = self.get_value(0)
             t2 = self.get_value(1)
-            fault = chiller.get_fault(0)
+            fault = chiller.Action('get_fault',0)
             if self.logger is not None :self.logger.info('thermocouple: {:f} {:f} chiller fault: {:d}'.format(t1,t2,fault))
             print('thermocouple: {:f} {:f}'.format(t1,t2))
             if t1 > self.twarn or t2 > self.twarn or fault != 0 :
