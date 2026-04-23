@@ -81,7 +81,7 @@ class Yocto :
         print('connect camera in ASCOM Remote now (10s)!')
         time.sleep(10)
         C = Camera("10.75.0.251:11111",0)
-        chiller = Switch("10.75.0.251:11111",2)
+        chiller = Switch("10.75.0.251:5555",2)
         relay=usbrelay.USBRelay()
 
         while True :
