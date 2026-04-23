@@ -90,7 +90,8 @@ class TCube :
 
     def get_fault(self,id) :
         self.write('FLTS1A?')
-        return bin(self.read())
+        try : return int(self.read())
+        except : return 256
 
     def tset(self,id,val) :
         self.write('SETTEMP {:f}'.format(val))
