@@ -90,7 +90,7 @@ class Yocto :
             t2 = self.get_value(1)
             fault = chiller.Action('get_fault',0)
             if self.logger is not None :self.logger.info('thermocouple: {:f} {:f} chiller fault: {:d}'.format(t1,t2,fault))
-            print('thermocouple: {:f} {:f}'.format(t1,t2))
+            print('thermocouple: {:f} {:f} chiller fault: {:d}'.format(t1,t2,fault))
             if t1 > self.twarn or t2 > self.twarn or fault != 0 :
                 #if temp > twarn, turn off cooler power, but not camera, and stay in loop
                 if self.logger is not None : self.logger.info('turning off cooler...')
