@@ -25,9 +25,10 @@ class Wanderer :
         self.wanderer=Serial(port,19200,timeout=1)
         time.sleep(2)
         self.connected = True
-        # start with all ports on
-        for id in range(self.maxswitch) :
-            self.set_value(id,1)
+        # start with only port 1 on (no focuser)
+        self.set_value(0,1)
+        self.set_value(1,0)
+        self.set_value(2,0)
 
     def connected(self,state) :
         print('connected',state)
