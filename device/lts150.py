@@ -37,7 +37,7 @@ class LTS150 :
         t.start()
 
     def connect(self) :
-        self.logger.info('connect LTS 150')
+        if self.logger is not None : self.logger.info('connect LTS 150')
         DeviceManagerCLI.BuildDeviceList()
         # create new device
         # Connect, begin polling, and enable
@@ -57,15 +57,15 @@ class LTS150 :
 
         # Get Device Information and display description
         self.device_info = self.device.GetDeviceInfo()
-        self.logger.info(self.device_info.Description)
+        if self.logger is not None : self.logger.info(self.device_info.Description)
 
         # Load any configuration settings needed by the controller/stage
         motor_config = self.device.LoadMotorConfiguration(self.serial_no)
 
         # Get parameters related to homing/zeroing/other
         home_params = self.device.GetHomingParams()
-        self.logger.info(f'Homing velocity: {home_params.Velocity}')
-        self.logger.info(f'Homing Direction: {home_params.Direction}')
+        if self.logger is not None : self.logger.info(f'Homing velocity: {home_params.Velocity}')
+        if self.logger is not None : self.logger.info(f'Homing Direction: {home_params.Direction}')
         home_params.Velocity = Decimal(10.0)  # real units, mm/s
         # Set homing params (if changed)
         self.device.SetHomingParams(home_params)
@@ -75,7 +75,7 @@ class LTS150 :
         print('MaxVelcity: ', vel_params.MaxVelocity)
         print('Acceleration: ', vel_params.Acceleration)
 
-        self.logger.info('connected LTS 150')
+        if self.logger is not None : self.logger.info('connected LTS 150')
         self.connected = True
 
     def disconnect(self) :
@@ -101,7 +101,7 @@ class LTS150 :
         position=float(val/1000.)
         # Move the device to a new position
         new_pos = Decimal(position)  # Must be a .NET decimal
-        self.logger.info(f'Moving to {position}')
+        if self.logger is not None : self.logger.info(f'Moving to {position}')
         t=Thread(target=lambda : self.move(new_pos))
         t.start()
 
@@ -125,9 +125,9 @@ class LTS150 :
 
     def sendhome(self) :
         # Home or Zero the device (if a motor/piezo)
-        self.logger.info("Homing Device")
+        if self.logger is not None : self.logger.info("Homing Device")
         self.device.Home(60000)  # 60 second timeout
-        self.logger.info("Done")
+        if self.logger is not None : self.logger.info("Done")
 
     def get_velocity(self) :
         return Decimal.ToDouble(self.device.get_Velocity())
