@@ -18,8 +18,11 @@ class TC300 :
 
     def connect(self,port='COM7') :
         print('connect TC300')
-        self.tc300=Serial(port,115200,timeout=1)
-        self.connected = True
+        try :
+            self.tc300=Serial(port,115200,timeout=1)
+            self.connected = True
+        except :
+            self.connected = False
 
     def connected(self,state) :
         print('connected',state)
