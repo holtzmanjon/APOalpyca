@@ -17,19 +17,23 @@ class Zaber() :
         self.connect()
 
     def connect(self,port='COM6') :
-        self.logger.info('connect Zaber stage')
-        self.connection = Connection.open_serial_port(port)
-        self.connection.enable_alerts()
+        try :
+            self.connection = Connection.open_serial_port(port)
+            self.connection.enable_alerts()
 
-        device_list = self.connection.detect_devices()
-        self.logger.info("Found {} devices".format(len(device_list)))
+            device_list = self.connection.detect_devices()
+            self.logger.info("Found {} devices".format(len(device_list)))
 
-        self.device = device_list[0]
-        self.axis = self.device.get_axis(1)
-        if not self.axis.is_homed():
-            self.logger.info('homing axis...')
-            self.axis.home()
-        self.connected = True
+            self.device = device_list[0]
+            self.axis = self.device.get_axis(1)
+            if not self.axis.is_homed():
+                self.logger.info('homing axis...')
+                self.axis.home()
+            self.logger.info('connected Zaber stage')
+            self.connected = True
+        except :
+            self.logger.info('failed to connect Zaber stage')
+            self.connected = False
 
     def home(self) :
         """ Send home asynchronously

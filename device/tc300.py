@@ -20,13 +20,14 @@ class TC300 :
         print('connect TC300')
         try :
             self.tc300=Serial(port,115200,timeout=1)
+            print('connected TC300')
             self.connected = True
         except :
+            print('failed to connect TC300')
             self.connected = False
 
-    def connected(self,state) :
-        print('connected',state)
-        return state
+    def connected(self) :
+        return self.connected
 
     def canwrite(self,id) :
         return True

@@ -37,46 +37,50 @@ class LTS150 :
         t.start()
 
     def connect(self) :
-        if self.logger is not None : self.logger.info('connect LTS 150')
-        DeviceManagerCLI.BuildDeviceList()
-        # create new device
-        # Connect, begin polling, and enable
-        self.device = LongTravelStage.CreateLongTravelStage(self.serial_no)
-        self.device.Connect(self.serial_no)
+        try :
+            if self.logger is not None : self.logger.info('connect LTS 150')
+            DeviceManagerCLI.BuildDeviceList()
+            # create new device
+            # Connect, begin polling, and enable
+            self.device = LongTravelStage.CreateLongTravelStage(self.serial_no)
+            self.device.Connect(self.serial_no)
 
-        # Ensure that the device settings have been initialized
-        if not self.device.IsSettingsInitialized():
-            self.device.WaitForSettingsInitialized(10000)  # 10 second timeout
-            assert self.device.IsSettingsInitialized() is True
+            # Ensure that the device settings have been initialized
+            if not self.device.IsSettingsInitialized():
+                self.device.WaitForSettingsInitialized(10000)  # 10 second timeout
+                assert self.device.IsSettingsInitialized() is True
 
-        # Start polling and enable
-        self.device.StartPolling(250)  #250ms polling rate
-        time.sleep(5)
-        self.device.EnableDevice()
-        time.sleep(0.25)  # Wait for device to enable
+            # Start polling and enable
+            self.device.StartPolling(250)  #250ms polling rate
+            time.sleep(5)
+            self.device.EnableDevice()
+            time.sleep(0.25)  # Wait for device to enable
 
-        # Get Device Information and display description
-        self.device_info = self.device.GetDeviceInfo()
-        if self.logger is not None : self.logger.info(self.device_info.Description)
+            # Get Device Information and display description
+            self.device_info = self.device.GetDeviceInfo()
+            if self.logger is not None : self.logger.info(self.device_info.Description)
 
-        # Load any configuration settings needed by the controller/stage
-        motor_config = self.device.LoadMotorConfiguration(self.serial_no)
+            # Load any configuration settings needed by the controller/stage
+            motor_config = self.device.LoadMotorConfiguration(self.serial_no)
 
-        # Get parameters related to homing/zeroing/other
-        home_params = self.device.GetHomingParams()
-        if self.logger is not None : self.logger.info(f'Homing velocity: {home_params.Velocity}')
-        if self.logger is not None : self.logger.info(f'Homing Direction: {home_params.Direction}')
-        home_params.Velocity = Decimal(10.0)  # real units, mm/s
-        # Set homing params (if changed)
-        self.device.SetHomingParams(home_params)
-        # set velocity
-        self.set_velocity()
-        vel_params = self.device.GetVelocityParams()
-        print('MaxVelcity: ', vel_params.MaxVelocity)
-        print('Acceleration: ', vel_params.Acceleration)
+            # Get parameters related to homing/zeroing/other
+            home_params = self.device.GetHomingParams()
+            if self.logger is not None : self.logger.info(f'Homing velocity: {home_params.Velocity}')
+            if self.logger is not None : self.logger.info(f'Homing Direction: {home_params.Direction}')
+            home_params.Velocity = Decimal(10.0)  # real units, mm/s
+            # Set homing params (if changed)
+            self.device.SetHomingParams(home_params)
+            # set velocity
+            self.set_velocity()
+            vel_params = self.device.GetVelocityParams()
+            print('MaxVelcity: ', vel_params.MaxVelocity)
+            print('Acceleration: ', vel_params.Acceleration)
 
-        if self.logger is not None : self.logger.info('connected LTS 150')
-        self.connected = True
+            if self.logger is not None : self.logger.info('connected LTS 150')
+            self.connected = True
+        except :
+            if self.logger is not None : self.logger.info('failed to connect LTS 150')
+            self.connected = False
 
     def disconnect(self) :
         self.device.StopPolling()
