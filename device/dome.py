@@ -76,11 +76,11 @@ class action:
         print('par: ', par)
         try:
             if req.get_media()['Action'] == 'lower' :
-                val = dome_dev[devnum].set_lower(par)
+                val = dome_dev.set_lower(par)
             elif req.get_media()['Action'] == 'upper_time' :
-                val = dome_dev[devnum].set_upper_time(par)
+                val = dome_dev.set_upper_time(par)
             elif req.get_media()['Action'] == 'lower_time' :
-                val = dome_dev[devnum].set_lower_time(par)
+                val = dome_dev.set_lower_time(par)
             resp.text = PropertyResponse(val, req).json
         except Exception as ex:
             resp.text = PropertyResponse(None, req,
