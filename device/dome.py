@@ -63,24 +63,31 @@ def start_dome_device(logger: logger):
 
 @before(PreProcessRequest(maxdev))
 class action:
-    def on_put(self, req: Request, resp: Response, devnum: int):
-        #resp.text = MethodResponse(req, NotImplementedException()).json
-        if not dome_dev.connected : ## IS DEV CONNECTED ##:
-            resp.text = PropertyResponse(None, req,
-                            NotConnectedException()).json
-            return
-        print('req: ', req)
-        #action = get_request_field('ActionName', req)      # Raises 400 bad request if missing
-        action='weather'
-        print('action: ', action)
-        try:
-            # -----------------------------
-            getattr(dome_dev,action)() ### DEVICE OPERATION(PARAM) ###
-            # -----------------------------
-            resp.text = MethodResponse(req).json
-        except Exception as ex:
+
+   def on_put(self, req: Request, resp: Response, devnum: int):
+        idstr = get_request_field('Parameters', req)      # Raises 400 bad request if missing
+        try: 
+            par = int(idstr)
+        except:
             resp.text = MethodResponse(req,
-                            DriverException(0x500, 'Action failed', ex)).json
+                            InvalidValueException(f'Id {idstr} not a valid integer.')).json
+            return
+        print('action: ',req.get_media()['Action'])
+        print('par: ', par)
+        try:
+            if req.get_media()['Action'] == 'lower' :
+                val = dome_dev[devnum].set_lower(par)
+            elif req.get_media()['Action'] == 'upper_time' :
+                val = dome_dev[devnum].set_upper_time(par)
+            elif req.get_media()['Action'] == 'lower_time' :
+                val = dome_dev[devnum].set_lower_time(par)
+            resp.text = PropertyResponse(val, req).json
+        except Exception as ex:
+            resp.text = PropertyResponse(None, req,
+                DriverException(0x500, 'Dome.Action failed', ex)).json
+    else :
+        resp.text = MethodResponse(req, NotImplementedException()).json
+
 
 @before(PreProcessRequest(maxdev))
 class commandblind:

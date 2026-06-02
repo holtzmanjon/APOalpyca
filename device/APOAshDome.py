@@ -54,7 +54,7 @@ class ShutterState(Enum) :
     shutterError = 4     # Dome shutter status error
 
 class APOAshDome() :
-    def __init__(self, logger=None, lower=False ) :
+    def __init__(self, logger=None, lower=False, upper_time=UPPER_TIME, lower_time=LOWER_TIME ) :
         """  Initialize dome properties and capabilities
         """
         self.connected = True
@@ -80,7 +80,9 @@ class APOAshDome() :
         self.verbose = True
         self.enc = Encoder.Encoder(ENCODER_A,ENCODER_B)
         GPIO.setup(HOME, GPIO.IN)
-        self.SupportedActions=['weather']
+        self.upper_time = upper_time
+        self.lower_time = lower_time
+        self.SupportedActions=['lower','upper_time','lower_time']
         try:
             with open("SavedPosition.txt") as fp :
                 self.azimuth=float(fp.read())
@@ -206,7 +208,7 @@ class APOAshDome() :
         set_relay(UPPER_DIRECTION,0)
         set_relay(UPPER_POWER,1)
         self.shutterstatus = ShutterState.shutterOpening.value
-        t=Timer(UPPER_TIME,self.set_upper_open)
+        t=Timer(self.upper_time,self.set_upper_open)
         t.start()
 
     def close_upper(self) :
@@ -217,7 +219,7 @@ class APOAshDome() :
         set_relay(UPPER_DIRECTION,1)
         set_relay(UPPER_POWER,1)
         self.shutterstatus = ShutterState.shutterClosing.value
-        t=Timer(UPPER_TIME,self.set_upper_closed)
+        t=Timer(self.upper_time,self.set_upper_closed)
         t.start()
 
     def set_lower_open(self) :
@@ -242,7 +244,7 @@ class APOAshDome() :
             set_relay(LOWER_POWER,0)
             set_relay(LOWER_DIRECTION,1)
             set_relay(LOWER_POWER,1)
-            t=Timer(LOWER_TIME,self.set_lower_open)
+            t=Timer(self.lower_time,self.set_lower_open)
             t.start()
         else :
             raise RuntimeError('cannot open lower shutter when upper shutter is not open')
@@ -255,7 +257,7 @@ class APOAshDome() :
             set_relay(LOWER_POWER,0)
             set_relay(LOWER_DIRECTION,0)
             set_relay(LOWER_POWER,1)
-            t=Timer(LOWER_TIME,self.set_lower_open)
+            t=Timer(self.lower_time,self.set_lower_open)
             t.start()
         else :
             print('cannot close lower shutter when upper shutter is not open')
@@ -269,7 +271,7 @@ class APOAshDome() :
 
         self.open_upper() 
         if self.lower :
-            t=Timer(UPPER_TIME+10,self.open_lower)
+            t=Timer(self.upper_time+10,self.open_lower)
             t.start()
 
     def close_shutter(self) :
@@ -277,7 +279,7 @@ class APOAshDome() :
         """
         if self.lower :
             self.close_lower() 
-            t=Timer(LOWER_TIME+10,self.close_upper)
+            t=Timer(self.lower_time+10,self.close_upper)
             t.start()
         else :
             self.close_upper() 
@@ -407,6 +409,15 @@ class APOAshDome() :
         #self.slaved=True
         raise RuntimeError('slaving not available') 
 
+    def set_lower(self,val) :
+        print('not setting lower to: ', val)
+
+    def set_lower_time(self,val) :
+        print('not setting lower_time to: ', val)
+
+    def set_upper_time(self,val) :
+        print('not setting upper_time to: ', val)
+
 def set_relay(bit,value) :
     """ Utility routine to turn RELAYplates relays on (1) or off
 
@@ -432,3 +443,5 @@ def diff(azimuth,current_az) :
     if delta > 180 : delta-=360
     elif delta < -180 : delta+=360
     return delta
+
+
