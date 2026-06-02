@@ -65,10 +65,13 @@ def start_dome_device(logger: logger):
 class action:
 
    def on_put(self, req: Request, resp: Response, devnum: int):
-        print('action: ',req.get_media()['Action'])
+        idstr = get_request_field('Parameters', req)      # Raises 400 bad request if missing
+        cmd = req.get_media()['Action']
+        par = int(idstr)
+ 
+        print('action: ',cmd)
         print('par: ', par)
         try:
-            cmd = req.get_media()['Action']
             if cmd  == 'lower' :
                 dome_dev.set_lower(par)
             elif cmd  == 'upper_time' :
