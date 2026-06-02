@@ -9,6 +9,7 @@ from threading import Timer, Lock, Thread
 from logging import Logger
 from tristate import Tristate
 import Encoder
+import subprocess
 
 # put in try/except for readthedocs
 try :
@@ -118,6 +119,8 @@ class APOAshDome() :
                not (self.shutterstatus == ShutterState.shutterClosing.value) : 
                 self.close_shutter()
                 if self.logger is not None : self.logger.info('closing dome from monitor_weather')
+                if self.logger is not None : self.logger.info('closing louvers from monitor_weather')
+                subprocess.run("ms1 off 9",shell=True)
             time.sleep(timeout)
           except Exception as e :
             print('Error: ', e)
