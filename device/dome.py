@@ -65,23 +65,17 @@ def start_dome_device(logger: logger):
 class action:
 
    def on_put(self, req: Request, resp: Response, devnum: int):
-        idstr = get_request_field('Parameters', req)      # Raises 400 bad request if missing
-        try: 
-            par = int(idstr)
-        except:
-            resp.text = MethodResponse(req,
-                            InvalidValueException(f'Id {idstr} not a valid integer.')).json
-            return
         print('action: ',req.get_media()['Action'])
         print('par: ', par)
         try:
-            if req.get_media()['Action'] == 'lower' :
-                val = dome_dev.set_lower(par)
-            elif req.get_media()['Action'] == 'upper_time' :
-                val = dome_dev.set_upper_time(par)
-            elif req.get_media()['Action'] == 'lower_time' :
-                val = dome_dev.set_lower_time(par)
-            resp.text = PropertyResponse(val, req).json
+            cmd = req.get_media()['Action']
+            if cmd  == 'lower' :
+                dome_dev.set_lower(par)
+            elif cmd  == 'upper_time' :
+                dome_dev.set_upper_time(par)
+            elif cmd  == 'lower_time' :
+                dome_dev.set_lower_time(par)
+            resp.text = PropertyResponse(cmd,req).json
         except Exception as ex:
             resp.text = PropertyResponse(None, req,
                 DriverException(0x500, 'Dome.Action failed', ex)).json
