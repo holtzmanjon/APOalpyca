@@ -257,7 +257,7 @@ class APOAshDome() :
             set_relay(LOWER_POWER,0)
             set_relay(LOWER_DIRECTION,0)
             set_relay(LOWER_POWER,1)
-            t=Timer(self.lower_time,self.set_lower_open)
+            t=Timer(self.lower_time+10,self.set_lower_closed)
             t.start()
         else :
             print('cannot close lower shutter when upper shutter is not open')
