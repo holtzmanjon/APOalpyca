@@ -69,8 +69,8 @@ class action:
         cmd = req.get_media()['Action']
         par = int(idstr)
  
-        print('action: ',cmd)
-        print('par: ', par)
+        logger.info('action: {:s}'.format(cmd))
+        logger.info('par: {:d}'.format(par))
         try:
             if cmd  == 'lower' :
                 dome_dev.set_lower(par)

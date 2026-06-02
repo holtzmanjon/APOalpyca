@@ -410,13 +410,13 @@ class APOAshDome() :
         raise RuntimeError('slaving not available') 
 
     def set_lower(self,val) :
-        print('not setting lower to: ', val)
+        self.logger.info('not setting lower to: ', val)
 
     def set_lower_time(self,val) :
-        print('not setting lower_time to: ', val)
+        self.logger.info('not setting lower_time to: ', val)
 
     def set_upper_time(self,val) :
-        print('not setting upper_time to: ', val)
+        self.logger.info('not setting upper_time to: ', val)
 
 def set_relay(bit,value) :
     """ Utility routine to turn RELAYplates relays on (1) or off
