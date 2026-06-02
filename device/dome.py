@@ -85,9 +85,6 @@ class action:
         except Exception as ex:
             resp.text = PropertyResponse(None, req,
                 DriverException(0x500, 'Dome.Action failed', ex)).json
-    else :
-        resp.text = MethodResponse(req, NotImplementedException()).json
-
 
 @before(PreProcessRequest(maxdev))
 class commandblind:
