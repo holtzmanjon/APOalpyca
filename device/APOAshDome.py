@@ -119,8 +119,6 @@ class APOAshDome() :
                not (self.shutterstatus == ShutterState.shutterClosing.value) : 
                 self.close_shutter()
                 if self.logger is not None : self.logger.info('closing dome from monitor_weather')
-                if self.logger is not None : self.logger.info('closing louvers from monitor_weather')
-                subprocess.run("ms1 off 9",shell=True)
             time.sleep(timeout)
           except Exception as e :
             print('Error: ', e)
@@ -139,8 +137,6 @@ class APOAshDome() :
                not (self.shutterstatus == ShutterState.shutterClosing.value) : 
                 self.close_shutter()
                 if self.logger is not None : self.logger.info('closing dome from reset_watchdog')
-                if self.logger is not None : self.logger.info('closing louvers from monitor_weather')
-                subprocess.run("ms1 off 9",shell=True)
             time.sleep(timeout)
 
     def start_watchdog(self) :
@@ -288,6 +284,13 @@ class APOAshDome() :
             t.start()
         else :
             self.close_upper() 
+        self.close_louvers()
+
+    def close_louvers(self) :
+        """ Close louvers
+        """
+        if self.logger is not None : self.logger.info('closing louvers...')
+        subprocess.run("ms1 off 9",shell=True)
 
     def atpark(self) :
         """ Is telescope at park position?
@@ -368,8 +371,6 @@ class APOAshDome() :
            not (self.shutterstatus == ShutterState.shutterClosing.value) : 
             self.close_shutter()
             if self.logger is not None : self.logger.info('closing dome from slewtoazimuth')
-            if self.logger is not None : self.logger.info('closing louvers from monitor_weather')
-            subprocess.run("ms1 off 9",shell=True)
         else :
            t=Thread(target=lambda : self.gotoazimuth(azimuth))
            t.start()
