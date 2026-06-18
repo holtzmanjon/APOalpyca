@@ -290,7 +290,7 @@ class APOAshDome() :
         """ Close louvers
         """
         if self.logger is not None : self.logger.info('closing louvers...')
-        subprocess.run("ms1 off 9",shell=True)
+        subprocess.run("/home/ocs/bin/ms1 off 9",shell=True)
 
     def atpark(self) :
         """ Is telescope at park position?
