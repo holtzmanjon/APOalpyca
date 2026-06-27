@@ -79,7 +79,7 @@ class Yocto :
         """
         self.ccd_power()
         print('connect camera in ASCOM Remote now (10s)!')
-        time.sleep(10)
+        time.sleep(30)
         C = Camera("10.75.0.251:11111",0)
         chiller = Switch("10.75.0.251:5555",2)
         relay=usbrelay.USBRelay()
@@ -91,6 +91,7 @@ class Yocto :
             fault = chiller.Action('get_fault',0)
             if self.logger is not None :self.logger.info('thermocouple: {:f} {:f} chiller fault: {:d}'.format(t1,t2,fault))
             print('thermocouple: {:f} {:f} chiller fault: {:d}'.format(t1,t2,fault))
+            print('CCD: {:f} {:f}'.format(C.CCDTemperature,C.CoolerPower))
             if t1 > self.twarn or t2 > self.twarn or fault != 0 :
                 #if temp > twarn, turn off cooler power, but not camera, and stay in loop
                 if self.logger is not None : self.logger.info('turning off cooler...')
