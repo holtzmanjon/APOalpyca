@@ -67,13 +67,15 @@ class LTS150 :
             home_params = self.device.GetHomingParams()
             if self.logger is not None : self.logger.info(f'Homing velocity: {home_params.Velocity}')
             if self.logger is not None : self.logger.info(f'Homing Direction: {home_params.Direction}')
-            home_params.Velocity = Decimal(10.0)  # real units, mm/s
+            print(f'Homing velocity: {home_params.Velocity}')
+            print(f'Homing Direction: {home_params.Direction}')
+            #home_params.Velocity = Decimal(10.0)  # real units, mm/s
             # Set homing params (if changed)
-            self.device.SetHomingParams(home_params)
+            #self.device.SetHomingParams(home_params)
             # set velocity
             self.set_velocity()
             vel_params = self.device.GetVelocityParams()
-            print('MaxVelcity: ', vel_params.MaxVelocity)
+            print('MaxVelocity: ', vel_params.MaxVelocity)
             print('Acceleration: ', vel_params.Acceleration)
 
             if self.logger is not None : self.logger.info('connected LTS 150')
