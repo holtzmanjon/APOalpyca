@@ -106,7 +106,7 @@ class Yocto :
                 time.sleep(1)
                 print('relay_on')
                 relay.on_relay(1)
-                time.sleep(1)
+                time.sleep(5)
                 print('relay_off 2')
                 relay.off_relay(1)
             else :
