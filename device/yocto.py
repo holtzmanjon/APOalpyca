@@ -89,7 +89,7 @@ class Yocto :
             t1 = self.get_value(0)
             t2 = self.get_value(1)
             fault = chiller.Action('get_fault',0)
-            fault = 0
+            fault = 0   # TEMPORARY FOR NO CHILLER
             if self.logger is not None :self.logger.info('thermocouple: {:f} {:f} chiller fault: {:d}'.format(t1,t2,fault))
             print('thermocouple: {:f} {:f} chiller fault: {:d}'.format(t1,t2,fault))
             print('CCD: {:f} {:f}'.format(C.CCDTemperature,C.CoolerPower))
