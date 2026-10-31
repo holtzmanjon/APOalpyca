@@ -14,6 +14,7 @@ class USBRelay() :
         filter = hid.HidDeviceFilter(vendor_id=USB_CFG_VENDOR_ID, product_id=USB_CFG_DEVICE_ID)
         hid_device = filter.get_devices()
         self.device = hid_device[0]
+        self.connected=False
         self.open_device()
         
     def open_device(self):
@@ -25,6 +26,7 @@ class USBRelay() :
                 self.get_report()
             else:
                 print("Device already opened")
+            self.connected=True
         else:
             print("Device is not active")
 
