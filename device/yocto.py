@@ -89,6 +89,7 @@ class Yocto :
             t1 = self.get_value(0)
             t2 = self.get_value(1)
             fault = chiller.Action('get_fault',0)
+            fault = 0
             if self.logger is not None :self.logger.info('thermocouple: {:f} {:f} chiller fault: {:d}'.format(t1,t2,fault))
             print('thermocouple: {:f} {:f} chiller fault: {:d}'.format(t1,t2,fault))
             print('CCD: {:f} {:f}'.format(C.CCDTemperature,C.CoolerPower))
@@ -110,8 +111,8 @@ class Yocto :
                 relay.off_relay(1)
             else :
                 # let camera go off and exit loop
-                if self.logger is not None : self.logger.info('temp out of range, break...')
-                break
+                if self.logger is not None : self.logger.info('temp out of range')
+                #break
 
             time.sleep(self.timeout)
           except Exception as e :
