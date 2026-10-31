@@ -22,7 +22,7 @@ logger: Logger = None
 
 from tc300 import TC300
 from eshel import K8056
-from lcus_relay import USBRelay
+from noyito_relay import USBRelay
 
 # ----------------------
 # MULTI-INSTANCE SUPPORT
@@ -62,7 +62,7 @@ class Switch1Metadata:
 
 class Switch2Metadata:
     """ Metadata describing the Switch Device. Edit for your device"""
-    Name = 'LCUS relay card'
+    Name = 'Noyito relay card'
     Version = '1.0.0'
     Description = 'Relay for calibration shutter'
     DeviceType = 'Switch'
