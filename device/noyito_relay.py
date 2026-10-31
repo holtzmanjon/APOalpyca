@@ -8,7 +8,7 @@ USB_CFG_DEVICE_ID = 0x05DF  # Should suit, if not check ID with a tool like USBD
 
 
 class USBRelay() :
-    def __init__(self,vendor=USB_CFG_VENDOR_ID,device=USB_CFG_DEVICE_ID) :
+    def __init__(self,vendor=USB_CFG_VENDOR_ID,device=USB_CFG_DEVICE_ID,logger=None) :
         """ Initialize USB device
         """
         filter = hid.HidDeviceFilter(vendor_id=USB_CFG_VENDOR_ID, product_id=USB_CFG_DEVICE_ID)
