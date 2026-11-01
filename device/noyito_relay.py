@@ -11,9 +11,16 @@ class USBRelay() :
     def __init__(self,vendor=USB_CFG_VENDOR_ID,device=USB_CFG_DEVICE_ID,logger=None) :
         """ Initialize USB device
         """
+        print('Init Noyito relay')
         filter = hid.HidDeviceFilter(vendor_id=USB_CFG_VENDOR_ID, product_id=USB_CFG_DEVICE_ID)
         hid_device = filter.get_devices()
         self.device = hid_device[0]
+        self.maxswitch = 1
+        self.description = 'Noyito USB relay'
+        self.name = 'USB relay'
+        self.minswitchvalue = 0
+        self.maxswitchvalue = 1
+        self.canasync = False
         self.connected=False
         self.open_device()
         
@@ -114,4 +121,40 @@ class USBRelay() :
         """ Return if specified relay is on
         """
         return self.read_relay_status(relay_number) > 0
+
+    def connected(self,state) :
+        print('connected',state)
+        return state
+
+    def canwrite(self,id) :
+        return True
+
+    def disconnect(self) :
+        self.connected(False)
+
+    def get_description(self,id) :
+        return '{:s}, channel {:d}'.format(self.description,id)
+
+    def get_name(self,id) :
+        return self.name
+
+    def get_minvalue(self,id) :
+        return self.minswitchvalue
+
+    def get_maxvalue(self,id) :
+        return self.maxswitchvalue
+
+    def set_state(self,id,val) :
+        if val :
+            self.on_relay(id+1)
+        else :
+            self.off_relay(id+1)
+        time.sleep(1)
+
+    def set_value(self,id,val) :
+        self.set_state(id,val)
+
+    def getswitch(self,id) :
+        return self.is_relay_on(id)
+
 
