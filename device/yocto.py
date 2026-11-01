@@ -71,7 +71,7 @@ class Yocto :
         """
         relay=usbrelay.USBRelay()
         relay.on_relay(1)
-        time.sleep(1)
+        time.sleep(5)
         relay.off_relay(1)
     
     def reset_watchdog(self) :
