@@ -81,14 +81,14 @@ class Yocto :
         print('connect camera in ASCOM Remote now (10s)!')
         time.sleep(30)
         C = Camera("10.75.0.251:11111",0)
-        chiller = Switch("10.75.0.251:5555",2)
+        #chiller = Switch("10.75.0.251:5555",2)
         relay=usbrelay.USBRelay()
 
         while True :
           try :
             t1 = self.get_value(0)
             t2 = self.get_value(1)
-            fault = chiller.Action('get_fault',0)
+            #fault = chiller.Action('get_fault',0)
             fault = 0   # TEMPORARY FOR NO CHILLER
             if self.logger is not None :self.logger.info('thermocouple: {:f} {:f} chiller fault: {:d}'.format(t1,t2,fault))
             print('thermocouple: {:f} {:f} chiller fault: {:d}'.format(t1,t2,fault))
