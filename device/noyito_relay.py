@@ -1,7 +1,7 @@
 # class to control USB device, specifically Noyito relay
 
 import pywinusb.hid as hid
-from time import sleep
+import time
 
 USB_CFG_VENDOR_ID = 0x16c0  # Should suit, if not check ID with a tool like USBDeview
 USB_CFG_DEVICE_ID = 0x05DF  # Should suit, if not check ID with a tool like USBDeview
