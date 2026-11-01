@@ -92,7 +92,7 @@ class Yocto :
             fault = 0   # TEMPORARY FOR NO CHILLER
             if self.logger is not None :self.logger.info('thermocouple: {:f} {:f} chiller fault: {:d}'.format(t1,t2,fault))
             print('thermocouple: {:f} {:f} chiller fault: {:d}'.format(t1,t2,fault))
-            print('CCD: {:f} {:f}'.format(C.CCDTemperature,C.CoolerPower))
+            print('CCD: {:f} {:f} {:f}'.format(C.CCDTemperature,C.CoolerPower,self.twarn))
             if t1 > self.twarn or t2 > self.twarn or fault != 0 :
                 #if temp > twarn, turn off cooler power, but not camera, and stay in loop
                 if self.logger is not None : self.logger.info('turning off cooler...')
