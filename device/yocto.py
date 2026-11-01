@@ -7,7 +7,7 @@ import kmtronix_relay as usbrelay
 from tcube import TCube
 
 class Yocto :
-    def __init__(self, logger=None,timeout=45,twarn=29,tcrit=32,watchdog=True) :
+    def __init__(self, logger=None,timeout=45,twarn=30,tcrit=32,watchdog=True) :
         """  Initialize dome properties and capabilities
         """
         self.logger=logger
@@ -95,30 +95,30 @@ class Yocto :
             print('CCD: {:f} {:f} {:f}'.format(C.CCDTemperature,C.CoolerPower,self.twarn))
             if t1 > self.twarn or t2 > self.twarn or fault != 0 :
                 #if temp > twarn, turn off cooler power, but not camera, and stay in loop
+                print('turning cooler off!')
                 if self.logger is not None : self.logger.info('turning off cooler...')
                 C.CoolerOn = False
             if t1 < self.tcrit and t2 < self.tcrit and fault == 0 :
                 # if temp<tcrit, reset watchdog to keep camera on
                 if self.logger is not None : self.logger.info('resetting watchdog...')
                 # always start with relayoff in case that generates an exception
-                print('relay_off 1')
                 relay.off_relay(1)
                 time.sleep(1)
-                print('relay_on')
                 relay.on_relay(1)
                 time.sleep(5)
-                print('relay_off 2')
                 relay.off_relay(1)
             else :
-                # let camera go off and exit loop
+                # let camera go off
                 if self.logger is not None : self.logger.info('temp out of range')
+                relay.off_relay(1)
+                C.CoolerOn = False
                 #break
 
             time.sleep(self.timeout)
           except Exception as e :
             print('exception: ',e)
             if self.logger is not None : self.logger.exception(e)
-            #time.sleep(15)
+            time.sleep(15)
             #relay=usbrelay.USBRelay()
 
 
