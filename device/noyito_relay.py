@@ -155,6 +155,6 @@ class USBRelay() :
         self.set_state(id,val)
 
     def getswitch(self,id) :
-        return self.is_relay_on(id)
+        return self.is_relay_on(id+1)
 
 
